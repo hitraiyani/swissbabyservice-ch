@@ -1,4 +1,4 @@
-@font-face {
+/* @font-face {
   font-family: 'IBMPlexSerif';
   font-display: swap;
   font-weight: 400;
@@ -10,4 +10,16 @@
   font-weight: 400;
   font-style: italic;
   src: url('./fonts/IBMPlexSerif-TextItalic.woff2') format('woff2');
+} */
+
+
+@font-face {
+  font-family: 'icon';
+  src:    url('./fonts/icomoon-bz.eot?x9znww');
+  src:    url('./fonts/icomoon-bz.eot?x9znww#iefix') format('embedded-opentype'),
+  url('./fonts/icomoon-bz.ttf?x9znww') format('truetype'),
+  url('./fonts/icomoon-bz.woff?x9znww') format('woff'),
+  url('./fonts/icomoon-bz.svg?x9znww#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
 }
