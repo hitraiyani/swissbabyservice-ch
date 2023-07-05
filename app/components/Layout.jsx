@@ -360,20 +360,83 @@ function Footer({menu}) {
       divider={isHome ? 'none' : 'top'}
       as="footer"
       role="contentinfo"
-      className={`grid min-h-[25rem] items-start grid-flow-row w-full gap-6 py-8 px-6 md:px-8 lg:px-12 md:gap-8 lg:gap-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-${itemsCount}
-        bg-primary dark:bg-contrast dark:text-primary text-contrast overflow-hidden`}
+      className={`w-full bg-[#fff] overflow-hidden text[#3391c2]`}
     >
-      <FooterMenu menu={menu} />
-      <CountrySelector />
-      <div
+      {/* <FooterMenu menu={menu} /> */}
+      {/* <CountrySelector /> */}
+      {/* <div
         className={`self-end pt-8 opacity-50 md:col-span-2 lg:col-span-${itemsCount}`}
       >
         &copy; {new Date().getFullYear()} / Shopify, Inc. Hydrogen is an MIT
         Licensed Open Source project.
+      </div> */}
+      <div className="container max-w-[1100px] m-auto pl-[15px] pr-[15px] pt-[40px]">
+  <div className="footer-row-wrap relative">
+    <div className="bz-footer-row hidden lg:block"></div>
+    <div
+     className="footer-row flex flex-row flex-wrap xl:flex-nowrap mx-[-15px] gap-y-[15px] md:gap-y-[15px] xl:gap-x-[15px] 2xl:gap-x-[15px]">
+      <div className="footer-col px-[15px] w-[50%] md:w-[25%] xl:w-[25%]">
+        <div className="col-inner">
+        <h4 className="title text-[20px] text-[#3391c2] font-semibold font-serif mb-[40px] mt-[-35px]">Swissbabyservice</h4>
+          <p className="text-[13px] text-[#3391c2] font-normal font-['arial']">
+            Mit unserem umfangreichen Sortiment an klassichen, ökologischen oder biologischen Windeln, 
+                      Pflege- & Hygieneprodukten und Zubehör sind wir Ihr zuverlässiger Partner,
+                       sowohl für Private als auch für Geschäfts/Grosskunden.
+          </p>
+        </div>
       </div>
+      <div className="footer-col px-[15px] w-[50%] md:w-[25%] xl:w-[25%]">
+        <div className="col-inner">
+          
+            <h4 className="title text-[20px] text-[#3391c2] font-semibold font-serif mb-[40px] mt-[-35px]">Informationen</h4>
+            <ul className="nav-list flex flex-col gap-[10px]">
+              <li className="text-[13px] text-[#2380b1] font-normal font-['arial']"><a className="hover:text-[#2A6496] transition-all duration-500 underline"
+                  href="/" target="_self">Swissbabyservice Portrait</a></li>
+              <li className="text-[13px] text-[#2380b1] font-normal font-['arial']"><a className="hover:text-[#2A6496] transition-all duration-500 underline"
+                  href="/" target="_self">Ein Herz für Andere</a></li>
+                  <li className="text-[13px] text-[#2380b1] font-normal font-['arial']"><a className="hover:text-[#2A6496] transition-all duration-500 underline"
+                  href="/" target="_self">Partner / Nützliche Links</a></li>
+                  <li className="text-[13px] text-[#2380b1] font-normal font-['arial']"><a className="hover:text-[#2A6496] transition-all duration-500 underline"
+                  href="/" target="_self">Bestellinfos</a></li>
+                  <li className="text-[13px] text-[#2380b1] font-normal font-['arial']"><a className="hover:text-[#2A6496] transition-all duration-500 underline"
+                  href="/" target="_self">AGBs</a></li>
+                  <li className="text-[13px] text-[#2380b1] font-normal font-['arial']"><a className="hover:text-[#2A6496] transition-all duration-500 underline"
+                  href="/" target="_self">Datenschutz</a></li>
+            </ul>
+        </div>
+      </div>
+      <div className="footer-col px-[15px] w-[50%] md:w-[25%] xl:w-[25%]">
+        <div className="col-inner">         
+            <h4 className="title text-[20px] text-[#3391c2] font-semibold font-serif mb-[40px] mt-[-35px]">Versand/Zahlung</h4>
+             <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] mb-[10px]">Lieferkosten <strong>CHF 6.90</strong></p>
+             <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] mb-[10px]">Gratislieferung ab einem Bestellwert von <strong>CHF 65.00</strong></p>
+             <div className='flex items-start gap-[5px]'>
+                    <img src="https://cdn.shopify.com/s/files/1/0787/1352/0419/files/rechnung.png?v=1688561840" height="auto" alt="" />
+                    <div className='flex'>
+                    <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] mb-[10px]"><strong  className='font-semibold'>Rechnung</strong><br/>30 Tage netto</p>
+                    </div>
+             </div>
+        </div>
+      </div>
+      <div className="footer-col px-[15px] w-[23%]">
+        <div className="col-inner">
+          <h4 className="title text-[20px] text-[#3391c2] font-semibold font-serif mb-[40px] mt-[-35px]">Kontakt</h4>
+          <div className="contact-info">
+           <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] mb-[10px] "><b className='font-semibold'>SWISSBABYSERVICE</b><br/>Schulstrasse 13a<br/>9553 Bettwiesen<br/></p>
+             <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] mb-[10px]"><strong className='font-semibold'>FR 079 434 62 99</strong></p>
+             <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] mb-[10px]"><strong className='font-semibold'>DE 052 720 58 58</strong></p>
+             <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] mb-[10px]"><a href="mailto:info@swissbabyservice.ch" className="hover:text-[#2A6496] transition-all duration-500 underline">info@swissbabyservice.ch</a></p>
+          </div>
+       
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
     </Section>
   );
 }
+
 
 function FooterLink({item}) {
   if (item.to.startsWith('http')) {
