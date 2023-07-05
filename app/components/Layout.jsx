@@ -216,59 +216,37 @@ function DesktopHeader({isHome,aicoMenu, menu, openCart, title}) {
       role="banner"
       className={`${
         isHome
-          ? 'bg-primary/80 dark:bg-contrast/60 text-contrast dark:text-primary shadow-darkHeader'
-          : 'bg-contrast/80 text-primary'
+          ? ''
+          : ''
       } ${
-        !isHome && y > 50 && ' shadow-lightHeader'
-      } hidden h-nav lg:flex items-center sticky transition duration-300 backdrop-blur-lg z-40 top-0 justify-between w-full leading-none gap-8 px-12 py-8`}
+        !isHome && y > 50 && ''
+      } site-header`}
     >
-      <div className="flex gap-12">
-        <Link className="font-bold" to="/" prefetch="intent">
-          {title}
-        </Link>
-        <nav className="flex gap-8">
-          {/* Top level menu items */}
-          {(menu?.items || []).map((item) => (
-            <Link
-              key={item.id}
-              to={item.to}
-              target={item.target}
-              prefetch="intent"
-              className={({isActive}) =>
-                isActive ? 'pb-1 border-b -mb-px' : 'pb-1'
-              }
-            >
-              {item.title}
-            </Link>
-          ))}
-        </nav>
-      </div>
-      <div className="flex items-center gap-1">
-        <Form
-          method="get"
-          action={params.locale ? `/${params.locale}/search` : '/search'}
-          className="flex items-center gap-2"
-        >
-          <Input
-            className={
-              isHome
-                ? 'focus:border-contrast/20 dark:focus:border-primary/20'
-                : 'focus:border-primary/20'
-            }
-            type="search"
-            variant="minisearch"
-            placeholder="Search"
-            name="q"
-          />
-          <button
-            type="submit"
-            className="relative flex items-center justify-center w-8 h-8 focus:ring-primary/5"
-          >
-            <IconSearch />
-          </button>
-        </Form>
-        <AccountLink className="relative flex items-center justify-center w-8 h-8 focus:ring-primary/5" />
-        <CartCount isHome={isHome} openCart={openCart} />
+      <div className='container'>
+        <div className='row flex justify-between'>
+          <div className='logo-col max-w-[400px]'>
+              <a href="/" className='block w-full'>
+                <img className='w-full h-auto' src="https://cdn.shopify.com/s/files/1/0787/1352/0419/files/swissbabyservice.png?v=1688547438" alt="" />
+              </a>
+          </div>
+          <div className='language-col'>
+              <div className='language-block flex gap-[5px]'>
+                <button className='p-[7px] text-[12px] text-white bg-[#428bca] leading-none rounded-[0_0_3px_3px]'>de</button>
+                <button className='p-[7px] text-[12px] text-white bg-[#428bca] leading-none rounded-[0_0_3px_3px]'>it</button>
+                <button className='p-[7px] text-[12px] text-white bg-[#428bca] leading-none rounded-[0_0_3px_3px]'>fr</button>
+              </div>
+          </div>
+          <div className='right-col flex'>
+            <a href="/account" className='header-login p-[16px] flex text-[13px] items-end text-[#2A6496] font-["Open_Sans"] font-medium'>
+              <span className='icon text-[30px]'><i className="hr-icon-login"></i></span>
+              <span className='name'> Anmelden</span>
+            </a>
+            <div className='header-cart bg-[#c0d4e6] font-["Open_Sans"]'>
+              <CartCount isHome={isHome} openCart={openCart} />
+            </div>
+          </div>
+        </div>
+          {/* <AccountLink className="relative flex items-center justify-center w-8 h-8 focus:ring-primary/5" /> */}
       </div>
     </header>
   );
@@ -316,11 +294,13 @@ function Badge({openCart, dark, count}) {
         <div
           className={`${
             dark
-              ? 'text-primary bg-contrast dark:text-contrast dark:bg-primary'
-              : 'text-contrast bg-primary'
-          } absolute bottom-1 right-1 text-[0.625rem] font-medium subpixel-antialiased h-3 min-w-[0.75rem] flex items-center justify-center leading-none text-center rounded-full w-auto px-[0.125rem] pb-px`}
+              ? ''
+              : ''
+          } `}
         >
-          <span>{count || 0}</span>
+          <i className="hr-icon-cart mr-2"></i>
+          <span className="cart-text">Warenkorb</span>
+          <span className='bg-[#e4f0fa] px-[10px] py-[5px] text-[13px] ml-[8px] rounded-[5px]'>{count || 0}</span>
         </div>
       </>
     ),

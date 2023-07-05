@@ -1,7 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+/* font-family: 'Open Sans', sans-serif;
+font-family: 'Roboto', sans-serif; */
+/* font-["Open_Sans"] , font-["Roboto"]*/
+
+@font-face {
+  font-family: 'icon';
+  src:    url('./fonts/icomoon-bz.eot?x9znww');
+  src:    url('./fonts/icomoon-bz.eot?x9znww#iefix') format('embedded-opentype'),
+  url('./fonts/icomoon-bz.ttf?x9znww') format('truetype'),
+  url('./fonts/icomoon-bz.woff?x9znww') format('woff'),
+  url('./fonts/icomoon-bz.svg?x9znww#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 /* Tokens */
 :root {
   --color-primary: 20 20 20; /* Text, buttons, etc. */
@@ -179,4 +194,47 @@ shop-pay-button {
       @apply aspect-[inherit] w-full object-cover;
     }
   }
+}
+
+/* // ------------------------
+// site css */
+body{
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  line-height: 1.2;
+  font-weight: 400;
+  overflow-x: hidden;
+  background-color: #fff;
+}
+
+.container {
+  max-width: 1100px;
+  padding-right: 15px;
+  padding-left: 15px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+
+[class^="hr-icon-"], [class*=" hr-icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.hr-icon-cart:before {
+	content: "\e903";
+}
+.hr-icon-login:before {
+	content: "\e904";
 }
