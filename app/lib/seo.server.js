@@ -1,7 +1,7 @@
 function root({shop, url}) {
   return {
     title: shop?.name,
-    titleTemplate: '%s | Hydrogen Demo Store',
+    titleTemplate: 'Swissbabyservice – Ihr Spezialist für Windeln & Hygiene',
     description: truncate(shop?.description ?? ''),
     handle: '@shopify',
     url,
@@ -34,8 +34,8 @@ function root({shop, url}) {
 function home() {
   return {
     title: 'Home',
-    titleTemplate: '%s | Hydrogen Demo Store',
-    description: 'The best place to buy snowboarding products',
+    titleTemplate: 'Swissbabyservice – Ihr Spezialist für Windeln & Hygiene',
+    description: 'Swissbabyservice – Ihr Spezialist für Windeln & Hygiene',
     robots: {
       noIndex: false,
       noFollow: false,

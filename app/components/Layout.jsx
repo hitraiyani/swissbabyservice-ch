@@ -20,7 +20,7 @@ import {
   CartLoading,
   Link,
 } from '~/components';
-import {useIsHomePath} from '~/lib/utils';
+import {useIsHomePath, getMenuHandle} from '~/lib/utils';
 import {useIsHydrated} from '~/hooks/useIsHydrated';
 import {useCartFetchers} from '~/hooks/useCartFetchers';
 
@@ -252,10 +252,23 @@ function DesktopHeader({isHome,aicoMenu, menu, openCart, title}) {
         <div className='container'>
             <div className='navbar-wrap'>
               <ul className='navbar-items flex'>
-                <li className='navbar-item flex-1'>
-                  <a href="#" className='nav-link font-["Open_Sans"] text-[#2380b1] py-[22px] text-[20px] font-normal uppercase inline-block active'>Startseite</a>
-                </li>
-                <li className='navbar-item flex-1'>
+                {aicoMenu?.map((item,index) => {
+                    return (
+                      <li key={index} className="navbar-item flex-1">
+                        <Link
+                          to={`${
+                            item.category.name == ' Home'
+                              ? '/'
+                              : getMenuHandle(item.category)
+                          }`}
+                          className='nav-link font-["Open_Sans"] text-[#2380b1] py-[22px] text-[20px] font-normal uppercase inline-block'
+                        >
+                          {item.category.name}
+                        </Link>
+                      </li>
+                    );
+                })}
+                {/* <li className='navbar-item flex-1'>
                   <a href="#" className='nav-link font-["Open_Sans"] text-[#2380b1] py-[22px] text-[20px] font-normal uppercase inline-block'>Produkte</a>
                 </li>
                 <li className='navbar-item flex-1'>
@@ -266,7 +279,7 @@ function DesktopHeader({isHome,aicoMenu, menu, openCart, title}) {
                 </li>
                 <li className='navbar-item flex-1'>
                   <a href="#" className='nav-link font-["Open_Sans"] text-[#2380b1] py-[22px] text-[20px] font-normal uppercase inline-block'>Kontakt</a>
-                </li>
+                </li> */}
               </ul>
             </div>
         </div>
