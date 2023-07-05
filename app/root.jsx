@@ -146,7 +146,22 @@ const LAYOUT_QUERY = `#graphql
     $footerMenuHandle: String!
   ) @inContext(language: $language) {
     shop {
-      ...Shop
+      id
+      name
+      description
+      primaryDomain {
+        url
+      }
+      aico_navigation_menu: metafield(namespace: "aico_metafields", key: "aico_navigation_menu") {
+        value
+      }
+      brand {
+       logo {
+         image {
+          url
+         }
+       }
+     }
     }
     headerMenu: menu(handle: $headerMenuHandle) {
       ...Menu
@@ -155,21 +170,7 @@ const LAYOUT_QUERY = `#graphql
       ...Menu
     }
   }
-  fragment Shop on Shop {
-    id
-    name
-    description
-    primaryDomain {
-      url
-    }
-    brand {
-      logo {
-        image {
-          url
-        }
-      }
-    }
-  }
+  
   fragment MenuItem on MenuItem {
     id
     resourceId
@@ -204,6 +205,7 @@ async function getLayoutData({storefront}) {
     },
   });
 
+
   invariant(data, 'No data returned from Shopify API');
 
   /*
@@ -224,7 +226,7 @@ async function getLayoutData({storefront}) {
     ? parseMenu(data.footerMenu, customPrefixes)
     : undefined;
 
-  return {shop: data.shop, headerMenu, footerMenu};
+  return {shop: data.shop,aicoHeaderMenu : data?.shop?.aico_navigation_menu?.value ? JSON.parse(data?.shop?.aico_navigation_menu?.value) : [] , headerMenu, footerMenu};
 }
 
 const CART_QUERY = `#graphql

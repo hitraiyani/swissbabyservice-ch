@@ -296,3 +296,12 @@ export function getCartId(request) {
   const cookies = parseCookie(request.headers.get('Cookie') || '');
   return cookies.cart ? `gid://shopify/Cart/${cookies.cart}` : undefined;
 }
+export function getMenuHandle(menuItem) {
+  if (menuItem?.id && menuItem?.handle && menuItem.id.includes('Collection')) {
+      return `/collections/${menuItem?.handle}`;
+  } else if (menuItem?.id && menuItem?.handle && menuItem.id.includes('Product')) {
+    return `/products/${menuItem?.handle}`;
+  } else {
+    return menuItem?.id ? `/${menuItem?.handle}` : `#`;
+  }
+}

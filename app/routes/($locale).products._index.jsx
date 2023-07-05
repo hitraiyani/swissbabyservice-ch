@@ -56,6 +56,8 @@ export async function loader({request, context: {storefront}}) {
 export default function AllProducts() {
   const {products} = useLoaderData();
 
+  console.log(products);
+
   return (
     <>
       <PageHeader heading="All Products" variant="allCollections" />

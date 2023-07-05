@@ -26,6 +26,8 @@ import {useCartFetchers} from '~/hooks/useCartFetchers';
 
 export function Layout({children, layout}) {
   const {headerMenu, footerMenu} = layout;
+ 
+
   return (
     <>
       <div className="flex flex-col min-h-screen">
@@ -34,7 +36,7 @@ export function Layout({children, layout}) {
             Skip to content
           </a>
         </div>
-        {headerMenu && <Header title={layout.shop.name} menu={headerMenu} />}
+         <Header title={layout.shop.name}  aicoMenu={layout?.aicoHeaderMenu} menu={headerMenu} />
         <main role="main" id="mainContent" className="flex-grow">
           {children}
         </main>
@@ -44,7 +46,7 @@ export function Layout({children, layout}) {
   );
 }
 
-function Header({title, menu}) {
+function Header({title,aicoMenu, menu}) {
   const isHome = useIsHomePath();
 
   const {
@@ -71,12 +73,13 @@ function Header({title, menu}) {
     <>
       <CartDrawer isOpen={isCartOpen} onClose={closeCart} />
       {menu && (
-        <MenuDrawer isOpen={isMenuOpen} onClose={closeMenu} menu={menu} />
+        <MenuDrawer isOpen={isMenuOpen} aicoMenu={aicoMenu} onClose={closeMenu} menu={menu} />
       )}
       <DesktopHeader
         isHome={isHome}
         title={title}
         menu={menu}
+        aicoMenu={aicoMenu}
         openCart={openCart}
       />
       <MobileHeader
@@ -205,7 +208,7 @@ function MobileHeader({title, isHome, openCart, openMenu}) {
   );
 }
 
-function DesktopHeader({isHome, menu, openCart, title}) {
+function DesktopHeader({isHome,aicoMenu, menu, openCart, title}) {
   const params = useParams();
   const {y} = useWindowScroll();
   return (
