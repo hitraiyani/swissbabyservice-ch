@@ -216,8 +216,7 @@ body{
   margin-right: auto;
 }
 
-
-
+/* header css */
 [class^="hr-icon-"], [class*=" hr-icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'icon' !important;
@@ -238,3 +237,11 @@ body{
 .hr-icon-login:before {
 	content: "\e904";
 }
+.hr-icon-login, .hr-icon-cart {
+  font-size: 30px;
+}
+.language-block button.active{
+  background-color: #F1B5C8;
+    padding-bottom: 15px;
+}
+/* End header css */
