@@ -47,7 +47,7 @@ export function Layout({children, layout, locale}) {
           {children}
         </main>
       </div>
-      {footerMenu && <Footer menu={footerMenu} />}
+      {footerMenu && <Footer menu={footerMenu} locale={locale} />}
     </>
   );
 }
@@ -331,10 +331,10 @@ function DesktopHeader({isHome, aicoMenu, menu, openCart, title, locale}) {
               <span className="icon text-[30px]">
                 <i className="hr-icon-login"></i>
               </span>
-              <span className="name"> Anmelden</span>
+              <span className="name"> {translate("register",locale)}</span>
             </a>
             <div className="header-cart">
-              <CartCount isHome={isHome} openCart={openCart} />
+              <CartCount isHome={isHome} openCart={openCart}  locale={locale} />
             </div>
           </div>
         </div>
@@ -421,17 +421,18 @@ function AccountLink({className}) {
   );
 }
 
-function CartCount({isHome, openCart}) {
+function CartCount({isHome, openCart,locale}) {
   const [root] = useMatches();
 
   return (
-    <Suspense fallback={<Badge count={0} dark={isHome} openCart={openCart} />}>
+    <Suspense fallback={<Badge count={0} dark={isHome} openCart={openCart}  locale={locale} />}>
       <Await resolve={root.data?.cart}>
         {(cart) => (
           <Badge
             dark={isHome}
             openCart={openCart}
             count={cart?.totalQuantity || 0}
+            locale={locale}
           />
         )}
       </Await>
@@ -439,7 +440,7 @@ function CartCount({isHome, openCart}) {
   );
 }
 
-function Badge({openCart, dark, count}) {
+function Badge({openCart, dark, count,locale}) {
   const isHydrated = useIsHydrated();
 
   const BadgeCounter = useMemo(
@@ -448,7 +449,7 @@ function Badge({openCart, dark, count}) {
         {/* <IconBag /> */}
         <div className={`${dark ? '' : ''} flex items-center`}>
           <i className="hr-icon-cart mr-2"></i>
-          <span className="cart-text text-[13px] font-['arial']">Warenkorb</span>
+          <span className="cart-text text-[13px] font-['arial']"> {translate("shoping_cart",locale) }</span>
           <span className='bg-[#e4f0fa] px-[10px] py-[5px] text-[13px] ml-[8px] rounded-[5px] text-[#2380b1] font-["arial"]'>{count || 0}</span>
         </div>
       </>
@@ -473,7 +474,7 @@ function Badge({openCart, dark, count}) {
   );
 }
 
-function Footer({menu}) {
+function Footer({menu,locale}) {
 
   const isHome = useIsHomePath();
 
@@ -495,18 +496,14 @@ function Footer({menu}) {
                   Swissbabyservice
                 </h4>
                 <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] leading-[18px]">
-                  Mit unserem umfangreichen Sortiment an klassichen,
-                  ökologischen oder biologischen Windeln, Pflege- &
-                  Hygieneprodukten und Zubehör sind wir Ihr zuverlässiger
-                  Partner, sowohl für Private als auch für
-                  Geschäfts/Grosskunden.
+                   {translate("footer_desc",locale) } 
                 </p>
               </div>
             </div>
             <div className="px-[15px] w-[100%] md:w-[50%] lg:w-[25%] xl:w-[25%]">
               <div className="col-inner">
                 <h4 className="title text-[20px] text-[#3391c2] font-semibold font-serif pb-[15px] lg:pb-[0px] mb-[5px] lg:mb-[40px] mt-[0px] lg:mt-[-35px] border-b lg:border-b-0 border-[#3890bf]">
-                  Informationen
+                 {translate("information",locale) }
                 </h4>
                 <ul className="nav-list flex flex-col gap-[10px] mb-[10px]">
                   {menu?.items?.map((item,index) => {
@@ -528,13 +525,13 @@ function Footer({menu}) {
             <div className="px-[15px] w-[100%] md:w-[50%] lg:w-[25%] xl:w-[25%]">
               <div className="col-inner">
                 <h4 className="title text-[20px] text-[#3391c2] font-semibold font-serif pb-[15px] lg:pb-[0px] mb-[5px] lg:mb-[40px] mt-[0px] lg:mt-[-35px] border-b lg:border-b-0 border-[#3890bf]">
-                  Versand/Zahlung
+                 {translate("shipment",locale) }
                 </h4>
                 <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] leading-[18px] mb-[10px]">
-                  Lieferkosten <strong>CHF 6.90</strong>
+                  {translate("delivery_cost",locale)} <strong>CHF 6.90</strong>
                 </p>
                 <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] leading-[18px] mb-[10px]">
-                  Gratislieferung ab einem Bestellwert von{' '}
+                  {translate("free_delivery_of_order",locale)} {' '}
                   <strong>CHF 65.00</strong>
                 </p>
                 <div className="flex items-start gap-[5px]">
@@ -545,9 +542,9 @@ function Footer({menu}) {
                   />
                   <div className="flex">
                     <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] leading-[18px] mb-[10px]">
-                      <strong className="font-semibold">Rechnung</strong>
+                      <strong className="font-semibold">{translate("invoice",locale)}</strong>
                       <br />
-                      30 Tage netto
+                      30 {translate("take_net",locale)}
                     </p>
                   </div>
                 </div>
@@ -556,7 +553,7 @@ function Footer({menu}) {
             <div className="px-[15px] w-[100%] md:w-[50%] lg:w-[25%] xl:w-[25%]">
               <div className="col-inner">
                 <h4 className="title text-[20px] text-[#3391c2] font-semibold font-serif pb-[15px] lg:pb-[0px] mb-[5px] lg:mb-[40px] mt-[0px] lg:mt-[-35px] border-b lg:border-b-0 border-[#3890bf]">
-                  Kontakt
+                 {translate("contact",locale) }
                 </h4>
                 <div className="contact-info">
                   <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] leading-[18px] mb-[10px] ">
