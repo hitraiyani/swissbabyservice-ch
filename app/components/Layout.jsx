@@ -290,10 +290,10 @@ function DesktopHeader({isHome, aicoMenu, menu, openCart, title, locale}) {
       role="banner"
       className={`${isHome ? '' : ''} ${
         !isHome && y > 50 && ''
-      } site-header py-[16px] bg-white`}
+      } site-header bg-white`}
     >
       <div className="container">
-        <div className="row flex justify-between">
+        <div className="row flex justify-between py-[16px]">
           <div className="logo-col max-w-[400px]">
             <a href="/" className="block w-full">
               <img
@@ -304,32 +304,20 @@ function DesktopHeader({isHome, aicoMenu, menu, openCart, title, locale}) {
             </a>
           </div>
           <div className="language-col">
-            <div className="language-block flex gap-[5px] mt-[-16px] items-start">
-              <button
-                data-lang="de"
-                onClick={handleLanguageChange}
-                className={`p-[7px] text-[12px] text-white bg-[#428bca] leading-none rounded-[0_0_3px_3px] hover:bg-[#3071a9] font-bold font-["Roboto"] ${
+            <div className="language-block flex gap-[5px] mt-[-16px] items-start ml-[-79px]">
+              <button data-lang="de" onClick={handleLanguageChange} className={`p-[7px] text-[12px] text-white bg-[#428bca] leading-none rounded-[0_0_3px_3px] hover:bg-[#3071a9] font-bold font-["Roboto"] ${
                   locale == 'DE' ? 'active' : ''
-                }  `}
-              >
+                }`}>
                 de
               </button>
-              <button
-                data-lang="it"
-                onClick={handleLanguageChange}
-                className={`p-[7px] text-[12px] text-white bg-[#428bca] leading-none rounded-[0_0_3px_3px] hover:bg-[#3071a9] font-bold font-["Roboto"] ${
+              <button data-lang="it" onClick={handleLanguageChange} className={`p-[7px] text-[12px] text-white bg-[#428bca] leading-none rounded-[0_0_3px_3px] hover:bg-[#3071a9] font-bold font-["Roboto"] ${
                   locale == 'IT' ? 'active' : ''
-                } `}
-              >
+                } `}>
                 it
               </button>
-              <button
-                data-lang="fr"
-                onClick={handleLanguageChange}
-                className={`p-[7px] text-[12px] text-white bg-[#428bca] leading-none rounded-[0_0_3px_3px] hover:bg-[#3071a9] font-bold font-["Roboto"]  ${
+              <button data-lang="fr" onClick={handleLanguageChange}  className={`p-[7px] text-[12px] text-white bg-[#428bca] leading-none rounded-[0_0_3px_3px] hover:bg-[#3071a9] font-bold font-["Roboto"] ${
                   locale == 'FR' ? 'active' : ''
-                } `}
-              >
+                }`}>
                 fr
               </button>
             </div>
@@ -337,7 +325,7 @@ function DesktopHeader({isHome, aicoMenu, menu, openCart, title, locale}) {
           <div className="right-col flex items-center">
             <a
               href="/account"
-              className='header-login p-[16px] flex text-[13px] items-end text-[#2A6496] font-["Open_Sans"] font-medium mr-[16px]'
+              className='header-login p-[16px] flex text-[13px] text-[#2A6496] font-["arial"] font-medium mr-[16px] items-baseline gap-[2px]' 
             >
               <span className="icon text-[30px]">
                 <i className="hr-icon-login"></i>
@@ -353,18 +341,19 @@ function DesktopHeader({isHome, aicoMenu, menu, openCart, title, locale}) {
       </div>
       <div className="nav-header bg-[#e4f0fa] border-b-[1px] border-[#3890bf]">
         <div className="container">
+          <div className='flex justify-between gap-[40px] items-center'>
           <div className="navbar-wrap">
-            <ul className="navbar-items flex">
+            <ul className="navbar-items flex gap-[20px]">
               {aicoMenu?.map((item, index) => {
                 return (
-                  <li key={index} className="navbar-item flex-1">
+                  <li key={index} className="navbar-item flex-auto">
                     <Link
                       to={`${
                         item.category.name == ' Home'
                           ? '/'
                           : getMenuHandle(item.category)
                       }`}
-                      className='nav-link font-["Open_Sans"] text-[#2380b1] py-[22px] text-[20px] font-normal uppercase inline-block'
+                      className='nav-link font-["OpenSans"] text-[#2380b1] py-[22px] text-[20px] font-normal uppercase inline-block relative'
                     >
                       {item.category.name}
                     </Link>
@@ -372,18 +361,44 @@ function DesktopHeader({isHome, aicoMenu, menu, openCart, title, locale}) {
                 );
               })}
               {/* <li className='navbar-item flex-1'>
-                  <a href="#" className='nav-link font-["Open_Sans"] text-[#2380b1] py-[22px] text-[20px] font-normal uppercase inline-block'>Produkte</a>
+                  <a href="#" className='nav-link font-["arial"] text-[#2380b1] py-[22px] text-[20px] font-normal uppercase inline-block'>Produkte</a>
                 </li>
                 <li className='navbar-item flex-1'>
-                  <a href="#" className='nav-link font-["Open_Sans"] text-[#2380b1] py-[22px] text-[20px] font-normal uppercase inline-block'>Über uns</a>
+                  <a href="#" className='nav-link font-["arial"] text-[#2380b1] py-[22px] text-[20px] font-normal uppercase inline-block'>Über uns</a>
                 </li>
                 <li className='navbar-item flex-1'>
-                  <a href="#" className='nav-link font-["Open_Sans"] text-[#2380b1] py-[22px] text-[20px] font-normal uppercase inline-block'>Engagement</a>
+                  <a href="#" className='nav-link font-["arial"] text-[#2380b1] py-[22px] text-[20px] font-normal uppercase inline-block'>Engagement</a>
                 </li>
                 <li className='navbar-item flex-1'>
-                  <a href="#" className='nav-link font-["Open_Sans"] text-[#2380b1] py-[22px] text-[20px] font-normal uppercase inline-block'>Kontakt</a>
+                  <a href="#" className='nav-link font-["arial"] text-[#2380b1] py-[22px] text-[20px] font-normal uppercase inline-block'>Kontakt</a>
                 </li> */}
             </ul>
+          </div>
+          <div className="search-bar-col max-w-[190px]">
+            <Form
+              method="get"
+              action={params.locale ? `/${params.locale}/search` : '/search'}
+              className="flex items-center gap-2"
+            >
+              <Input
+                className={
+                  isHome
+                    ? ''
+                    : ''
+                }
+                type="search"
+                variant="minisearch"
+                placeholder="Produkt suchen"
+                name="q"
+              />
+              {/* <button
+                type="submit"
+                className="relative flex items-center justify-center w-8 h-8 focus:ring-primary/5"
+              >
+                <IconSearch />
+              </button> */}
+            </Form>
+          </div>
           </div>
         </div>
       </div>
@@ -432,12 +447,8 @@ function Badge({openCart, dark, count}) {
         {/* <IconBag /> */}
         <div className={`${dark ? '' : ''} flex items-center`}>
           <i className="hr-icon-cart mr-2"></i>
-          <span className="cart-text text-[13px] font-['Open_Sans']">
-            Warenkorb
-          </span>
-          <span className='bg-[#e4f0fa] px-[10px] py-[5px] text-[13px] ml-[8px] rounded-[5px] text-[#2380b1] font-["Open_Sans"]'>
-            {count || 0}
-          </span>
+          <span className="cart-text text-[13px] font-['arial']">Warenkorb</span>
+          <span className='bg-[#e4f0fa] px-[10px] py-[5px] text-[13px] ml-[8px] rounded-[5px] text-[#2380b1] font-["arial"]'>{count || 0}</span>
         </div>
       </>
     ),
@@ -447,14 +458,14 @@ function Badge({openCart, dark, count}) {
   return isHydrated ? (
     <button
       onClick={openCart}
-      className="w-full bg-[#c0d4e6] font-['Open_Sans'] p-[13px_12px_13px_15px] rounded-[8px] text-[#2380b1] hover:bg-[#2380b1] hover:text-white transition-all duration-500"
+      className="w-full bg-[#c0d4e6] font-['arial'] p-[13px_12px_13px_15px] rounded-[8px] text-[#2380b1] hover:bg-[#2380b1] hover:text-white transition-all duration-500"
     >
       {BadgeCounter}
     </button>
   ) : (
     <Link
       to="/cart"
-      className="w-full bg-[#c0d4e6] font-['Open_Sans'] p-[13px_12px_13px_15px] rounded-[8px] text-[#2380b1] hover:bg-[#2380b1] hover:text-white transition-all duration-500"
+      className="w-full bg-[#c0d4e6] font-['arial'] p-[13px_12px_13px_15px] rounded-[8px] text-[#2380b1] hover:bg-[#2380b1] hover:text-white transition-all duration-500"
     >
       {BadgeCounter}
     </Link>
