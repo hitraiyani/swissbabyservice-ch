@@ -134,6 +134,7 @@ export function MenuDrawer({isOpen, onClose, menu,aicoMenu,locale}) {
 }
 
 function MenuMobileNav({menu, onClose,aicoMenu,locale}) {
+  const {pathname} = useLocation();
   return (
     <nav className="grid px-[15px]">
       {/* Top level menu items */}
@@ -157,16 +158,13 @@ function MenuMobileNav({menu, onClose,aicoMenu,locale}) {
           <div className="navbar-wrap flex-1">
             <ul className="navbar-items flex flex-col">
             {aicoMenu?.map((item, index) => {
+              const itemHandle = item.category.name == 'Home' ? '/' : getMenuHandle(item.category);
                 return (
                   <li key={index} className='navbar-item flex-1'>
                     <Link
-                      to={`${
-                        item.category.name == ' Home'
-                          ? '/'
-                          : getMenuHandle(item.category)
-                      }`}
+                      to={itemHandle}
                        onClick={onClose}
-                      className='nav-link font-["OpenSans"] text-[#333] py-[22px] text-[20px] font-normal uppercase inline-block relative'
+                       className={`${itemHandle == pathname ? 'active': ''} nav-link font-["OpenSans"] text-[#333] py-[22px] text-[20px] font-normal uppercase inline-block relative`}
                     >
                       {translate(item.category.name,locale)}
                     </Link>
