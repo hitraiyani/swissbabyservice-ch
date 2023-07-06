@@ -5,11 +5,21 @@ font-family: 'Roboto', sans-serif; */
 
 @font-face {
   font-family: 'icon';
-  src:    url('./fonts/icomoon-bz.eot?x9znww');
-  src:    url('./fonts/icomoon-bz.eot?x9znww#iefix') format('embedded-opentype'),
-  url('./fonts/icomoon-bz.ttf?x9znww') format('truetype'),
-  url('./fonts/icomoon-bz.woff?x9znww') format('woff'),
-  url('./fonts/icomoon-bz.svg?x9znww#icomoon') format('svg');
+  src: url('./fonts/icomoon-bz.eot?x9znww');
+  src: url('./fonts/icomoon-bz.eot?x9znww#iefix') format('embedded-opentype'),
+    url('./fonts/icomoon-bz.ttf?x9znww') format('truetype'),
+    url('./fonts/icomoon-bz.woff?x9znww') format('woff'),
+    url('./fonts/icomoon-bz.svg?x9znww#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'OpenSans';
+  src: url('./fonts/opensans.eot');
+  src: url('./fonts/opensans.eot?x9znww#iefix') format('embedded-opentype'),
+    url('./fonts/opensans.woff') format('woff'),
+    url('./fonts/opensans.ttf') format('truetype'),
+    url('./fonts/opensans.svg#opensans') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -198,7 +208,7 @@ shop-pay-button {
 
 /* // ------------------------
 // site css */
-body{
+body {
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
   line-height: 1.2;
@@ -217,7 +227,8 @@ body{
 }
 
 /* header css */
-[class^="hr-icon-"], [class*=" hr-icon-"] {
+[class^='hr-icon-'],
+[class*=' hr-icon-'] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'icon' !important;
   speak: none;
@@ -232,22 +243,60 @@ body{
   -moz-osx-font-smoothing: grayscale;
 }
 .hr-icon-cart:before {
-	content: "\e903";
+  content: '\e903';
 }
 .hr-icon-login:before {
-	content: "\e904";
+  content: '\e904';
 }
-.hr-icon-login, .hr-icon-cart {
+.hr-icon-login,
+.hr-icon-cart {
   font-size: 30px;
 }
-.language-block button.active{
-  background-color: #F1B5C8;
-    padding-bottom: 15px;
+.language-block button.active {
+  background-color: #f1b5c8;
+  padding-bottom: 15px;
+}
+.form-control:focus {
+  color: #495057;
+  background-color: #fff;
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0.25rem 0.1rem rgba(0, 123, 255, 0.25);
+}
+.nav-header .navbar-items > .navbar-item > .nav-link:after {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: rgb(35,128,177);
+  content: '';
+  opacity: 0;
+  -webkit-transition: height 0.3s, opacity 0.3s, -webkit-transform 0.3s;
+  -moz-transition: height 0.3s, opacity 0.3s, -moz-transform 0.3s;
+  transition: height 0.3s, opacity 0.3s, transform 0.3s;
+  -webkit-transform: translateY(-20px);
+  -moz-transform: translateY(-20px);
+  transform: translateY(-20px);
+}
+.nav-header .navbar-items > .navbar-item > .nav-link:hover::after, .nav-header .navbar-items > .navbar-item > .nav-link:focus::after {
+  height: 10px;
+  opacity: 1;
+  -webkit-transform: translateY(-10px);
+  -moz-transform: translateY(-10px);
+  transform: translateY(-10px);
+}
+.nav-header .navbar-items > .navbar-item > .nav-link.active:after {
+  background: rgb(154,46,163);
+  height: 10px;
+  opacity: 1;
+  -webkit-transform: translateY(-10px);
+  -moz-transform: translateY(-10px);
+  transform: translateY(-10px);
 }
 /* End header css */
 
-
-.bz-footer-row{
+.bz-footer-row {
   height: auto;
   width: 100%;
   background-color: transparent;
@@ -255,19 +304,23 @@ body{
   border-bottom: 1px solid #3890bf;
 }
 .bz-footer-row:after {
-  content: "";
+  content: '';
   display: inline-block;
   width: 20px;
   height: 20px;
   margin-top: 0;
   margin-right: 15px;
-  background: transparent url('https://cdn.shopify.com/s/files/1/0787/1352/0419/files/heart.png?v=1688561823') no-repeat 0px 0px;
+  background: transparent
+    url('https://cdn.shopify.com/s/files/1/0787/1352/0419/files/heart.png?v=1688561823')
+    no-repeat 0px 0px;
   float: right;
   position: relative;
   top: 10px;
 }
 .footer-cloud {
-  background: transparent url('https://cdn.shopify.com/s/files/1/0787/1352/0419/files/cloud-footer.png?v=1688619435') no-repeat center bottom;
+  background: transparent
+    url('https://cdn.shopify.com/s/files/1/0787/1352/0419/files/cloud-footer.png?v=1688619435')
+    no-repeat center bottom;
   width: 100%;
   height: 464px;
   margin-top: 0;
@@ -278,7 +331,7 @@ body{
   top: -464px;
 }
 
-.main-footer{
+.main-footer {
   margin-top: 310px;
   padding-top: 0px !important;
   padding-left: 0px !important;
