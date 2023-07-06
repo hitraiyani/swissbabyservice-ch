@@ -9,6 +9,7 @@ import {getHeroPlaceholder} from '~/lib/placeholders';
 import {seoPayload} from '~/lib/seo.server';
 import {routeHeaders} from '~/data/cache';
 import { translate } from '~/lib/utils';
+import { Swiper, SwiperSlide } from "swiper/react";
 
 export const headers = routeHeaders;
 
@@ -99,6 +100,11 @@ export default function Homepage() {
       )}
       {/* { translate('test',language)} */}
       
+      {/* <Swiper className="mySwiper">
+        <SwiperSlide>Slide 1</SwiperSlide>
+        <SwiperSlide>Slide 2</SwiperSlide>
+        <SwiperSlide>Slide 3</SwiperSlide>
+      </Swiper> */}
 
       {featuredProducts && (
         <Suspense>
