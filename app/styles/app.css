@@ -251,6 +251,9 @@ body {
 .hr-icon-login,
 .hr-icon-cart {
   font-size: 30px;
+  @media (max-width: 991px) {
+    font-size: 18px;
+  }
 }
 .language-block button.active {
   background-color: #f1b5c8;
@@ -263,13 +266,13 @@ body {
   outline: 0;
   box-shadow: 0 0 0.25rem 0.1rem rgba(0, 123, 255, 0.25);
 }
-.nav-header .navbar-items > .navbar-item > .nav-link:after {
+.navbar-wrap .navbar-items > .navbar-item > .nav-link:after {
   position: absolute;
   top: 100%;
   left: 0;
   width: 100%;
   height: 1px;
-  background: rgb(35,128,177);
+  background: rgb(35, 128, 177);
   content: '';
   opacity: 0;
   -webkit-transition: height 0.3s, opacity 0.3s, -webkit-transform 0.3s;
@@ -279,20 +282,36 @@ body {
   -moz-transform: translateY(-20px);
   transform: translateY(-20px);
 }
-.nav-header .navbar-items > .navbar-item > .nav-link:hover::after, .nav-header .navbar-items > .navbar-item > .nav-link:focus::after {
+.navbar-wrap .navbar-items > .navbar-item > .nav-link:hover::after,
+.navbar-wrap .navbar-items > .navbar-item > .nav-link:focus::after {
   height: 10px;
   opacity: 1;
   -webkit-transform: translateY(-10px);
   -moz-transform: translateY(-10px);
   transform: translateY(-10px);
 }
-.nav-header .navbar-items > .navbar-item > .nav-link.active:after {
-  background: rgb(154,46,163);
+.navbar-wrap .navbar-items > .navbar-item > .nav-link.active:after {
+  background: rgb(154, 46, 163);
   height: 10px;
   opacity: 1;
   -webkit-transform: translateY(-10px);
   -moz-transform: translateY(-10px);
   transform: translateY(-10px);
+}
+.navbar-wrap:after,
+.mobile-header::after {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-top: -6px;
+  background: transparent
+    url('https://cdn.shopify.com/s/files/1/0787/1352/0419/files/heart.png?v=1688561823')
+    no-repeat 0px 0px;
+  position: absolute;
+  top: 100%;
+  left: auto;
+  right: 15px;
 }
 /* End header css */
 

@@ -134,9 +134,9 @@ export function MenuDrawer({isOpen, onClose, menu}) {
 
 function MenuMobileNav({menu, onClose}) {
   return (
-    <nav className="grid gap-4 p-6 sm:gap-6 sm:px-12 sm:py-8">
+    <nav className="grid px-[15px]">
       {/* Top level menu items */}
-      {(menu?.items || []).map((item) => (
+      {/* {(menu?.items || []).map((item) => (
         <span key={item.id} className="block">
           <Link
             to={item.to}
@@ -151,7 +151,25 @@ function MenuMobileNav({menu, onClose}) {
             </Text>
           </Link>
         </span>
-      ))}
+      ))} */}
+      <div className='flex justify-between gap-[20px] xl:gap-[40px] items-center'>
+          <div className="navbar-wrap flex-1">
+            <ul className="navbar-items flex flex-col">
+              <li className='navbar-item flex-1'>
+                  <a href="#" className='nav-link font-["OpenSans"] text-[#333] py-[22px] text-[20px] font-normal uppercase inline-block relative'>Produkte</a>
+                </li>
+                <li className='navbar-item flex-1'>
+                  <a href="#" className='nav-link font-["OpenSans"] text-[#333] py-[22px] text-[20px] font-normal uppercase inline-block relative'>Über uns</a>
+                </li>
+                <li className='navbar-item flex-1'>
+                  <a href="#" className='nav-link font-["OpenSans"] text-[#333] py-[22px] text-[20px] font-normal uppercase inline-block relative'>Engagement</a>
+                </li>
+                <li className='navbar-item flex-1'>
+                  <a href="#" className='nav-link font-["OpenSans"] text-[#333] py-[22px] text-[20px] font-normal uppercase inline-block relative'>Kontakt</a>
+                </li>
+            </ul>
+          </div>
+        </div>
     </nav>
   );
 }
@@ -166,57 +184,82 @@ function MobileHeader({title, isHome, openCart, openMenu,aicoMenu }) {
       role="banner"
       className={`${
         isHome
-          ? 'bg-primary/80 dark:bg-contrast/60 text-contrast dark:text-primary shadow-darkHeader'
-          : 'bg-contrast/80 text-primary'
-      } flex lg:hidden items-center h-nav sticky backdrop-blur-lg z-40 top-0 justify-between w-full leading-none gap-4 px-4 md:px-8`}
+          ? ''
+          : ''
+      } mobile-header min-[992px]:hidden bg-white pb-[16px] border-b-[1px] border-[#3890bf] relative`}
     >
-      <div className="flex items-center justify-start w-full gap-4">
-        <button
-          onClick={openMenu}
-          className="relative flex items-center justify-center w-8 h-8"
-        >
-          <IconMenu />
-        </button>
-        <Form
-          method="get"
-          action={params.locale ? `/${params.locale}/search` : '/search'}
-          className="items-center gap-2 sm:flex"
-        >
+      <div className='container'>
+        <div className='row flex justify-between py-[8px] mb-[16px]'>
           <button
-            type="submit"
-            className="relative flex items-center justify-center w-8 h-8"
+            onClick={openMenu}
+            className=""
           >
-            <IconSearch />
+            <IconMenu className={'text-[#2380b1] w-[28px] h-[32px] scale-[1.5]'} />
           </button>
-          <Input
-            className={
-              isHome
-                ? 'focus:border-contrast/20 dark:focus:border-primary/20'
-                : 'focus:border-primary/20'
-            }
-            type="search"
-            variant="minisearch"
-            placeholder="Search"
-            name="q"
-          />
-        </Form>
-      </div>
-
-      <Link
-        className="flex items-center self-stretch leading-[3rem] md:leading-[4rem] justify-center flex-grow w-full h-full"
-        to="/"
-      >
-        <Heading
-          className="font-bold text-center leading-none"
-          as={isHome ? 'h1' : 'h2'}
-        >
-          {title}
-        </Heading>
-      </Link>
-
-      <div className="flex items-center justify-end w-full gap-4">
-        <AccountLink className="relative flex items-center justify-center w-8 h-8" />
-        <CartCount isHome={isHome} openCart={openCart} />
+          <div className='my-account-mobile'>
+          <a
+              href="/account"
+              className='header-login pt-[4px] flex text-[11px] text-[#2380b1] font-["arial"] font-medium items-baseline gap-[2px]' 
+            >
+              <span className="icon">
+                <i className="hr-icon-login"></i>
+              </span>
+              <span className="name"> Anmelden</span>
+            </a>
+          </div>
+          <div className='header-cart mobile'> 
+            <CartCount isHome={isHome} openCart={openCart} />
+          </div>
+          <div className="language-col">
+            <div className="language-block flex gap-[5px] items-start mt-[-8px]">
+              <button className='p-[7px] text-[12px] text-white bg-[#428bca] leading-none rounded-[0_0_3px_3px] hover:bg-[#3071a9] font-bold font-["Roboto"] active'>
+                de
+              </button>
+              <button className='p-[7px] text-[12px] text-white bg-[#428bca] leading-none rounded-[0_0_3px_3px] hover:bg-[#3071a9] font-bold font-["Roboto"]'>
+                it
+              </button>
+              <button className='p-[7px] text-[12px] text-white bg-[#428bca] leading-none rounded-[0_0_3px_3px] hover:bg-[#3071a9] font-bold font-["Roboto"]'>
+                fr
+              </button>
+            </div>
+          </div>
+        </div>
+        <div className='row mb-[20px]'>
+          <div className="logo-col max-w-[400px] mx-auto">
+            <a href="/" className="block w-full">
+              <img
+                className="w-full h-auto"
+                src="https://cdn.shopify.com/s/files/1/0787/1352/0419/files/swissbabyservice.png?v=1688547438"
+                alt=""
+              />
+            </a>
+          </div>
+        </div>
+        <div className='row'>
+          <Form
+            method="get"
+            action={params.locale ? `/${params.locale}/search` : '/search'}
+            className="items-center gap-2 sm:flex"
+          >
+            {/* <button
+              type="submit"
+              className="relative flex items-center justify-center w-8 h-8"
+            >
+              <IconSearch />
+            </button> */}
+            <Input
+              className={
+                isHome
+                  ? ''
+                  : ''
+              }
+              type="search"
+              variant="minisearch"
+              placeholder="Produkt suchen"
+              name="q"
+            />
+          </Form>
+        </div>
       </div>
     </header>
   );
@@ -291,7 +334,7 @@ function DesktopHeader({isHome, aicoMenu, menu, openCart, title, locale}) {
       role="banner"
       className={`${isHome ? '' : ''} ${
         !isHome && y > 50 && ''
-      } site-header bg-white`}
+      } site-header bg-white max-[991px]:hidden`}
     >
       <div className="container">
         <div className="row flex justify-between py-[16px]">
@@ -340,10 +383,10 @@ function DesktopHeader({isHome, aicoMenu, menu, openCart, title, locale}) {
         </div>
         {/* <AccountLink className="relative flex items-center justify-center w-8 h-8 focus:ring-primary/5" /> */}
       </div>
-      <div className="nav-header bg-[#e4f0fa] border-b-[1px] border-[#3890bf]">
+      <div className="nav-header bg-[#e4f0fa] border-b-[1px] border-[#3890bf] relative">
         <div className="container">
-          <div className='flex justify-between gap-[40px] items-center'>
-          <div className="navbar-wrap">
+          <div className='flex justify-between gap-[20px] xl:gap-[40px] items-center'>
+          <div className="navbar-wrap flex-1">
             <ul className="navbar-items flex gap-[20px]">
               {aicoMenu?.map((item, index) => {
                 return (
@@ -354,7 +397,7 @@ function DesktopHeader({isHome, aicoMenu, menu, openCart, title, locale}) {
                           ? '/'
                           : getMenuHandle(item.category)
                       }`}
-                      className='nav-link font-["OpenSans"] text-[#2380b1] py-[22px] text-[20px] font-normal uppercase inline-block relative'
+                      className='nav-link font-["OpenSans"] text-[#2380b1] py-[23px] text-[18px] xl:text-[20px] font-normal uppercase inline-block relative'
                     >
                       {translate(item.category.name,locale)}
                     </Link>
@@ -362,16 +405,16 @@ function DesktopHeader({isHome, aicoMenu, menu, openCart, title, locale}) {
                 );
               })}
               {/* <li className='navbar-item flex-1'>
-                  <a href="#" className='nav-link font-["arial"] text-[#2380b1] py-[22px] text-[20px] font-normal uppercase inline-block'>Produkte</a>
+                  <a href="#" className='nav-link font-["OpenSans"] text-[#2380b1] py-[23px] text-[18px] xl:text-[20px] font-normal uppercase inline-block relative'>Produkte</a>
                 </li>
                 <li className='navbar-item flex-1'>
-                  <a href="#" className='nav-link font-["arial"] text-[#2380b1] py-[22px] text-[20px] font-normal uppercase inline-block'>Über uns</a>
+                  <a href="#" className='nav-link font-["OpenSans"] text-[#2380b1] py-[23px] text-[18px] xl:text-[20px] font-normal uppercase inline-block relative'>Über uns</a>
                 </li>
                 <li className='navbar-item flex-1'>
-                  <a href="#" className='nav-link font-["arial"] text-[#2380b1] py-[22px] text-[20px] font-normal uppercase inline-block'>Engagement</a>
+                  <a href="#" className='nav-link font-["OpenSans"] text-[#2380b1] py-[23px] text-[18px] xl:text-[20px] font-normal uppercase inline-block relative'>Engagement</a>
                 </li>
                 <li className='navbar-item flex-1'>
-                  <a href="#" className='nav-link font-["arial"] text-[#2380b1] py-[22px] text-[20px] font-normal uppercase inline-block'>Kontakt</a>
+                  <a href="#" className='nav-link font-["OpenSans"] text-[#2380b1] py-[23px] text-[18px] xl:text-[20px] font-normal uppercase inline-block relative'>Kontakt</a>
                 </li> */}
             </ul>
           </div>
@@ -449,8 +492,8 @@ function Badge({openCart, dark, count,locale}) {
         {/* <IconBag /> */}
         <div className={`${dark ? '' : ''} flex items-center`}>
           <i className="hr-icon-cart mr-2"></i>
-          <span className="cart-text text-[13px] font-['arial']"> {translate("shoping_cart",locale) }</span>
-          <span className='bg-[#e4f0fa] px-[10px] py-[5px] text-[13px] ml-[8px] rounded-[5px] text-[#2380b1] font-["arial"]'>{count || 0}</span>
+          <span className="cart-text text-[12px] min-[992px]:text-[13px] font-['arial']">{translate("shoping_cart",locale)}</span>
+          <span className='bg-[#e4f0fa] px-[4px] min-[992px]:px-[10px] py-[2px] min-[992px]:py-[5px] text-[12px] min-[992px]:text-[13px] ml-[8px] rounded-[2px] min-[992px]:rounded-[5px] text-[#2380b1] font-["arial"]'>{count || 0}</span>
         </div>
       </>
     ),
@@ -460,14 +503,14 @@ function Badge({openCart, dark, count,locale}) {
   return isHydrated ? (
     <button
       onClick={openCart}
-      className="w-full bg-[#c0d4e6] font-['arial'] p-[13px_12px_13px_15px] rounded-[8px] text-[#2380b1] hover:bg-[#2380b1] hover:text-white transition-all duration-500"
+      className="w-full bg-[#c0d4e6] font-['arial'] p-[7px_6px_7px_8px] min-[992px]:p-[13px_12px_13px_15px] rounded-[4px] min-[992px]:rounded-[8px] text-[#2380b1] hover:bg-[#2380b1] hover:text-white transition-all duration-500"
     >
       {BadgeCounter}
     </button>
   ) : (
     <Link
       to="/cart"
-      className="w-full bg-[#c0d4e6] font-['arial'] p-[13px_12px_13px_15px] rounded-[8px] text-[#2380b1] hover:bg-[#2380b1] hover:text-white transition-all duration-500"
+      className="w-full bg-[#c0d4e6] font-['arial'] p-[7px_6px_7px_8px] min-[992px]:p-[13px_12px_13px_15px] rounded-[4px] min-[992px]:rounded-[8px] text-[#2380b1] hover:bg-[#2380b1] hover:text-white transition-all duration-500"
     >
       {BadgeCounter}
     </Link>
