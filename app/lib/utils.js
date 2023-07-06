@@ -1,7 +1,37 @@
 import {useLocation, useMatches} from '@remix-run/react';
 import {parse as parseCookie} from 'worktop/cookie';
 import typographicBase from 'typographic-base';
-import {countries} from '~/data/countries';
+import {countries, languageSwitchOption} from '~/data/countries';
+import deJson from '~/data/de.json';
+import frJson from '~/data/fr.json';
+import itJson from '~/data/it.json';
+
+export const translate = (key, language) => {
+  const translations =
+    language?.toLowerCase() === 'fr'
+      ? frJson
+      : language?.toLowerCase() === 'it'
+      ? itJson
+      : deJson;
+  return translations[key] || key;
+};
+
+export const productTranslate = (product, key, language) => {
+  const translation =
+    language?.toLowerCase() === 'fr'
+      ? product[key + '_fr']['value']
+        ? product[key + '_fr']['value']
+        : product?.[key]
+      : language?.toLowerCase() === 'it'
+      ? product[key + '_it']['value']
+        ? product[key + '_it']['value']
+        : product?.[key]
+      : product[key + '_de_ch']['value']
+      ? product[key + '_de_ch']['value']
+      : product?.[key];
+
+  return translation;
+};
 
 export function missingClass(string, prefix) {
   if (!string) {
@@ -250,6 +280,38 @@ export function getLocaleFromRequest(request) {
       };
 }
 
+export function getLocaleFromRequestNew(request) {
+  const cookieValue = request.headers.get('Cookie');
+  const languageCookie = cookieValue
+    ? cookieValue
+        .split(';')
+        .find((cookie) => cookie.trim().startsWith('language='))
+    : null;
+  const language = languageCookie ? languageCookie.split('=')[1] : null;
+
+  const url = new URL(request.url);
+  const firstPathPart =
+    '/' + url.pathname.substring(1).split('/')[0].toLowerCase();
+
+  //const languageSwitchKey = (language && language == 'fr')  ? '/fr' : firstPathPart;
+  const languageSwitchKey =
+    language && language == 'fr'
+      ? '/fr'
+      : language && language == 'it'
+      ? '/it'
+      : firstPathPart;
+
+  return languageSwitchOption[languageSwitchKey]
+    ? {
+        ...languageSwitchOption[languageSwitchKey],
+        pathPrefix: languageSwitchKey,
+      }
+    : {
+        ...languageSwitchOption['default'],
+        pathPrefix: '',
+      };
+}
+
 export function usePrefixPathWithLocale(path) {
   const [root] = useMatches();
   const selectedLocale = root.data?.selectedLocale ?? DEFAULT_LOCALE;
@@ -298,8 +360,12 @@ export function getCartId(request) {
 }
 export function getMenuHandle(menuItem) {
   if (menuItem?.id && menuItem?.handle && menuItem.id.includes('Collection')) {
-      return `/collections/${menuItem?.handle}`;
-  } else if (menuItem?.id && menuItem?.handle && menuItem.id.includes('Product')) {
+    return `/collections/${menuItem?.handle}`;
+  } else if (
+    menuItem?.id &&
+    menuItem?.handle &&
+    menuItem.id.includes('Product')
+  ) {
     return `/products/${menuItem?.handle}`;
   } else {
     return menuItem?.id ? `/${menuItem?.handle}` : `#`;

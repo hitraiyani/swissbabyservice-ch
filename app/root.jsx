@@ -61,6 +61,9 @@ export default function App() {
   const data = useLoaderData();
   const locale = data.selectedLocale ?? DEFAULT_LOCALE;
   const hasUserConsent = true;
+  // console.log(locale);
+  // console.log("defautl  locale");
+
 
   useAnalytics(hasUserConsent, locale);
 
@@ -77,6 +80,7 @@ export default function App() {
         <Layout
           key={`${locale.language}-${locale.country}`}
           layout={data.layout}
+          locale={locale.language}
         >
           <Outlet />
         </Layout>

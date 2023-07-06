@@ -8,15 +8,18 @@ import {MEDIA_FRAGMENT, PRODUCT_CARD_FRAGMENT} from '~/data/fragments';
 import {getHeroPlaceholder} from '~/lib/placeholders';
 import {seoPayload} from '~/lib/seo.server';
 import {routeHeaders} from '~/data/cache';
+import { translate } from '~/lib/utils';
 
 export const headers = routeHeaders;
 
 export async function loader({params, context}) {
   const {language, country} = context.storefront.i18n;
 
+
+
   if (
     params.locale &&
-    params.locale.toLowerCase() !== `${language}-${country}`.toLowerCase()
+    params.locale.toLowerCase() !== `${language}`.toLowerCase()
   ) {
     // If the locale URL param is defined, yet we still are on `EN-US`
     // the the locale param must be invalid, send to the 404 page
@@ -31,6 +34,7 @@ export async function loader({params, context}) {
 
   return defer({
     shop,
+    language,
     primaryHero: hero,
     // These different queries are separated to illustrate how 3rd party content
     // fetching can be optimized for both above and below the fold.
@@ -82,6 +86,7 @@ export default function Homepage() {
     tertiaryHero,
     featuredCollections,
     featuredProducts,
+    language
   } = useLoaderData();
 
   // TODO: skeletons vs placeholders
@@ -92,6 +97,8 @@ export default function Homepage() {
       {primaryHero && (
         <Hero {...primaryHero} height="full" top loading="eager" />
       )}
+      {/* { translate('test',language)} */}
+      
 
       {featuredProducts && (
         <Suspense>

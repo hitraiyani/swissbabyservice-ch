@@ -2,6 +2,8 @@ import {useParams, Form, Await, useMatches} from '@remix-run/react';
 import {useWindowScroll} from 'react-use';
 import {Disclosure} from '@headlessui/react';
 import {Suspense, useEffect, useMemo} from 'react';
+import Cookies from 'js-cookie';
+
 import {
   Drawer,
   useDrawer,
@@ -24,9 +26,8 @@ import {useIsHomePath, getMenuHandle} from '~/lib/utils';
 import {useIsHydrated} from '~/hooks/useIsHydrated';
 import {useCartFetchers} from '~/hooks/useCartFetchers';
 
-export function Layout({children, layout}) {
+export function Layout({children, layout, locale}) {
   const {headerMenu, footerMenu} = layout;
- 
 
   return (
     <>
@@ -36,7 +37,12 @@ export function Layout({children, layout}) {
             Skip to content
           </a>
         </div>
-         <Header title={layout.shop.name}  aicoMenu={layout?.aicoHeaderMenu} menu={headerMenu} />
+        <Header
+          title={layout.shop.name}
+          locale={locale}
+          aicoMenu={layout?.aicoHeaderMenu}
+          menu={headerMenu}
+        />
         <main role="main" id="mainContent" className="flex-grow">
           {children}
         </main>
@@ -46,7 +52,7 @@ export function Layout({children, layout}) {
   );
 }
 
-function Header({title,aicoMenu, menu}) {
+function Header({title, aicoMenu, menu, locale}) {
   const isHome = useIsHomePath();
 
   const {
@@ -73,7 +79,12 @@ function Header({title,aicoMenu, menu}) {
     <>
       <CartDrawer isOpen={isCartOpen} onClose={closeCart} />
       {menu && (
-        <MenuDrawer isOpen={isMenuOpen} aicoMenu={aicoMenu} onClose={closeMenu} menu={menu} />
+        <MenuDrawer
+          isOpen={isMenuOpen}
+          aicoMenu={aicoMenu}
+          onClose={closeMenu}
+          menu={menu}
+        />
       )}
       <DesktopHeader
         isHome={isHome}
@@ -81,12 +92,14 @@ function Header({title,aicoMenu, menu}) {
         menu={menu}
         aicoMenu={aicoMenu}
         openCart={openCart}
+        locale={locale}
       />
       <MobileHeader
         isHome={isHome}
         title={title}
         openCart={openCart}
         openMenu={openMenu}
+        locale={locale}
       />
     </>
   );
@@ -207,68 +220,160 @@ function MobileHeader({title, isHome, openCart, openMenu}) {
     </header>
   );
 }
+const handleLanguageChange = (e) => {
+  e.stopPropagation();
+  let selectedLang = e.currentTarget.getAttribute('data-lang');
+  if (selectedLang) {
+    Cookies.set('language', selectedLang, {expires: 30});
+    setTimeout(() => {
+      var selectedLanguage = selectedLang;
+      const currentUrl = window.location.href;
+      let newUrl = currentUrl;
+      const firstPathPart = location.pathname
+        .substring(1)
+        .split('/')[0]
+        .toLowerCase();
 
-function DesktopHeader({isHome,aicoMenu, menu, openCart, title}) {
+      if (
+        firstPathPart == 'fr' &&
+        (selectedLanguage != 'fr' || selectedLanguage != 'it')
+      ) {
+        newUrl = currentUrl.replace('/fr', '');
+      }
+      if (
+        firstPathPart == 'it' &&
+        (selectedLanguage != 'fr' || selectedLanguage != 'it')
+      ) {
+        newUrl = currentUrl.replace('/it', '');
+      }
+
+      if (firstPathPart == 'it' && selectedLanguage == 'fr') {
+        newUrl = currentUrl.replace('/it', '/fr');
+      }
+
+      if (firstPathPart == 'fr' && selectedLanguage == 'it') {
+        newUrl = currentUrl.replace('/fr', '/it');
+      }
+
+      if (
+        firstPathPart != 'fr' &&
+        firstPathPart != 'it' &&
+        selectedLanguage == 'fr'
+      ) {
+        newUrl =
+          location.origin +
+          '/fr/' +
+          (location.pathname + location.search).substr(1);
+      }
+
+      if (
+        firstPathPart != 'fr' &&
+        firstPathPart != 'it' &&
+        selectedLanguage == 'it'
+      ) {
+        newUrl =
+          location.origin +
+          '/it/' +
+          (location.pathname + location.search).substr(1);
+      }
+
+      window.location.href = newUrl;
+    }, 200);
+  }
+};
+
+function DesktopHeader({isHome, aicoMenu, menu, openCart, title, locale}) {
+  console.log(locale);
+  console.log('locale languge');
   const params = useParams();
   const {y} = useWindowScroll();
   return (
     <header
       role="banner"
-      className={`${
-        isHome
-          ? ''
-          : ''
-      } ${
+      className={`${isHome ? '' : ''} ${
         !isHome && y > 50 && ''
       } site-header py-[16px] bg-white`}
     >
-      <div className='container'>
-        <div className='row flex justify-between'>
-          <div className='logo-col max-w-[400px]'>
-              <a href="/" className='block w-full'>
-                <img className='w-full h-auto' src="https://cdn.shopify.com/s/files/1/0787/1352/0419/files/swissbabyservice.png?v=1688547438" alt="" />
-              </a>
-          </div>
-          <div className='language-col'>
-              <div className='language-block flex gap-[5px] mt-[-16px] items-start'>
-                <button className='p-[7px] text-[12px] text-white bg-[#428bca] leading-none rounded-[0_0_3px_3px] hover:bg-[#3071a9] font-bold font-["Roboto"] active'>de</button>
-                <button className='p-[7px] text-[12px] text-white bg-[#428bca] leading-none rounded-[0_0_3px_3px] hover:bg-[#3071a9] font-bold font-["Roboto"]'>it</button>
-                <button className='p-[7px] text-[12px] text-white bg-[#428bca] leading-none rounded-[0_0_3px_3px] hover:bg-[#3071a9] font-bold font-["Roboto"]'>fr</button>
-              </div>
-          </div>
-          <div className='right-col flex items-center'>
-            <a href="/account" className='header-login p-[16px] flex text-[13px] items-end text-[#2A6496] font-["Open_Sans"] font-medium mr-[16px]'>
-              <span className='icon text-[30px]'><i className="hr-icon-login"></i></span>
-              <span className='name'> Anmelden</span>
+      <div className="container">
+        <div className="row flex justify-between">
+          <div className="logo-col max-w-[400px]">
+            <a href="/" className="block w-full">
+              <img
+                className="w-full h-auto"
+                src="https://cdn.shopify.com/s/files/1/0787/1352/0419/files/swissbabyservice.png?v=1688547438"
+                alt=""
+              />
             </a>
-            <div className='header-cart'>
+          </div>
+          <div className="language-col">
+            <div className="language-block flex gap-[5px] mt-[-16px] items-start">
+              <button
+                data-lang="de"
+                onClick={handleLanguageChange}
+                className={`p-[7px] text-[12px] text-white bg-[#428bca] leading-none rounded-[0_0_3px_3px] hover:bg-[#3071a9] font-bold font-["Roboto"] ${
+                  locale == 'DE' ? 'active' : ''
+                }  `}
+              >
+                de
+              </button>
+              <button
+                data-lang="it"
+                onClick={handleLanguageChange}
+                className={`p-[7px] text-[12px] text-white bg-[#428bca] leading-none rounded-[0_0_3px_3px] hover:bg-[#3071a9] font-bold font-["Roboto"] ${
+                  locale == 'IT' ? 'active' : ''
+                } `}
+              >
+                it
+              </button>
+              <button
+                data-lang="fr"
+                onClick={handleLanguageChange}
+                className={`p-[7px] text-[12px] text-white bg-[#428bca] leading-none rounded-[0_0_3px_3px] hover:bg-[#3071a9] font-bold font-["Roboto"]  ${
+                  locale == 'FR' ? 'active' : ''
+                } `}
+              >
+                fr
+              </button>
+            </div>
+          </div>
+          <div className="right-col flex items-center">
+            <a
+              href="/account"
+              className='header-login p-[16px] flex text-[13px] items-end text-[#2A6496] font-["Open_Sans"] font-medium mr-[16px]'
+            >
+              <span className="icon text-[30px]">
+                <i className="hr-icon-login"></i>
+              </span>
+              <span className="name"> Anmelden</span>
+            </a>
+            <div className="header-cart">
               <CartCount isHome={isHome} openCart={openCart} />
             </div>
           </div>
         </div>
-          {/* <AccountLink className="relative flex items-center justify-center w-8 h-8 focus:ring-primary/5" /> */}
+        {/* <AccountLink className="relative flex items-center justify-center w-8 h-8 focus:ring-primary/5" /> */}
       </div>
-      <div className='nav-header bg-[#e4f0fa] border-b-[1px] border-[#3890bf]'>
-        <div className='container'>
-            <div className='navbar-wrap'>
-              <ul className='navbar-items flex'>
-                {aicoMenu?.map((item,index) => {
-                    return (
-                      <li key={index} className="navbar-item flex-1">
-                        <Link
-                          to={`${
-                            item.category.name == ' Home'
-                              ? '/'
-                              : getMenuHandle(item.category)
-                          }`}
-                          className='nav-link font-["Open_Sans"] text-[#2380b1] py-[22px] text-[20px] font-normal uppercase inline-block'
-                        >
-                          {item.category.name}
-                        </Link>
-                      </li>
-                    );
-                })}
-                {/* <li className='navbar-item flex-1'>
+      <div className="nav-header bg-[#e4f0fa] border-b-[1px] border-[#3890bf]">
+        <div className="container">
+          <div className="navbar-wrap">
+            <ul className="navbar-items flex">
+              {aicoMenu?.map((item, index) => {
+                return (
+                  <li key={index} className="navbar-item flex-1">
+                    <Link
+                      to={`${
+                        item.category.name == ' Home'
+                          ? '/'
+                          : getMenuHandle(item.category)
+                      }`}
+                      className='nav-link font-["Open_Sans"] text-[#2380b1] py-[22px] text-[20px] font-normal uppercase inline-block'
+                    >
+                      {item.category.name}
+                    </Link>
+                  </li>
+                );
+              })}
+              {/* <li className='navbar-item flex-1'>
                   <a href="#" className='nav-link font-["Open_Sans"] text-[#2380b1] py-[22px] text-[20px] font-normal uppercase inline-block'>Produkte</a>
                 </li>
                 <li className='navbar-item flex-1'>
@@ -280,8 +385,8 @@ function DesktopHeader({isHome,aicoMenu, menu, openCart, title}) {
                 <li className='navbar-item flex-1'>
                   <a href="#" className='nav-link font-["Open_Sans"] text-[#2380b1] py-[22px] text-[20px] font-normal uppercase inline-block'>Kontakt</a>
                 </li> */}
-              </ul>
-            </div>
+            </ul>
+          </div>
         </div>
       </div>
     </header>
@@ -327,16 +432,14 @@ function Badge({openCart, dark, count}) {
     () => (
       <>
         {/* <IconBag /> */}
-        <div
-          className={`${
-            dark
-              ? ''
-              : ''
-          } flex items-center`}
-        >
+        <div className={`${dark ? '' : ''} flex items-center`}>
           <i className="hr-icon-cart mr-2"></i>
-          <span className="cart-text text-[13px] font-['Open_Sans']">Warenkorb</span>
-          <span className='bg-[#e4f0fa] px-[10px] py-[5px] text-[13px] ml-[8px] rounded-[5px] text-[#2380b1] font-["Open_Sans"]'>{count || 0}</span>
+          <span className="cart-text text-[13px] font-['Open_Sans']">
+            Warenkorb
+          </span>
+          <span className='bg-[#e4f0fa] px-[10px] py-[5px] text-[13px] ml-[8px] rounded-[5px] text-[#2380b1] font-["Open_Sans"]'>
+            {count || 0}
+          </span>
         </div>
       </>
     ),
@@ -384,72 +487,151 @@ function Footer({menu}) {
         Licensed Open Source project.
       </div> */}
       <div className="container max-w-[1100px] m-auto pl-[15px] pr-[15px] pt-[40px]">
-  <div className="footer-row-wrap relative">
-    <div className="bz-footer-row hidden lg:block"></div>
-    <div
-     className="footer-row flex flex-row flex-wrap xl:flex-nowrap mx-[-15px] gap-y-[15px] md:gap-y-[15px] xl:gap-x-[15px] 2xl:gap-x-[15px]">
-      <div className="footer-col px-[15px] w-[50%] md:w-[25%] xl:w-[25%]">
-        <div className="col-inner">
-        <h4 className="title text-[20px] text-[#3391c2] font-semibold font-serif mb-[40px] mt-[-35px]">Swissbabyservice</h4>
-          <p className="text-[13px] text-[#3391c2] font-normal font-['arial']">
-            Mit unserem umfangreichen Sortiment an klassichen, ökologischen oder biologischen Windeln, 
-                      Pflege- & Hygieneprodukten und Zubehör sind wir Ihr zuverlässiger Partner,
-                       sowohl für Private als auch für Geschäfts/Grosskunden.
-          </p>
-        </div>
-      </div>
-      <div className="footer-col px-[15px] w-[50%] md:w-[25%] xl:w-[25%]">
-        <div className="col-inner">
-          
-            <h4 className="title text-[20px] text-[#3391c2] font-semibold font-serif mb-[40px] mt-[-35px]">Informationen</h4>
-            <ul className="nav-list flex flex-col gap-[10px]">
-              <li className="text-[13px] text-[#2380b1] font-normal font-['arial']"><a className="hover:text-[#2A6496] transition-all duration-500 underline"
-                  href="/" target="_self">Swissbabyservice Portrait</a></li>
-              <li className="text-[13px] text-[#2380b1] font-normal font-['arial']"><a className="hover:text-[#2A6496] transition-all duration-500 underline"
-                  href="/" target="_self">Ein Herz für Andere</a></li>
-                  <li className="text-[13px] text-[#2380b1] font-normal font-['arial']"><a className="hover:text-[#2A6496] transition-all duration-500 underline"
-                  href="/" target="_self">Partner / Nützliche Links</a></li>
-                  <li className="text-[13px] text-[#2380b1] font-normal font-['arial']"><a className="hover:text-[#2A6496] transition-all duration-500 underline"
-                  href="/" target="_self">Bestellinfos</a></li>
-                  <li className="text-[13px] text-[#2380b1] font-normal font-['arial']"><a className="hover:text-[#2A6496] transition-all duration-500 underline"
-                  href="/" target="_self">AGBs</a></li>
-                  <li className="text-[13px] text-[#2380b1] font-normal font-['arial']"><a className="hover:text-[#2A6496] transition-all duration-500 underline"
-                  href="/" target="_self">Datenschutz</a></li>
-            </ul>
-        </div>
-      </div>
-      <div className="footer-col px-[15px] w-[50%] md:w-[25%] xl:w-[25%]">
-        <div className="col-inner">         
-            <h4 className="title text-[20px] text-[#3391c2] font-semibold font-serif mb-[40px] mt-[-35px]">Versand/Zahlung</h4>
-             <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] mb-[10px]">Lieferkosten <strong>CHF 6.90</strong></p>
-             <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] mb-[10px]">Gratislieferung ab einem Bestellwert von <strong>CHF 65.00</strong></p>
-             <div className='flex items-start gap-[5px]'>
-                    <img src="https://cdn.shopify.com/s/files/1/0787/1352/0419/files/rechnung.png?v=1688561840" height="auto" alt="" />
-                    <div className='flex'>
-                    <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] mb-[10px]"><strong  className='font-semibold'>Rechnung</strong><br/>30 Tage netto</p>
-                    </div>
-             </div>
-        </div>
-      </div>
-      <div className="footer-col px-[15px] w-[23%]">
-        <div className="col-inner">
-          <h4 className="title text-[20px] text-[#3391c2] font-semibold font-serif mb-[40px] mt-[-35px]">Kontakt</h4>
-          <div className="contact-info">
-           <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] mb-[10px] "><b className='font-semibold'>SWISSBABYSERVICE</b><br/>Schulstrasse 13a<br/>9553 Bettwiesen<br/></p>
-             <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] mb-[10px]"><strong className='font-semibold'>FR 079 434 62 99</strong></p>
-             <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] mb-[10px]"><strong className='font-semibold'>DE 052 720 58 58</strong></p>
-             <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] mb-[10px]"><a href="mailto:info@swissbabyservice.ch" className="hover:text-[#2A6496] transition-all duration-500 underline">info@swissbabyservice.ch</a></p>
+        <div className="footer-row-wrap relative">
+          <div className="bz-footer-row hidden lg:block"></div>
+          <div className="footer-row flex flex-row flex-wrap xl:flex-nowrap mx-[-15px] gap-y-[15px] md:gap-y-[15px] xl:gap-x-[15px] 2xl:gap-x-[15px]">
+            <div className="footer-col px-[15px] w-[50%] md:w-[25%] xl:w-[25%]">
+              <div className="col-inner">
+                <h4 className="title text-[20px] text-[#3391c2] font-semibold font-serif mb-[40px] mt-[-35px]">
+                  Swissbabyservice
+                </h4>
+                <p className="text-[13px] text-[#3391c2] font-normal font-['arial']">
+                  Mit unserem umfangreichen Sortiment an klassichen,
+                  ökologischen oder biologischen Windeln, Pflege- &
+                  Hygieneprodukten und Zubehör sind wir Ihr zuverlässiger
+                  Partner, sowohl für Private als auch für
+                  Geschäfts/Grosskunden.
+                </p>
+              </div>
+            </div>
+            <div className="footer-col px-[15px] w-[50%] md:w-[25%] xl:w-[25%]">
+              <div className="col-inner">
+                <h4 className="title text-[20px] text-[#3391c2] font-semibold font-serif mb-[40px] mt-[-35px]">
+                  Informationen
+                </h4>
+                <ul className="nav-list flex flex-col gap-[10px]">
+                  <li className="text-[13px] text-[#2380b1] font-normal font-['arial']">
+                    <a
+                      className="hover:text-[#2A6496] transition-all duration-500 underline"
+                      href="/"
+                      target="_self"
+                    >
+                      Swissbabyservice Portrait
+                    </a>
+                  </li>
+                  <li className="text-[13px] text-[#2380b1] font-normal font-['arial']">
+                    <a
+                      className="hover:text-[#2A6496] transition-all duration-500 underline"
+                      href="/"
+                      target="_self"
+                    >
+                      Ein Herz für Andere
+                    </a>
+                  </li>
+                  <li className="text-[13px] text-[#2380b1] font-normal font-['arial']">
+                    <a
+                      className="hover:text-[#2A6496] transition-all duration-500 underline"
+                      href="/"
+                      target="_self"
+                    >
+                      Partner / Nützliche Links
+                    </a>
+                  </li>
+                  <li className="text-[13px] text-[#2380b1] font-normal font-['arial']">
+                    <a
+                      className="hover:text-[#2A6496] transition-all duration-500 underline"
+                      href="/"
+                      target="_self"
+                    >
+                      Bestellinfos
+                    </a>
+                  </li>
+                  <li className="text-[13px] text-[#2380b1] font-normal font-['arial']">
+                    <a
+                      className="hover:text-[#2A6496] transition-all duration-500 underline"
+                      href="/"
+                      target="_self"
+                    >
+                      AGBs
+                    </a>
+                  </li>
+                  <li className="text-[13px] text-[#2380b1] font-normal font-['arial']">
+                    <a
+                      className="hover:text-[#2A6496] transition-all duration-500 underline"
+                      href="/"
+                      target="_self"
+                    >
+                      Datenschutz
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div className="footer-col px-[15px] w-[50%] md:w-[25%] xl:w-[25%]">
+              <div className="col-inner">
+                <h4 className="title text-[20px] text-[#3391c2] font-semibold font-serif mb-[40px] mt-[-35px]">
+                  Versand/Zahlung
+                </h4>
+                <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] mb-[10px]">
+                  Lieferkosten <strong>CHF 6.90</strong>
+                </p>
+                <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] mb-[10px]">
+                  Gratislieferung ab einem Bestellwert von{' '}
+                  <strong>CHF 65.00</strong>
+                </p>
+                <div className="flex items-start gap-[5px]">
+                  <img
+                    src="https://cdn.shopify.com/s/files/1/0787/1352/0419/files/rechnung.png?v=1688561840"
+                    height="auto"
+                    alt=""
+                  />
+                  <div className="flex">
+                    <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] mb-[10px]">
+                      <strong className="font-semibold">Rechnung</strong>
+                      <br />
+                      30 Tage netto
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="footer-col px-[15px] w-[23%]">
+              <div className="col-inner">
+                <h4 className="title text-[20px] text-[#3391c2] font-semibold font-serif mb-[40px] mt-[-35px]">
+                  Kontakt
+                </h4>
+                <div className="contact-info">
+                  <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] mb-[10px] ">
+                    <b className="font-semibold">SWISSBABYSERVICE</b>
+                    <br />
+                    Schulstrasse 13a
+                    <br />
+                    9553 Bettwiesen
+                    <br />
+                  </p>
+                  <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] mb-[10px]">
+                    <strong className="font-semibold">FR 079 434 62 99</strong>
+                  </p>
+                  <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] mb-[10px]">
+                    <strong className="font-semibold">DE 052 720 58 58</strong>
+                  </p>
+                  <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] mb-[10px]">
+                    <a
+                      href="mailto:info@swissbabyservice.ch"
+                      className="hover:text-[#2A6496] transition-all duration-500 underline"
+                    >
+                      info@swissbabyservice.ch
+                    </a>
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
-       
         </div>
       </div>
-    </div>
-  </div>
-</div>
     </Section>
   );
 }
-
 
 function FooterLink({item}) {
   if (item.to.startsWith('http')) {
