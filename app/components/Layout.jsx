@@ -84,6 +84,7 @@ function Header({title, aicoMenu, menu, locale}) {
           aicoMenu={aicoMenu}
           onClose={closeMenu}
           menu={menu}
+          locale={locale}
         />
       )}
       <DesktopHeader
@@ -122,17 +123,17 @@ function CartDrawer({isOpen, onClose}) {
   );
 }
 
-export function MenuDrawer({isOpen, onClose, menu}) {
+export function MenuDrawer({isOpen, onClose, menu,aicoMenu,locale}) {
   return (
     <Drawer open={isOpen} onClose={onClose} openFrom="left" heading="Menu">
       <div className="grid">
-        <MenuMobileNav menu={menu} onClose={onClose} />
+        <MenuMobileNav menu={menu} onClose={onClose} aicoMenu={aicoMenu} locale={locale} />
       </div>
     </Drawer>
   );
 }
 
-function MenuMobileNav({menu, onClose}) {
+function MenuMobileNav({menu, onClose,aicoMenu,locale}) {
   return (
     <nav className="grid px-[15px]">
       {/* Top level menu items */}
@@ -155,7 +156,24 @@ function MenuMobileNav({menu, onClose}) {
       <div className='flex justify-between gap-[20px] xl:gap-[40px] items-center'>
           <div className="navbar-wrap flex-1">
             <ul className="navbar-items flex flex-col">
-              <li className='navbar-item flex-1'>
+            {aicoMenu?.map((item, index) => {
+                return (
+                  <li key={index} className='navbar-item flex-1'>
+                    <Link
+                      to={`${
+                        item.category.name == ' Home'
+                          ? '/'
+                          : getMenuHandle(item.category)
+                      }`}
+                       onClick={onClose}
+                      className='nav-link font-["OpenSans"] text-[#333] py-[22px] text-[20px] font-normal uppercase inline-block relative'
+                    >
+                      {translate(item.category.name,locale)}
+                    </Link>
+                  </li>
+                );
+              })}
+                {/* <li className='navbar-item flex-1'>
                   <a href="#" className='nav-link font-["OpenSans"] text-[#333] py-[22px] text-[20px] font-normal uppercase inline-block relative'>Produkte</a>
                 </li>
                 <li className='navbar-item flex-1'>
@@ -166,7 +184,7 @@ function MenuMobileNav({menu, onClose}) {
                 </li>
                 <li className='navbar-item flex-1'>
                   <a href="#" className='nav-link font-["OpenSans"] text-[#333] py-[22px] text-[20px] font-normal uppercase inline-block relative'>Kontakt</a>
-                </li>
+                </li> */}
             </ul>
           </div>
         </div>
@@ -174,7 +192,7 @@ function MenuMobileNav({menu, onClose}) {
   );
 }
 
-function MobileHeader({title, isHome, openCart, openMenu,aicoMenu }) {
+function MobileHeader({title, isHome, openCart, openMenu,aicoMenu,locale }) {
   // useHeaderStyleFix(containerStyle, setContainerStyle, isHome);
   
   const params = useParams();
@@ -204,21 +222,24 @@ function MobileHeader({title, isHome, openCart, openMenu,aicoMenu }) {
               <span className="icon">
                 <i className="hr-icon-login"></i>
               </span>
-              <span className="name"> Anmelden</span>
+              <span className="name"> {translate("register",locale)}</span>
             </a>
           </div>
           <div className='header-cart mobile'> 
-            <CartCount isHome={isHome} openCart={openCart} />
+            <CartCount isHome={isHome} openCart={openCart} locale={locale} />
           </div>
           <div className="language-col">
             <div className="language-block flex gap-[5px] items-start mt-[-8px]">
-              <button className='p-[7px] text-[12px] text-white bg-[#428bca] leading-none rounded-[0_0_3px_3px] hover:bg-[#3071a9] font-bold font-["Roboto"] active'>
+              <button  data-lang="de"
+                 onClick={handleLanguageChange} className= {`p-[7px] text-[12px] text-white bg-[#428bca] leading-none rounded-[0_0_3px_3px] hover:bg-[#3071a9] font-bold font-["Roboto"] ${locale == 'DE' ? 'active' : ''} `}>
                 de
               </button>
-              <button className='p-[7px] text-[12px] text-white bg-[#428bca] leading-none rounded-[0_0_3px_3px] hover:bg-[#3071a9] font-bold font-["Roboto"]'>
+              <button data-lang="it"
+                 onClick={handleLanguageChange} className={`p-[7px] text-[12px] text-white bg-[#428bca] leading-none rounded-[0_0_3px_3px] hover:bg-[#3071a9] font-bold font-["Roboto"] ${locale == 'IT' ? 'active' : ''} `}>
                 it
               </button>
-              <button className='p-[7px] text-[12px] text-white bg-[#428bca] leading-none rounded-[0_0_3px_3px] hover:bg-[#3071a9] font-bold font-["Roboto"]'>
+              <button data-lang="fr"
+                 onClick={handleLanguageChange}  className={`p-[7px] text-[12px] text-white bg-[#428bca] leading-none rounded-[0_0_3px_3px] hover:bg-[#3071a9] font-bold font-["Roboto"] ${locale == 'FR' ? 'active' : ''}  `}>
                 fr
               </button>
             </div>
