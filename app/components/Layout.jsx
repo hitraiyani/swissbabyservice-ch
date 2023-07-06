@@ -22,7 +22,7 @@ import {
   CartLoading,
   Link,
 } from '~/components';
-import {useIsHomePath, getMenuHandle} from '~/lib/utils';
+import {useIsHomePath, getMenuHandle, translate} from '~/lib/utils';
 import {useIsHydrated} from '~/hooks/useIsHydrated';
 import {useCartFetchers} from '~/hooks/useCartFetchers';
 
@@ -99,6 +99,7 @@ function Header({title, aicoMenu, menu, locale}) {
         title={title}
         openCart={openCart}
         openMenu={openMenu}
+        aicoMenu={aicoMenu}
         locale={locale}
       />
     </>
@@ -155,9 +156,9 @@ function MenuMobileNav({menu, onClose}) {
   );
 }
 
-function MobileHeader({title, isHome, openCart, openMenu}) {
+function MobileHeader({title, isHome, openCart, openMenu,aicoMenu }) {
   // useHeaderStyleFix(containerStyle, setContainerStyle, isHome);
-
+  
   const params = useParams();
 
   return (
@@ -355,7 +356,7 @@ function DesktopHeader({isHome, aicoMenu, menu, openCart, title, locale}) {
                       }`}
                       className='nav-link font-["OpenSans"] text-[#2380b1] py-[22px] text-[20px] font-normal uppercase inline-block relative'
                     >
-                      {item.category.name}
+                      {translate(item.category.name,locale)}
                     </Link>
                   </li>
                 );
