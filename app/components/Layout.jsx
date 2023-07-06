@@ -473,12 +473,8 @@ function Badge({openCart, dark, count}) {
 }
 
 function Footer({menu}) {
+
   const isHome = useIsHomePath();
-  const itemsCount = menu
-    ? menu?.items?.length + 1 > 4
-      ? 4
-      : menu?.items?.length + 1
-    : [];
 
   return (
     <Section
@@ -487,15 +483,7 @@ function Footer({menu}) {
       role="contentinfo"
       className={`w-full p-0 lg:p-0 md:p-0 bg-[#fff] text[#3391c2] relative main-footer`}
     >
-      {/* <FooterMenu menu={menu} /> */}
-      {/* <CountrySelector /> */}
-      {/* <div
-        className={`self-end pt-8 opacity-50 md:col-span-2 lg:col-span-${itemsCount}`}
-      >
-        &copy; {new Date().getFullYear()} / Shopify, Inc. Hydrogen is an MIT
-        Licensed Open Source project.
-      </div> */}
-      <div class="footer-cloud"></div>
+      <div className="footer-cloud"></div>
       <div className="container max-w-[1100px] m-auto pl-[15px] pr-[15px] pt-[40px]">
         <div className="footer-row-wrap relative">
           <div className="bz-footer-row hidden sm:hidden lg:block xl:block"></div>
@@ -520,60 +508,19 @@ function Footer({menu}) {
                   Informationen
                 </h4>
                 <ul className="nav-list flex flex-col gap-[10px] mb-[10px]">
-                  <li className="text-[13px] text-[#2380b1] font-normal font-['arial']">
-                    <a
-                      className="hover:text-[#2A6496] transition-all duration-500 underline"
-                      href="/"
-                      target="_self"
-                    >
-                      Swissbabyservice Portrait
-                    </a>
-                  </li>
-                  <li className="text-[13px] text-[#2380b1] font-normal font-['arial']">
-                    <a
-                      className="hover:text-[#2A6496] transition-all duration-500 underline"
-                      href="/"
-                      target="_self"
-                    >
-                      Ein Herz für Andere
-                    </a>
-                  </li>
-                  <li className="text-[13px] text-[#2380b1] font-normal font-['arial']">
-                    <a
-                      className="hover:text-[#2A6496] transition-all duration-500 underline"
-                      href="/"
-                      target="_self"
-                    >
-                      Partner / Nützliche Links
-                    </a>
-                  </li>
-                  <li className="text-[13px] text-[#2380b1] font-normal font-['arial']">
-                    <a
-                      className="hover:text-[#2A6496] transition-all duration-500 underline"
-                      href="/"
-                      target="_self"
-                    >
-                      Bestellinfos
-                    </a>
-                  </li>
-                  <li className="text-[13px] text-[#2380b1] font-normal font-['arial']">
-                    <a
-                      className="hover:text-[#2A6496] transition-all duration-500 underline"
-                      href="/"
-                      target="_self"
-                    >
-                      AGBs
-                    </a>
-                  </li>
-                  <li className="text-[13px] text-[#2380b1] font-normal font-['arial']">
-                    <a
-                      className="hover:text-[#2A6496] transition-all duration-500 underline"
-                      href="/"
-                      target="_self"
-                    >
-                      Datenschutz
-                    </a>
-                  </li>
+                  {menu?.items?.map((item,index) => {
+                    return (
+                      <li key={index} className="text-[13px] text-[#2380b1] font-normal font-['arial']">
+                        <Link
+                          className="hover:text-[#2A6496] transition-all duration-500 underline"
+                          href="/"
+                          to={item.to}
+                        >
+                          {item.title}
+                        </Link>
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
             </div>
