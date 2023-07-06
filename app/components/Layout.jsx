@@ -1,4 +1,4 @@
-import {useParams, Form, Await, useMatches} from '@remix-run/react';
+import {useParams, Form, Await, useMatches, useLocation} from '@remix-run/react';
 import {useWindowScroll} from 'react-use';
 import {Disclosure} from '@headlessui/react';
 import {Suspense, useEffect, useMemo} from 'react';
@@ -350,6 +350,7 @@ const handleLanguageChange = (e) => {
 function DesktopHeader({isHome, aicoMenu, menu, openCart, title, locale}) {
   const params = useParams();
   const {y} = useWindowScroll();
+  const {pathname} = useLocation();
   return (
     <header
       role="banner"
@@ -410,15 +411,12 @@ function DesktopHeader({isHome, aicoMenu, menu, openCart, title, locale}) {
           <div className="navbar-wrap flex-1">
             <ul className="navbar-items flex gap-[20px]">
               {aicoMenu?.map((item, index) => {
+                const itemHandle = item.category.name == 'Home' ? '/' : getMenuHandle(item.category);
                 return (
                   <li key={index} className="navbar-item flex-auto">
                     <Link
-                      to={`${
-                        item.category.name == ' Home'
-                          ? '/'
-                          : getMenuHandle(item.category)
-                      }`}
-                      className='nav-link font-["OpenSans"] text-[#2380b1] py-[23px] text-[18px] xl:text-[20px] font-normal uppercase inline-block relative'
+                      to={itemHandle}
+                      className={`${itemHandle == pathname ? 'active': ''} nav-link font-["OpenSans"] text-[#2380b1] py-[23px] text-[18px] xl:text-[20px] font-normal uppercase inline-block relative`}
                     >
                       {translate(item.category.name,locale)}
                     </Link>
