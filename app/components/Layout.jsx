@@ -388,18 +388,18 @@ function Footer({menu}) {
   <div className="footer-row-wrap relative">
     <div className="bz-footer-row hidden sm:hidden lg:block xl:block"></div>
     <div
-     className="footer-row flex flex-row flex-wrap xl:flex-nowrap mx-[-15px] gap-y-5">
-      <div className="footer-col px-[15px] w-[100%] md:w-[50%] lg:w-[25%] xl:w-[25%]">
+     className="flex flex-row flex-wrap xl:flex-nowrap mx-[-15px] gap-y-5">
+      <div className="px-[15px] w-[100%] md:w-[50%] lg:w-[25%] xl:w-[25%]">
         <div className="col-inner">
         <h4 className="title text-[20px] text-[#3391c2] font-semibold font-serif pb-[15px] lg:pb-[0px] mb-[5px] lg:mb-[40px] mt-[0px] lg:mt-[-35px] border-b lg:border-b-0 border-[#3890bf]">Swissbabyservice</h4>
-          <p className="text-[13px] text-[#3391c2] font-normal font-['arial']">
+          <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] leading-[18px]">
             Mit unserem umfangreichen Sortiment an klassichen, ökologischen oder biologischen Windeln, 
                       Pflege- & Hygieneprodukten und Zubehör sind wir Ihr zuverlässiger Partner,
                        sowohl für Private als auch für Geschäfts/Grosskunden.
           </p>
         </div>
       </div>
-      <div className="footer-col px-[15px] w-[100%] md:w-[50%] lg:w-[25%] xl:w-[25%]">
+      <div className="px-[15px] w-[100%] md:w-[50%] lg:w-[25%] xl:w-[25%]">
         <div className="col-inner">
           
             <h4 className="title text-[20px] text-[#3391c2] font-semibold font-serif pb-[15px] lg:pb-[0px] mb-[5px] lg:mb-[40px] mt-[0px] lg:mt-[-35px] border-b lg:border-b-0 border-[#3890bf]">Informationen</h4>
@@ -419,27 +419,27 @@ function Footer({menu}) {
             </ul>
         </div>
       </div>
-      <div className="footer-col px-[15px] w-[100%] md:w-[50%] lg:w-[25%] xl:w-[25%]">
+      <div className="px-[15px] w-[100%] md:w-[50%] lg:w-[25%] xl:w-[25%]">
         <div className="col-inner">         
             <h4 className="title text-[20px] text-[#3391c2] font-semibold font-serif pb-[15px] lg:pb-[0px] mb-[5px] lg:mb-[40px] mt-[0px] lg:mt-[-35px] border-b lg:border-b-0 border-[#3890bf]">Versand/Zahlung</h4>
-             <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] mb-[10px]">Lieferkosten <strong>CHF 6.90</strong></p>
-             <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] mb-[10px]">Gratislieferung ab einem Bestellwert von <strong>CHF 65.00</strong></p>
+             <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] leading-[18px] mb-[10px]">Lieferkosten <strong>CHF 6.90</strong></p>
+             <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] leading-[18px] mb-[10px]">Gratislieferung ab einem Bestellwert von <strong>CHF 65.00</strong></p>
              <div className='flex items-start gap-[5px]'>
                     <img src="https://cdn.shopify.com/s/files/1/0787/1352/0419/files/rechnung.png?v=1688561840" height="auto" alt="" />
                     <div className='flex'>
-                    <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] mb-[10px]"><strong  className='font-semibold'>Rechnung</strong><br/>30 Tage netto</p>
+                    <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] leading-[18px] mb-[10px]"><strong  className='font-semibold'>Rechnung</strong><br/>30 Tage netto</p>
                     </div>
              </div>
         </div>
       </div>
-      <div className="footer-col px-[15px] w-[100%] md:w-[50%] lg:w-[25%] xl:w-[25%]">
+      <div className="px-[15px] w-[100%] md:w-[50%] lg:w-[25%] xl:w-[25%]">
         <div className="col-inner">
           <h4 className="title text-[20px] text-[#3391c2] font-semibold font-serif pb-[15px] lg:pb-[0px] mb-[5px] lg:mb-[40px] mt-[0px] lg:mt-[-35px] border-b lg:border-b-0 border-[#3890bf]">Kontakt</h4>
           <div className="contact-info">
-           <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] mb-[10px] "><b className='font-semibold'>SWISSBABYSERVICE</b><br/>Schulstrasse 13a<br/>9553 Bettwiesen<br/></p>
-             <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] mb-[10px]"><strong className='font-semibold'>FR 079 434 62 99</strong></p>
-             <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] mb-[10px]"><strong className='font-semibold'>DE 052 720 58 58</strong></p>
-             <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] mb-[10px]"><a href="mailto:info@swissbabyservice.ch" className="hover:text-[#2A6496] transition-all duration-500 underline">info@swissbabyservice.ch</a></p>
+           <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] leading-[18px] mb-[10px] "><b className='font-semibold'>SWISSBABYSERVICE</b><br/>Schulstrasse 13a<br/>9553 Bettwiesen<br/></p>
+             <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] leading-[18px] mb-[10px]"><strong className='font-semibold'>FR 079 434 62 99</strong></p>
+             <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] leading-[18px] mb-[10px]"><strong className='font-semibold'>DE 052 720 58 58</strong></p>
+             <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] leading-[18px] mb-[10px]"><a href="mailto:info@swissbabyservice.ch" className="hover:text-[#2A6496] transition-all duration-500 underline">info@swissbabyservice.ch</a></p>
           </div>
        
         </div>
