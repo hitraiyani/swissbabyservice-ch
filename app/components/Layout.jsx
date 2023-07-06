@@ -283,8 +283,6 @@ const handleLanguageChange = (e) => {
 };
 
 function DesktopHeader({isHome, aicoMenu, menu, openCart, title, locale}) {
-  console.log(locale);
-  console.log('locale languge');
   const params = useParams();
   const {y} = useWindowScroll();
   return (
@@ -476,7 +474,7 @@ function Footer({menu}) {
       divider={isHome ? 'none' : 'top'}
       as="footer"
       role="contentinfo"
-      className={`w-full bg-[#fff] overflow-hidden text[#3391c2]`}
+      className={`w-full p-0 lg:p-0 md:p-0 bg-[#fff] text[#3391c2] relative main-footer`}
     >
       {/* <FooterMenu menu={menu} /> */}
       {/* <CountrySelector /> */}
@@ -486,16 +484,17 @@ function Footer({menu}) {
         &copy; {new Date().getFullYear()} / Shopify, Inc. Hydrogen is an MIT
         Licensed Open Source project.
       </div> */}
+      <div class="footer-cloud"></div>
       <div className="container max-w-[1100px] m-auto pl-[15px] pr-[15px] pt-[40px]">
         <div className="footer-row-wrap relative">
-          <div className="bz-footer-row hidden lg:block"></div>
-          <div className="footer-row flex flex-row flex-wrap xl:flex-nowrap mx-[-15px] gap-y-[15px] md:gap-y-[15px] xl:gap-x-[15px] 2xl:gap-x-[15px]">
-            <div className="footer-col px-[15px] w-[50%] md:w-[25%] xl:w-[25%]">
+          <div className="bz-footer-row hidden sm:hidden lg:block xl:block"></div>
+          <div className="flex flex-row flex-wrap xl:flex-nowrap mx-[-15px] gap-y-5">
+            <div className="px-[15px] w-[100%] md:w-[50%] lg:w-[25%] xl:w-[25%]">
               <div className="col-inner">
-                <h4 className="title text-[20px] text-[#3391c2] font-semibold font-serif mb-[40px] mt-[-35px]">
+                <h4 className="title text-[20px] text-[#3391c2] font-semibold font-serif pb-[15px] lg:pb-[0px] mb-[5px] lg:mb-[40px] mt-[0px] lg:mt-[-35px] border-b lg:border-b-0 border-[#3890bf]">
                   Swissbabyservice
                 </h4>
-                <p className="text-[13px] text-[#3391c2] font-normal font-['arial']">
+                <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] leading-[18px]">
                   Mit unserem umfangreichen Sortiment an klassichen,
                   ökologischen oder biologischen Windeln, Pflege- &
                   Hygieneprodukten und Zubehör sind wir Ihr zuverlässiger
@@ -504,12 +503,12 @@ function Footer({menu}) {
                 </p>
               </div>
             </div>
-            <div className="footer-col px-[15px] w-[50%] md:w-[25%] xl:w-[25%]">
+            <div className="px-[15px] w-[100%] md:w-[50%] lg:w-[25%] xl:w-[25%]">
               <div className="col-inner">
-                <h4 className="title text-[20px] text-[#3391c2] font-semibold font-serif mb-[40px] mt-[-35px]">
+                <h4 className="title text-[20px] text-[#3391c2] font-semibold font-serif pb-[15px] lg:pb-[0px] mb-[5px] lg:mb-[40px] mt-[0px] lg:mt-[-35px] border-b lg:border-b-0 border-[#3890bf]">
                   Informationen
                 </h4>
-                <ul className="nav-list flex flex-col gap-[10px]">
+                <ul className="nav-list flex flex-col gap-[10px] mb-[10px]">
                   <li className="text-[13px] text-[#2380b1] font-normal font-['arial']">
                     <a
                       className="hover:text-[#2A6496] transition-all duration-500 underline"
@@ -567,15 +566,15 @@ function Footer({menu}) {
                 </ul>
               </div>
             </div>
-            <div className="footer-col px-[15px] w-[50%] md:w-[25%] xl:w-[25%]">
+            <div className="px-[15px] w-[100%] md:w-[50%] lg:w-[25%] xl:w-[25%]">
               <div className="col-inner">
-                <h4 className="title text-[20px] text-[#3391c2] font-semibold font-serif mb-[40px] mt-[-35px]">
+                <h4 className="title text-[20px] text-[#3391c2] font-semibold font-serif pb-[15px] lg:pb-[0px] mb-[5px] lg:mb-[40px] mt-[0px] lg:mt-[-35px] border-b lg:border-b-0 border-[#3890bf]">
                   Versand/Zahlung
                 </h4>
-                <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] mb-[10px]">
+                <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] leading-[18px] mb-[10px]">
                   Lieferkosten <strong>CHF 6.90</strong>
                 </p>
-                <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] mb-[10px]">
+                <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] leading-[18px] mb-[10px]">
                   Gratislieferung ab einem Bestellwert von{' '}
                   <strong>CHF 65.00</strong>
                 </p>
@@ -586,7 +585,7 @@ function Footer({menu}) {
                     alt=""
                   />
                   <div className="flex">
-                    <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] mb-[10px]">
+                    <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] leading-[18px] mb-[10px]">
                       <strong className="font-semibold">Rechnung</strong>
                       <br />
                       30 Tage netto
@@ -595,13 +594,13 @@ function Footer({menu}) {
                 </div>
               </div>
             </div>
-            <div className="footer-col px-[15px] w-[23%]">
+            <div className="px-[15px] w-[100%] md:w-[50%] lg:w-[25%] xl:w-[25%]">
               <div className="col-inner">
-                <h4 className="title text-[20px] text-[#3391c2] font-semibold font-serif mb-[40px] mt-[-35px]">
+                <h4 className="title text-[20px] text-[#3391c2] font-semibold font-serif pb-[15px] lg:pb-[0px] mb-[5px] lg:mb-[40px] mt-[0px] lg:mt-[-35px] border-b lg:border-b-0 border-[#3890bf]">
                   Kontakt
                 </h4>
                 <div className="contact-info">
-                  <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] mb-[10px] ">
+                  <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] leading-[18px] mb-[10px] ">
                     <b className="font-semibold">SWISSBABYSERVICE</b>
                     <br />
                     Schulstrasse 13a
@@ -609,13 +608,13 @@ function Footer({menu}) {
                     9553 Bettwiesen
                     <br />
                   </p>
-                  <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] mb-[10px]">
+                  <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] leading-[18px] mb-[10px]">
                     <strong className="font-semibold">FR 079 434 62 99</strong>
                   </p>
-                  <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] mb-[10px]">
+                  <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] leading-[18px] mb-[10px]">
                     <strong className="font-semibold">DE 052 720 58 58</strong>
                   </p>
-                  <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] mb-[10px]">
+                  <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] leading-[18px] mb-[10px]">
                     <a
                       href="mailto:info@swissbabyservice.ch"
                       className="hover:text-[#2A6496] transition-all duration-500 underline"
