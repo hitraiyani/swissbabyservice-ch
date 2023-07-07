@@ -10,6 +10,7 @@ import {seoPayload} from '~/lib/seo.server';
 import {routeHeaders} from '~/data/cache';
 import { translate } from '~/lib/utils';
 import { Swiper, SwiperSlide } from "swiper/react";
+import { ShoppingByBrands } from '~/components/ShoppingByBrands';
 
 export const headers = routeHeaders;
 
@@ -149,6 +150,8 @@ export default function Homepage() {
           </Await>
         </Suspense>
       )}
+
+     <ShoppingByBrands className={''} locale={language} />
 
       {tertiaryHero && (
         <Suspense fallback={<Hero {...skeletons[2]} />}>
