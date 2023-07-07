@@ -37,13 +37,8 @@ export async function loader({params, context}) {
   );
 
   const seo = seoPayload.home();
-  var ImageId = 'gid://shopify/Metaobject/1449623843';
-  if (language == 'IT') {
-    ImageId = 'gid://shopify/Metaobject/1449656611';
-  } else if (language == 'FR') {
-    ImageId = 'gid://shopify/Metaobject/1449591075';
-  }
-
+  var ImageId = 'gid://shopify/Metaobject/1449656611';
+  
   return defer({
     shop,
     homeHeroSlider: home_hero_slider,
