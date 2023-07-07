@@ -28,7 +28,7 @@ export function HeroSlider({slides}) {
             className='myswiper1'
           >
             { slides.map((slide,index) =>(
-               <SwiperSlide>
+               <SwiperSlide key={index}>
                <div className="slide-item h-full">
                  <div className="slide-item-inner flex flex-col-reverse lg:flex-row overflow-hidden rounded-[30px] h-full">
                    <div className="content-left w-full lg:w-[40%]">
