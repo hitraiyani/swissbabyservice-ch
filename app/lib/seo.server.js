@@ -1,8 +1,8 @@
 function root({shop, url}) {
   return {
     title: shop?.name,
-    titleTemplate: 'Swissbabyservice – Ihr Spezialist für Windeln & Hygiene',
-    description: truncate(shop?.description ?? ''),
+    titleTemplate: '%s',
+    description: 'Swissbabyservice – Ihr Spezialist für Windeln & Hygiene » Mit unserem umfangreichen Sortiment an Windeln ✔ Pflege- & Hygieneprodukten ✔ sind wir Ihr zuverlässiger Partner.',
     handle: '@shopify',
     url,
     robots: {
@@ -35,7 +35,7 @@ function home() {
   return {
     title: 'Home',
     titleTemplate: 'Swissbabyservice – Ihr Spezialist für Windeln & Hygiene',
-    description: 'Swissbabyservice – Ihr Spezialist für Windeln & Hygiene',
+    description: 'Swissbabyservice – Ihr Spezialist für Windeln & Hygiene » Mit unserem umfangreichen Sortiment an Windeln ✔ Pflege- & Hygieneprodukten ✔ sind wir Ihr zuverlässiger Partner.',
     robots: {
       noIndex: false,
       noFollow: false,
@@ -313,7 +313,16 @@ function policies({policies, url}) {
   };
 }
 
+function customPage({title, url, description}) {
+  return {
+    title,
+    description,
+    url
+  };
+}
+
 export const seoPayload = {
+  customPage,
   article,
   blog,
   collection,

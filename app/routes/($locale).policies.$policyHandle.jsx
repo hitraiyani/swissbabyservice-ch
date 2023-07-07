@@ -5,7 +5,7 @@ import invariant from 'tiny-invariant';
 import {PageHeader, Section, Button} from '~/components';
 import {routeHeaders} from '~/data/cache';
 import {seoPayload} from '~/lib/seo.server';
-
+import {translate} from '~/lib/utils';
 export const headers = routeHeaders;
 
 export async function loader({request, params, context}) {
@@ -32,8 +32,8 @@ export async function loader({request, params, context}) {
   if (!policy) {
     throw new Response(null, {status: 404});
   }
-
-  const seo = seoPayload.policy({policy, url: request.url});
+  
+  const seo = seoPayload.customPage({ 'title' : translate(`${policy.handle}-title`,context.storefront.i18n.language), url: request.url, description : ''});
 
   return json({policy, seo});
 }
@@ -48,18 +48,6 @@ export default function Policies() {
         display="flex"
         className="flex-col items-baseline w-full gap-8 md:flex-row"
       >
-        <PageHeader
-          heading={policy.title}
-          className="grid items-start flex-grow gap-4 md:sticky top-36 md:w-5/12"
-        >
-          <Button
-            className="justify-self-start"
-            variant="inline"
-            to={'/policies'}
-          >
-            &larr; Back to Policies
-          </Button>
-        </PageHeader>
         <div className="flex-grow w-full md:w-7/12">
           <div
             dangerouslySetInnerHTML={{__html: policy.body}}
