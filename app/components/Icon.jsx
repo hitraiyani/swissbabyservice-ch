@@ -14,6 +14,16 @@ function Icon({children, className, fill = 'currentColor', stroke, ...props}) {
     </svg>
   );
 }
+export function IconChevronRight(props) {
+  return (
+    <svg {...props}  width={14} height={27} viewBox="0 0 14 27" fill="none" xmlns="http://www.w3.org/2000/svg" > <path d="M1.47949 1.47974L12.4795 13.4797L1.47949 25.4797" stroke="currentColor" strokeWidth={2} strokeLinecap="round" /> </svg>
+  );
+}
+export function IconStar(props) {
+  return (
+    <svg {...props} xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" > <path fill="none" stroke="currentColor" strokeLinejoin="round" strokeWidth="1.5" d="m12 2l3.104 6.728l7.358.873l-5.44 5.03l1.444 7.268L12 18.28L5.534 21.9l1.444-7.268L1.538 9.6l7.359-.873L12 2Z" /> </svg>
+  );
+}
 
 export function IconMenu(props) {
   return (

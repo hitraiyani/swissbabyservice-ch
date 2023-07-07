@@ -11,6 +11,8 @@ import {routeHeaders} from '~/data/cache';
 import { translate } from '~/lib/utils';
 import { Swiper, SwiperSlide } from "swiper/react";
 import { ShoppingByBrands } from '~/components/ShoppingByBrands';
+import { NewInTheShop } from '~/components/NewInTheShop';
+import { CtaBanner } from '~/components/CtaBanner';
 
 export const headers = routeHeaders;
 
@@ -74,6 +76,24 @@ export async function loader({params, context}) {
         language,
       },
     }),
+    latestProducts: context.storefront.query(HOMEPAGE_LATEST_PRODUCTS_QUERY, {
+      variables: {
+        /**
+         * Country and language properties are automatically injected
+         * into all queries. Passing them is unnecessary unless you
+         * want to override them from the following default:
+         */
+        country,
+        language,
+      },
+    }),
+
+    childBanner: context.storefront.query(
+      HOMEPAGE_SLEEPING_CHILD_BANNER_QUERY,
+      {
+        variables: {metaObjectId: 'gid://shopify/Metaobject/1449591075'},
+      },
+    ),
     analytics: {
       pageType: AnalyticsPageType.home,
     },
@@ -88,6 +108,8 @@ export default function Homepage() {
     tertiaryHero,
     featuredCollections,
     featuredProducts,
+    latestProducts,
+    childBanner,
     language
   } = useLoaderData();
 
@@ -135,6 +157,16 @@ export default function Homepage() {
         </Suspense>
       )}
 
+    {childBanner && (
+        <Suspense>
+          <Await resolve={childBanner}>
+            {({data}) => {
+              return <CtaBanner banner={data.banner} />;
+            }}
+          </Await>
+        </Suspense>
+      )}
+
       {featuredCollections && (
         <Suspense>
           <Await resolve={featuredCollections}>
@@ -153,7 +185,20 @@ export default function Homepage() {
 
      <ShoppingByBrands className={''} locale={language} />
 
-      {tertiaryHero && (
+     {latestProducts && (
+        <Suspense>
+          <Await resolve={latestProducts}>
+            {({products}) => {
+              if (!products?.nodes) return <></>;
+              return (
+                <NewInTheShop products={products.nodes} title={translate("new_in_shop",language)} locale={language} />
+              );
+            }}
+          </Await>
+        </Suspense>
+      )}
+
+       {tertiaryHero && (
         <Suspense fallback={<Hero {...skeletons[2]} />}>
           <Await resolve={tertiaryHero}>
             {({hero}) => {
@@ -166,6 +211,38 @@ export default function Homepage() {
     </>
   );
 }
+
+
+ // @see: https://shopify.dev/api/storefront/2023-04/queries/products
+ export const HOMEPAGE_LATEST_PRODUCTS_QUERY = `#graphql
+  query homepagelatestProducts($country: CountryCode, $language: LanguageCode)
+  @inContext(country: $country, language: $language) {
+    products(first: 8) {
+      nodes {
+        ...ProductCard
+      }
+    }
+  }
+  ${PRODUCT_CARD_FRAGMENT}
+`;
+
+const HOMEPAGE_SLEEPING_CHILD_BANNER_QUERY = `#graphql
+${MEDIA_FRAGMENT}
+  query homeTopCollections($metaObjectId: ID!, $country: CountryCode, $language: LanguageCode)
+  @inContext(country: $country, language: $language) {
+    data : metaobject(id : $metaObjectId) {
+      handle
+      id
+      type
+      banner : field(key: "banner") {
+        reference {
+          ...Media
+        }
+      }
+    }
+      
+  }
+`;
 
 const COLLECTION_CONTENT_FRAGMENT = `#graphql
   fragment CollectionContent on Collection {

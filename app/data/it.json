@@ -16,5 +16,7 @@
   "take_net" : "giorni netti",
   "invoice":"Fattura",
   "shop_by_brand":"le nostre marche",
+  "new_in_shop" :"Nouveautés",
+  "add_to_cart":"Aggiungi al carrello",
   "footer_desc":"Con il suo acquisto, aiuta vari progetti e fondazioni sociali con i quali collaboriamo."
 }

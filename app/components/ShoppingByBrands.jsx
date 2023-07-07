@@ -40,8 +40,6 @@ export function ShoppingByBrands({className,locale}) {
           <div className="logo-list">
             <ul className="flex flex-wrap gap-x-[14px] gap-y-[12px] max-w-[910px] items-center justify-center mx-auto">
               {brandData?.map((item, index) => {
-                console.log(item);
-                console.log("brand data");
                 let brandImage = '';
                 let brandRedirectUrl = '';
                 if (item?.attributes?.translations != null) {

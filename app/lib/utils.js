@@ -17,18 +17,48 @@ export const translate = (key, language) => {
 };
 
 export const productTranslate = (product, key, language) => {
-  const translation =
-    language?.toLowerCase() === 'fr'
-      ? product[key + '_fr']['value']
+  const lang = language?.toLowerCase();
+  // console.log(lang);
+  // console.log(product);
+
+  var translate = product?.title;
+  switch (lang) {
+    case 'fr':
+      translate = product[key + '_fr']?.['value']
         ? product[key + '_fr']['value']
-        : product?.[key]
-      : language?.toLowerCase() === 'it'
-      ? product[key + '_it']['value']
+        : product?.[key];
+
+      break;
+    case 'it':
+      translate = product[key + '_fr']?.['value']
+        ? product[key + '_fr']['value']
+        : product?.[key];
+
+      break;
+    case 'de':
+      translate = product[key + '_it']?.['value']
         ? product[key + '_it']['value']
-        : product?.[key]
-      : product[key + '_de_ch']['value']
-      ? product[key + '_de_ch']['value']
-      : product?.[key];
+        : product?.[key];
+
+      break;
+    default:
+      translate = product?.title;
+      break;
+  }
+  return translate;
+
+  // const translation =
+  //   language?.toLowerCase() === 'fr'
+  //     ? product[key + '_fr']['value']
+  //       ? product[key + '_fr']['value']
+  //       : product?.[key]
+  //     : language?.toLowerCase() === 'it'
+  //     ? product[key + '_it']['value']
+  //       ? product[key + '_it']['value']
+  //       : product?.[key]
+  //     : product[key + '_de_ch']['value']
+  //     ? product[key + '_de_ch']['value']
+  //     : product?.[key];
 
   return translation;
 };
