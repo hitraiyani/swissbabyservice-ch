@@ -8,18 +8,17 @@ import {MEDIA_FRAGMENT, PRODUCT_CARD_FRAGMENT} from '~/data/fragments';
 import {getHeroPlaceholder} from '~/lib/placeholders';
 import {seoPayload} from '~/lib/seo.server';
 import {routeHeaders} from '~/data/cache';
-import { translate } from '~/lib/utils';
-import { Swiper, SwiperSlide } from "swiper/react";
-import { ShoppingByBrands } from '~/components/ShoppingByBrands';
-import { NewInTheShop } from '~/components/NewInTheShop';
-import { CtaBanner } from '~/components/CtaBanner';
+import {translate} from '~/lib/utils';
+import {Swiper, SwiperSlide} from 'swiper/react';
+import {ShoppingByBrands} from '~/components/ShoppingByBrands';
+import {NewInTheShop} from '~/components/NewInTheShop';
+import {CtaBanner} from '~/components/CtaBanner';
+import {HeroSlider} from '~/components/HeroSlider';
 
 export const headers = routeHeaders;
 
 export async function loader({params, context}) {
   const {language, country} = context.storefront.i18n;
-
-
 
   if (
     params.locale &&
@@ -30,14 +29,24 @@ export async function loader({params, context}) {
     throw new Response(null, {status: 404});
   }
 
-  const {shop, hero} = await context.storefront.query(HOMEPAGE_SEO_QUERY, {
-    variables: {handle: 'freestyle'},
-  });
+  const {shop, hero, home_hero_slider} = await context.storefront.query(
+    HOMEPAGE_SEO_QUERY,
+    {
+      variables: {handle: 'freestyle'},
+    },
+  );
 
   const seo = seoPayload.home();
+  var ImageId = 'gid://shopify/Metaobject/1449623843';
+  if (language == 'IT') {
+    ImageId = 'gid://shopify/Metaobject/1449656611';
+  } else if (language == 'FR') {
+    ImageId = 'gid://shopify/Metaobject/1449591075';
+  }
 
   return defer({
     shop,
+    homeHeroSlider: home_hero_slider,
     language,
     primaryHero: hero,
     // These different queries are separated to illustrate how 3rd party content
@@ -91,7 +100,7 @@ export async function loader({params, context}) {
     childBanner: context.storefront.query(
       HOMEPAGE_SLEEPING_CHILD_BANNER_QUERY,
       {
-        variables: {metaObjectId: 'gid://shopify/Metaobject/1449591075'},
+        variables: {metaObjectId: ImageId},
       },
     ),
     analytics: {
@@ -104,13 +113,14 @@ export async function loader({params, context}) {
 export default function Homepage() {
   const {
     primaryHero,
+    homeHeroSlider,
     secondaryHero,
     tertiaryHero,
     featuredCollections,
     featuredProducts,
     latestProducts,
     childBanner,
-    language
+    language,
   } = useLoaderData();
 
   // TODO: skeletons vs placeholders
@@ -118,17 +128,12 @@ export default function Homepage() {
 
   return (
     <>
-      {primaryHero && (
+      <HeroSlider slides={homeHeroSlider?.nodes} />
+
+      {/* {primaryHero && (
         <Hero {...primaryHero} height="full" top loading="eager" />
       )}
-      {/* { translate('test',language)} */}
       
-      {/* <Swiper className="mySwiper">
-        <SwiperSlide>Slide 1</SwiperSlide>
-        <SwiperSlide>Slide 2</SwiperSlide>
-        <SwiperSlide>Slide 3</SwiperSlide>
-      </Swiper> */}
-
       {featuredProducts && (
         <Suspense>
           <Await resolve={featuredProducts}>
@@ -144,9 +149,9 @@ export default function Homepage() {
             }}
           </Await>
         </Suspense>
-      )}
+      )} */}
 
-      {secondaryHero && (
+      {/* {secondaryHero && (
         <Suspense fallback={<Hero {...skeletons[1]} />}>
           <Await resolve={secondaryHero}>
             {({hero}) => {
@@ -155,17 +160,7 @@ export default function Homepage() {
             }}
           </Await>
         </Suspense>
-      )}
-
-    {childBanner && (
-        <Suspense>
-          <Await resolve={childBanner}>
-            {({data}) => {
-              return <CtaBanner banner={data.banner} />;
-            }}
-          </Await>
-        </Suspense>
-      )}
+      )} */}
 
       {featuredCollections && (
         <Suspense>
@@ -183,22 +178,36 @@ export default function Homepage() {
         </Suspense>
       )}
 
-     <ShoppingByBrands className={''} locale={language} />
+      {childBanner && (
+        <Suspense>
+          <Await resolve={childBanner}>
+            {({data}) => {
+              return <CtaBanner banner={data.banner} />;
+            }}
+          </Await>
+        </Suspense>
+      )}
 
-     {latestProducts && (
+      <ShoppingByBrands className={''} locale={language} />
+
+      {latestProducts && (
         <Suspense>
           <Await resolve={latestProducts}>
             {({products}) => {
               if (!products?.nodes) return <></>;
               return (
-                <NewInTheShop products={products.nodes} title={translate("new_in_shop",language)} locale={language} />
+                <NewInTheShop
+                  products={products.nodes}
+                  title={translate('new_in_shop', language)}
+                  locale={language}
+                />
               );
             }}
           </Await>
         </Suspense>
       )}
 
-       {tertiaryHero && (
+      {tertiaryHero && (
         <Suspense fallback={<Hero {...skeletons[2]} />}>
           <Await resolve={tertiaryHero}>
             {({hero}) => {
@@ -212,9 +221,8 @@ export default function Homepage() {
   );
 }
 
-
- // @see: https://shopify.dev/api/storefront/2023-04/queries/products
- export const HOMEPAGE_LATEST_PRODUCTS_QUERY = `#graphql
+// @see: https://shopify.dev/api/storefront/2023-04/queries/products
+export const HOMEPAGE_LATEST_PRODUCTS_QUERY = `#graphql
   query homepagelatestProducts($country: CountryCode, $language: LanguageCode)
   @inContext(country: $country, language: $language) {
     products(first: 8) {
@@ -278,6 +286,29 @@ const HOMEPAGE_SEO_QUERY = `#graphql
   @inContext(country: $country, language: $language) {
     hero: collection(handle: $handle) {
       ...CollectionContent
+    }
+    home_hero_slider : metaobjects(type: "home_slider", first: 5) {
+      nodes {
+        id
+        heading: field(key: "heading") {
+          value
+        }
+        sub_heading: field(key: "sub_heading") {
+          value
+        }
+        main_image: field(key: "main_image") {
+          reference {
+            ...Media
+          }
+        }
+       
+        cta_label: field(key: "cta_label") {
+          value
+        }
+        cta_redirect: field(key: "cta_redirect") {
+          value
+        }
+      }
     }
     shop {
       name
