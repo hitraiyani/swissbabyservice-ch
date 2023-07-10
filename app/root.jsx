@@ -28,6 +28,7 @@ import swiper from 'swiper/css';
 import swiper_navigation from 'swiper/css/navigation';
 import swiper_pagination from 'swiper/css/pagination';
 import swiper_scrollbar from 'swiper/css/scrollbar';
+import swiper_effect_fade from 'swiper/css/effect-fade';
 
 export const links = () => {
   return [
@@ -41,6 +42,7 @@ export const links = () => {
     {rel: 'stylesheet', href: swiper_navigation},
     {rel: 'stylesheet', href: swiper_pagination},
     {rel: 'stylesheet', href: swiper_scrollbar},
+    {rel: 'stylesheet', href: swiper_effect_fade},
   ];
 };
 
