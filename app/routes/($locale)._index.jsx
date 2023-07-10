@@ -38,6 +38,10 @@ export async function loader({params, context}) {
 
   const seo = seoPayload.home();
   var ImageId = 'gid://shopify/Metaobject/1449656611';
+
+  if(language == "FR"){
+    var ImageId = "gid://shopify/Metaobject/4294377763";
+  }
   
   return defer({
     shop,

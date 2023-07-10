@@ -20,5 +20,14 @@
   "add_to_cart":"Aggiungi al carrello",
   "footer_desc":"Con il suo acquisto, aiuta vari progetti e fondazioni sociali con i quali collaboriamo.",
   "privacy-policy-title" : "Datenschutz",
-  "terms-of-service-title" : "Allgemeine Geschäftsbestimmungen"
+  "terms-of-service-title" : "Allgemeine Geschäftsbestimmungen",
+  "quick_request" : "Modulo di Contatto",
+  "name_require":"Il Nome deve essere tra 3 e 32 caratteri!",
+  "email_require":"L'indirizzo E-Mail non sembra valido!",
+  "email_require_valid":"Muss eine gültige E-Mail-Adresse sein",
+  "inquiry_require":"La richiesta deve essere lunga dai 10 ai 3000 caratteri!",
+  "name" : "Nome",
+  "email" : "Indirizzo E-Mail",
+  "message" : "Richiesta",
+  "send" : "Invia"
 }

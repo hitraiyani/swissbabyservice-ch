@@ -13,6 +13,15 @@
   "add_to_cart":"In den Warenkorb",
   "footer_desc":"Mit unserem umfangreichen Sortiment an klassichen, ökologischen oder biologischen Windeln, Pflege- & Hygieneprodukten und Zubehör sind wir Ihr zuverlässiger Partner, sowohl für Private als auch für Geschäfts/Grosskunden.",
   "privacy-policy-title" : "Datenschutz",
-  "terms-of-service-title" : "Allgemeine Geschäftsbestimmungen"
+  "terms-of-service-title" : "Allgemeine Geschäftsbestimmungen",
+  "quick_request" : "Kontaktformular",
+  "name_require":"Name muss zwischen 3 und 32 Zeichen lang sein",
+  "email_require":"Emailadresse ist nicht gültig",
+  "email_require_valid":"Muss eine gültige E-Mail-Adresse sein",
+  "inquiry_require":"Text muss zwischen 10 und 3000 Zeichen lang sein",
+  "name" : "Name",
+  "email" : "Emailadresse",
+  "message" : "Anfrage / Text",
+  "send" : "Abschicken"
 
 }
