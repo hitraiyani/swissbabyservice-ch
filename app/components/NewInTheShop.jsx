@@ -1,5 +1,11 @@
 import clsx from 'clsx';
-import {Autoplay, Navigation, Pagination, Scrollbar, A11y} from 'swiper/modules';
+import {
+  Autoplay,
+  Navigation,
+  Pagination,
+  Scrollbar,
+  A11y,
+} from 'swiper/modules';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import {
   IconChevronRight,
@@ -7,20 +13,21 @@ import {
   AddToCartButton,
   Text,
   Link,
-  
 } from '~/components';
 import {flattenConnection, Image, Money, useMoney} from '@shopify/hydrogen';
 import {isDiscounted, productTranslate, translate} from '~/lib/utils';
-import { CompareAtPrice } from './CompareAtPrice';
+import {CompareAtPrice} from './CompareAtPrice';
 
-export function NewInTheShop({products, title,locale}) {
-
+export function NewInTheShop({products, title, locale}) {
   return (
-    <section className={`new-in-Shop-section py-[20px] md:py-[30px] xl:py-[40px] 2xl:py-[50px]`}>
+    <section
+      className={`new-in-Shop-section py-[20px] md:py-[30px] xl:py-[40px] 2xl:py-[50px]`}
+    >
       <div className="container">
         <div className="title-wrap mb-[22px]">
-          <h2 className="text-[#1C5F7B] text-[24px] font-bold text-left">
+          <h2 className="text-[20px] font-medium text-left text-[#2380B1] flex items-center gap-[20px] mb-[40px] font-['Open_Sans']">
             {title}
+            <span className="flex-1 border-b-[1px] border-[#3890bf] relative before:bg-no-repeat before:content-[''] before:inline-block before:w-5 before:h-5 before:bg-[url('https://cdn.shopify.com/s/files/1/0787/1352/0419/files/heart.png?v=1688561823')] before:absolute before:z-[2] before:-mt-1.5 before:right-[5px] md:before:right-[15px] before:top-full"></span>
           </h2>
         </div>
         <div className="relative new-in-Shop-slider">
@@ -39,7 +46,7 @@ export function NewInTheShop({products, title,locale}) {
             // }}
             breakpoints={{
               0: {
-                slidesPerView: 2,
+                slidesPerView: 1,
                 spaceBetween: 10,
               },
               640: {
@@ -50,11 +57,11 @@ export function NewInTheShop({products, title,locale}) {
                 slidesPerView: 2,
                 spaceBetween: 20,
               },
-              1024: {
+              992: {
                 slidesPerView: 3,
                 spaceBetween: 20,
               },
-              1280: {
+              1200: {
                 slidesPerView: 4,
                 spaceBetween: 28,
               },
@@ -62,7 +69,6 @@ export function NewInTheShop({products, title,locale}) {
             className="myswiper2"
           >
             {products.map((product, index) => {
-             
               const firstVariant = flattenConnection(product?.variants)[0];
 
               if (!firstVariant) return null;
@@ -71,7 +77,7 @@ export function NewInTheShop({products, title,locale}) {
               const productAnalytics = {
                 productGid: product.id,
                 variantGid: firstVariant.id,
-                name: productTranslate(product,'title',locale) ,
+                name: productTranslate(product, 'title', locale),
                 variantName: firstVariant.title,
                 brand: product.vendor,
                 price: firstVariant.price.amount,
@@ -80,7 +86,7 @@ export function NewInTheShop({products, title,locale}) {
 
               return (
                 <SwiperSlide key={index}>
-                  <div className="slide-item">
+                  <div className="slide-item p-[15px] bg-white relative">
                     <div className="product-card">
                       <div className="product-card-inner">
                         <Link
@@ -101,7 +107,7 @@ export function NewInTheShop({products, title,locale}) {
                             )}
                           </div>
                         </Link>
-                        <h4 className="pro-name text-[14px] text-[#292929] font-normal">
+                        <h4 className="pro-name text-[13px] text-[#2380b1] font-normal pt-[20px]">
                           {product.title}
                         </h4>
                         {/* <div className="rating flex gap-[6px] text-[#666666] mt-[12px]">
@@ -111,16 +117,30 @@ export function NewInTheShop({products, title,locale}) {
                         <IconStar className={'w-[17px] h-[15px]'} />
                         <IconStar className={'w-[17px] h-[15px]'} />
                       </div> */}
-                        <div className="price text-[16px] text-black font-bold mt-[12px] gap-[7px] flex flex-wrap items-center">
-                            <Money withoutTrailingZeros data={price} />
+                        <div className="price text-[20px] text-black mt-[8px] flex flex-wrap items-center font-['OpenSans'] gap-x-[15px] gap-y-[10px] leading-none">
+                          <span className="price-old text-[#b7d4e9] line-through">
+                            CHF 88.10
+                          </span>
+                          <span className="pd-price bg-[#b7d4e9] p-[5px] text-white">
+                            -19%
+                          </span>
+                          <span className="price-new price-old text-[#9a2ea3]">
+                            CHF 71.35
+                          </span>
+                          {/* <Money withoutTrailingZeros data={price} />
                             {isDiscounted(price, compareAtPrice) && (
                               <CompareAtPrice
                                 className={'opacity-50'}
                                 data={compareAtPrice}
                               />
-                            )}
+                            )} */}
                         </div>
-                        <div className="buy-now-btn flex mt-[14px]">
+                        <div className="buy-now-btn flex flex-col gap-[15px] absolute top-1/2 -translate-y-1/2 left-0 w-full right-0 mx-auto p-[20px] h-full bg-[#dbd4e9f2] items-center justify-center">
+                          <button className='!p-[8.2px_16px] text-[20px] rounded-[5px] bg-transparent border-[2px] border-[#9a2ea3] text-[#9a2ea3] font-["OpenSans"] hover:bg-[#9a2ea3] hover:text-white leading-none transition-all duration-500 w-full'>
+                            <Text as="span" className="block !text-[20px]">
+                              Artikel ansehen
+                            </Text>
+                          </button>
                           <AddToCartButton
                             lines={[
                               {
@@ -133,13 +153,10 @@ export function NewInTheShop({products, title,locale}) {
                               products: [productAnalytics],
                               totalValue: parseFloat(productAnalytics.price),
                             }}
+                            className='!p-[8.2px_16px] text-[20px] rounded-[5px] bg-transparent border-[2px] border-[#9a2ea3] text-[#9a2ea3] font-["OpenSans"] hover:bg-[#9a2ea3] hover:text-white leading-none transition-all duration-500'
                           >
-                            <Text
-                              as="span"
-                              className="bg-[#1C5F7B] rounded-[100px] py-[14px] px-[20px] max-w-[160px] w-full min-h-[46px] leading-none text-[12px] text-white text-center hover:opacity-70 transition-all duration-500 flex items-center justify-center font-bold"
-                            >
-                              { translate('add_to_cart', locale) }
-
+                            <Text as="span" className="block !text-[20px]">
+                              {translate('add_to_cart', locale)}
                             </Text>
                           </AddToCartButton>
                         </div>
@@ -152,20 +169,22 @@ export function NewInTheShop({products, title,locale}) {
           </Swiper>
           <div
             id="swiper-button-prev-new-in-Shop"
-            className="absolute left-[-20px] md:left-[-36px] top-1/2 translate-y-[-180%] xl:translate-y-[-140%] w-[50px] h-[50px] xl:w-[73px] xl:h-[73px] bg-[#1C5F7B] rounded-[100px] z-[1] text-white hover:opacity-70 transition-all duration-500 flex items-center justify-center"
+            className="absolute left-0 md:left-[-20px] top-1/2 -translate-y-1/2 w-[40px] h-[45px] z-[1] transition-all duration-500 flex items-center justify-center"
           >
-            <IconChevronRight
-              className={
-                'w-[20px] h-[20px] xl:w-[14px] xl:h-[27px] rotate-[180deg] relative left-[-1px]'
-              }
+            <img
+              className="w-full h-full object-contain"
+              src="https://cdn.shopify.com/s/files/1/0787/1352/0419/files/left-a.png?v=1688967073"
+              alt=""
             />
           </div>
           <div
             id="swiper-button-next-new-in-Shop"
-            className="absolute right-[-20px] md:right-[-36px] top-1/2 translate-y-[-180%] xl:translate-y-[-140%] w-[50px] h-[50px] xl:w-[73px] xl:h-[73px] bg-[#1C5F7B] rounded-[100px] z-[1] text-white hover:opacity-70 transition-all duration-500 flex items-center justify-center"
+            className="absolute right-0 md:right-[-20px] top-1/2 -translate-y-1/2 w-[40px] h-[45px] z-[1] transition-all duration-500 flex items-center justify-center"
           >
-            <IconChevronRight
-              className={'w-[20px] h-[20px] xl:w-[14px] xl:h-[27px] relative left-[3px]'}
+            <img
+              className="w-full h-full object-contain"
+              src="https://cdn.shopify.com/s/files/1/0787/1352/0419/files/right-a.png?v=1688967073"
+              alt=""
             />
           </div>
         </div>
@@ -173,5 +192,3 @@ export function NewInTheShop({products, title,locale}) {
     </section>
   );
 }
-
-
