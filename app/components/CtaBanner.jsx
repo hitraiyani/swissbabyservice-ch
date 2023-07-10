@@ -4,10 +4,10 @@ import { Link } from './Link';
 
 export function CtaBanner({banner}) {
   return (
-    <section className={`cta-banner-section py-[20px] md:py-[30px] xl:py-[40px] 2xl:py-[50px]`}>
+    <section className={`cta-banner-section py-[15px]`}>
       <div className="container">
-      <Link to={'/'}>
-        <div className="img-wrap">
+      <Link to={'/'} className="relative block">
+        <div className="img-wrap before:hover:border-[4px] before:border-[#cc5060] before:absolute before:inset-0 before:w-full before:h-full">
           
           <Image 
              className="max-w-full w-full h-auto"

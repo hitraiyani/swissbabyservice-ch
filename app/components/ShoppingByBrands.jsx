@@ -1,12 +1,19 @@
 import {useEffect, useState} from 'react';
 import {AICO_API_URL, AICO_API_TOKEN, STORE_LOCALE} from '~/lib/const';
-
 import {
-  Link
-} from '~/components';
-import { translate } from '~/lib/utils';
+  Autoplay,
+  Navigation,
+  Pagination,
+  Scrollbar,
+  A11y,
+  EffectFade,
+} from 'swiper/modules';
+import {Swiper, SwiperSlide} from 'swiper/react';
 
-export function ShoppingByBrands({className,locale}) {
+import {Link} from '~/components';
+import {translate} from '~/lib/utils';
+
+export function ShoppingByBrands({className, locale}) {
   const [brandData, setbrandData] = useState([]);
 
   const loadBrandData = async () => {
@@ -27,18 +34,44 @@ export function ShoppingByBrands({className,locale}) {
     loadBrandData();
   }, []);
 
-
   return (
-    <section className={`${className} shopping-by-brands-section py-[20px] md:py-[30px] xl:py-[40px] 2xl:py-[50px]`}>
+    <section
+      className={`${className} shopping-by-brands-section py-[20px] md:py-[30px] xl:py-[40px] 2xl:py-[50px]`}
+    >
       <div className="container">
-        <div className="title-wrap mb-[20px] lg:mb-[40px] xl:mb-[50px] 2xl:mb-[70px]">
-          <h2 className="text-black text-[24px] font-bold text-center">
-            {translate('shop_by_brand',locale)}
+        <div className="title-wrap">
+          <h2 className="text-[20px] font-bold text-left text-[#2380B1] flex items-center gap-[20px] mb-[40px]">
+            {translate('shop_by_brand', locale)}
+            <span className="flex-1 border-b-[1px] border-[#3890bf] relative before:bg-no-repeat before:content-[''] before:inline-block before:w-5 before:h-5 before:bg-[url('https://cdn.shopify.com/s/files/1/0787/1352/0419/files/heart.png?v=1688561823')] before:absolute before:z-[2] before:-mt-1.5 before:right-[5px] md:before:right-[15px] before:top-full"></span>
           </h2>
         </div>
         <div className="logo-lists-wrap">
           <div className="logo-list">
-            <ul className="flex flex-wrap gap-x-[14px] gap-y-[12px] max-w-[910px] items-center justify-center mx-auto">
+            <Swiper
+              modules={[
+                Autoplay,
+                Navigation,
+                Pagination,
+                Scrollbar,
+                A11y,
+                EffectFade,
+              ]}
+              spaceBetween={24}
+              slidesPerView={5}
+              // autoplay={{
+              //   delay: 5000,
+              //   disableOnInteraction: false,
+              // }}
+              // breakpoints={{
+              //   0: {
+              //     autoHeight:true,
+              //   },
+              //   992: {
+              //     autoHeight:false,
+              //   },
+              // }}
+              className="shopping-by-brands-slider"
+            >
               {brandData?.map((item, index) => {
                 let brandImage = '';
                 let brandRedirectUrl = '';
@@ -59,18 +92,21 @@ export function ShoppingByBrands({className,locale}) {
                   }
                 }
                 return (
-                  <li key={index} className=" w-[117px] md:w-[197px] lg:w-[217px] h-[92px] md:h-[132px] lg:h-[152px] flex items-center justify-center bg-[#E7EFFF] bg-opacity-[0.4] rounded-[10px] relative overflow-hidden">
-                    <Link to={'/'} className="block w-full h-full absolute inset-0">
+                  <SwiperSlide key={index} className="relative">
+                    <Link
+                      to={'/'}
+                      className="w-full pb-[58%] flex items-center justify-center bg-[#E7EFFF] bg-opacity-[0.4] rounded-[10px] relative overflow-hidden"
+                    >
                       <img
-                        className="p-[5px] md:p-[10px] lg:p-[20px] w-full h-full object-contain transition-all duration-500 absolute inset-0"
+                        className="w-full h-full object-contain transition-all duration-500 absolute inset-0"
                         src={brandImage}
                         alt=""
                       />
                     </Link>
-                  </li>
+                  </SwiperSlide>
                 );
               })}
-            </ul>
+            </Swiper>
           </div>
         </div>
       </div>
