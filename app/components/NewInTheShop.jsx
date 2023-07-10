@@ -89,6 +89,7 @@ export function NewInTheShop({products, title, locale}) {
                   <div className="slide-item p-[15px] bg-white relative">
                     <div className="product-card">
                       <div className="product-card-inner">
+                        <div className='sale-label bg-[#9a2ea3] text-white p-[5px] leading-none uppercase text-[13px] absolute right-0 top-0 z-[1]'> SALE <span>-19%</span> </div>
                         <Link
                           to={`/products/${product.handle}`}
                           prefetch="intent"
