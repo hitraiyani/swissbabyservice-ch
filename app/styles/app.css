@@ -377,6 +377,24 @@ body {
 }
 /* End Hero slider css */
 
+/* Hero new-in-Shop-section css */
+.new-in-Shop-section {
+  .slide-item {
+    .buy-now-btn {
+      opacity: 0;
+    }
+    &:hover {
+      .buy-now-btn {
+        opacity: 1;
+      }
+    }
+  }
+  .swiper-button-disabled{
+    display: none;
+  }
+}
+/* End Hero new-in-Shop-section css */
+
 .bz-footer-row {
   height: auto;
   width: 100%;
