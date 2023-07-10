@@ -46,7 +46,7 @@ export function Contactus({className,locale}) {
       formRef.current.reset();
     }
   }, [fetcher]);
-
+  //contact section
   return (
     <section
       className={`${className} quick-request-section py-[20px] md:py-[30px] xl:py-[40px] 2xl:py-[50px]`}
