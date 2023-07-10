@@ -215,7 +215,7 @@ function MobileHeader({title, isHome, openCart, openMenu,aicoMenu,locale }) {
           <div className='my-account-mobile'>
           <a
               href="/account"
-              className='header-login pt-[4px] flex text-[11px] text-[#2380b1] font-["arial"] font-medium items-baseline gap-[2px]' 
+              className='header-login pt-[4px] flex text-[11px] text-[#2380b1] font-["Open_Sans"] font-medium items-baseline gap-[2px]' 
             >
               <span className="icon">
                 <i className="hr-icon-login"></i>
@@ -389,7 +389,7 @@ function DesktopHeader({isHome, aicoMenu, menu, openCart, title, locale}) {
           <div className="right-col flex items-center">
             <a
               href="/account"
-              className='header-login p-[16px] flex text-[13px] text-[#2A6496] font-["arial"] font-medium mr-[16px] items-baseline gap-[2px]' 
+              className='header-login p-[16px] flex text-[13px] text-[#2A6496] font-["Open_Sans"] font-medium mr-[16px] items-baseline gap-[2px]' 
             >
               <span className="icon text-[30px]">
                 <i className="hr-icon-login"></i>
@@ -509,8 +509,8 @@ function Badge({openCart, dark, count,locale}) {
         {/* <IconBag /> */}
         <div className={`${dark ? '' : ''} flex items-center`}>
           <i className="hr-icon-cart mr-2"></i>
-          <span className="cart-text text-[12px] min-[992px]:text-[13px] font-['arial']">{translate("shoping_cart",locale)}</span>
-          <span className='bg-[#e4f0fa] px-[4px] min-[992px]:px-[10px] py-[2px] min-[992px]:py-[5px] text-[12px] min-[992px]:text-[13px] ml-[8px] rounded-[2px] min-[992px]:rounded-[5px] text-[#2380b1] font-["arial"]'>{count || 0}</span>
+          <span className="cart-text text-[12px] min-[992px]:text-[13px] font-['Open_Sans']">{translate("shoping_cart",locale)}</span>
+          <span className='bg-[#e4f0fa] px-[4px] min-[992px]:px-[10px] py-[2px] min-[992px]:py-[5px] text-[12px] min-[992px]:text-[13px] ml-[8px] rounded-[2px] min-[992px]:rounded-[5px] text-[#2380b1] font-["Open_Sans"]'>{count || 0}</span>
         </div>
       </>
     ),
@@ -520,14 +520,14 @@ function Badge({openCart, dark, count,locale}) {
   return isHydrated ? (
     <button
       onClick={openCart}
-      className="w-full bg-[#c0d4e6] font-['arial'] p-[7px_6px_7px_8px] min-[992px]:p-[13px_12px_13px_15px] rounded-[4px] min-[992px]:rounded-[8px] text-[#2380b1] hover:bg-[#2380b1] hover:text-white transition-all duration-500"
+      className="w-full bg-[#c0d4e6] font-['Open_Sans'] p-[7px_6px_7px_8px] min-[992px]:p-[13px_12px_13px_15px] rounded-[4px] min-[992px]:rounded-[8px] text-[#2380b1] hover:bg-[#2380b1] hover:text-white transition-all duration-500"
     >
       {BadgeCounter}
     </button>
   ) : (
     <Link
       to="/cart"
-      className="w-full bg-[#c0d4e6] font-['arial'] p-[7px_6px_7px_8px] min-[992px]:p-[13px_12px_13px_15px] rounded-[4px] min-[992px]:rounded-[8px] text-[#2380b1] hover:bg-[#2380b1] hover:text-white transition-all duration-500"
+      className="w-full bg-[#c0d4e6] font-['Open_Sans'] p-[7px_6px_7px_8px] min-[992px]:p-[13px_12px_13px_15px] rounded-[4px] min-[992px]:rounded-[8px] text-[#2380b1] hover:bg-[#2380b1] hover:text-white transition-all duration-500"
     >
       {BadgeCounter}
     </Link>
@@ -552,23 +552,23 @@ function Footer({menu,locale}) {
           <div className="flex flex-row flex-wrap xl:flex-nowrap mx-[-15px] gap-y-5">
             <div className="px-[15px] w-[100%] md:w-[50%] lg:w-[25%] xl:w-[25%]">
               <div className="col-inner">
-                <h4 className="title text-[20px] text-[#3391c2] font-semibold font-serif pb-[15px] lg:pb-[0px] mb-[5px] lg:mb-[40px] mt-[0px] lg:mt-[-35px] border-b lg:border-b-0 border-[#3890bf]">
+                <h4 className="title text-[20px] text-[#3391c2] font-semibold font-['Open_Sans'] pb-[15px] lg:pb-[0px] mb-[5px] lg:mb-[40px] mt-[0px] lg:mt-[-35px] border-b lg:border-b-0 border-[#3890bf]">
                   Swissbabyservice
                 </h4>
-                <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] leading-[18px]">
+                <p className="text-[13px] text-[#3391c2] font-normal font-['Open_Sans'] leading-[18px]">
                    {translate("footer_desc",locale) } 
                 </p>
               </div>
             </div>
             <div className="px-[15px] w-[100%] md:w-[50%] lg:w-[25%] xl:w-[25%]">
               <div className="col-inner">
-                <h4 className="title text-[20px] text-[#3391c2] font-semibold font-serif pb-[15px] lg:pb-[0px] mb-[5px] lg:mb-[40px] mt-[0px] lg:mt-[-35px] border-b lg:border-b-0 border-[#3890bf]">
+                <h4 className="title text-[20px] text-[#3391c2] font-semibold font-['Open_Sans'] pb-[15px] lg:pb-[0px] mb-[5px] lg:mb-[40px] mt-[0px] lg:mt-[-35px] border-b lg:border-b-0 border-[#3890bf]">
                  {translate("information",locale) }
                 </h4>
                 <ul className="nav-list flex flex-col gap-[10px] mb-[10px]">
                   {menu?.items?.map((item,index) => {
                     return (
-                      <li key={index} className="text-[13px] text-[#2380b1] font-normal font-['arial']">
+                      <li key={index} className="text-[13px] text-[#2380b1] font-normal font-['Open_Sans']">
                         <Link
                           className="hover:text-[#2A6496] transition-all duration-500 underline"
                           href="/"
@@ -584,13 +584,13 @@ function Footer({menu,locale}) {
             </div>
             <div className="px-[15px] w-[100%] md:w-[50%] lg:w-[25%] xl:w-[25%]">
               <div className="col-inner">
-                <h4 className="title text-[20px] text-[#3391c2] font-semibold font-serif pb-[15px] lg:pb-[0px] mb-[5px] lg:mb-[40px] mt-[0px] lg:mt-[-35px] border-b lg:border-b-0 border-[#3890bf]">
+                <h4 className="title text-[20px] text-[#3391c2] font-semibold font-['Open_Sans'] pb-[15px] lg:pb-[0px] mb-[5px] lg:mb-[40px] mt-[0px] lg:mt-[-35px] border-b lg:border-b-0 border-[#3890bf]">
                  {translate("shipment",locale) }
                 </h4>
-                <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] leading-[18px] mb-[10px]">
+                <p className="text-[13px] text-[#3391c2] font-normal font-['Open_Sans'] leading-[18px] mb-[10px]">
                   {translate("delivery_cost",locale)} <strong>CHF 6.90</strong>
                 </p>
-                <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] leading-[18px] mb-[10px]">
+                <p className="text-[13px] text-[#3391c2] font-normal font-['Open_Sans'] leading-[18px] mb-[10px]">
                   {translate("free_delivery_of_order",locale)} {' '}
                   <strong>CHF 65.00</strong>
                 </p>
@@ -601,7 +601,7 @@ function Footer({menu,locale}) {
                     alt=""
                   />
                   <div className="flex">
-                    <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] leading-[18px] mb-[10px]">
+                    <p className="text-[13px] text-[#3391c2] font-normal font-['Open_Sans'] leading-[18px] mb-[10px]">
                       <strong className="font-semibold">{translate("invoice",locale)}</strong>
                       <br />
                       30 {translate("take_net",locale)}
@@ -612,11 +612,11 @@ function Footer({menu,locale}) {
             </div>
             <div className="px-[15px] w-[100%] md:w-[50%] lg:w-[25%] xl:w-[25%]">
               <div className="col-inner">
-                <h4 className="title text-[20px] text-[#3391c2] font-semibold font-serif pb-[15px] lg:pb-[0px] mb-[5px] lg:mb-[40px] mt-[0px] lg:mt-[-35px] border-b lg:border-b-0 border-[#3890bf]">
+                <h4 className="title text-[20px] text-[#3391c2] font-semibold font-['Open_Sans'] pb-[15px] lg:pb-[0px] mb-[5px] lg:mb-[40px] mt-[0px] lg:mt-[-35px] border-b lg:border-b-0 border-[#3890bf]">
                  {translate("contact",locale) }
                 </h4>
                 <div className="contact-info">
-                  <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] leading-[18px] mb-[10px] ">
+                  <p className="text-[13px] text-[#3391c2] font-normal font-['Open_Sans'] leading-[18px] mb-[10px] ">
                     <b className="font-semibold">SWISSBABYSERVICE</b>
                     <br />
                     Schulstrasse 13a
@@ -624,13 +624,13 @@ function Footer({menu,locale}) {
                     9553 Bettwiesen
                     <br />
                   </p>
-                  <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] leading-[18px] mb-[10px]">
+                  <p className="text-[13px] text-[#3391c2] font-normal font-['Open_Sans'] leading-[18px] mb-[10px]">
                     <strong className="font-semibold">FR 079 434 62 99</strong>
                   </p>
-                  <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] leading-[18px] mb-[10px]">
+                  <p className="text-[13px] text-[#3391c2] font-normal font-['Open_Sans'] leading-[18px] mb-[10px]">
                     <strong className="font-semibold">DE 052 720 58 58</strong>
                   </p>
-                  <p className="text-[13px] text-[#3391c2] font-normal font-['arial'] leading-[18px] mb-[10px]">
+                  <p className="text-[13px] text-[#3391c2] font-normal font-['Open_Sans'] leading-[18px] mb-[10px]">
                     <a
                       href="mailto:info@swissbabyservice.ch"
                       className="hover:text-[#2A6496] transition-all duration-500 underline"
