@@ -1,4 +1,4 @@
-import {useRef, Suspense, useMemo} from 'react';
+import {useRef, Suspense, useMemo, useState} from 'react';
 import {Disclosure, Listbox} from '@headlessui/react';
 import {defer} from '@shopify/remix-oxygen';
 import {
@@ -26,6 +26,8 @@ import {
   AddToCartButton,
   Button,
   SortFilter,
+  IconMinus,
+  IconPlus,
 } from '~/components';
 import {getExcerpt} from '~/lib/utils';
 import {seoPayload} from '~/lib/seo.server';
@@ -78,9 +80,6 @@ export async function loader({params, request, context}) {
     url: request.url,
   });
 
- 
-  
-
   return defer({
     product,
     shop,
@@ -93,72 +92,70 @@ export async function loader({params, request, context}) {
       totalValue: parseFloat(selectedVariant.price.amount),
     },
     seo,
-    language
+    language,
   });
 }
 
 export default function Product() {
-  const {product, shop, recommended,language} = useLoaderData();
+  const {product, shop, recommended, language} = useLoaderData();
   const {media, title, vendor, descriptionHtml} = product;
   const {shippingPolicy, refundPolicy} = shop;
 
   return (
     <>
       <Section className="px-0 md:px-8 lg:px-12">
-        
-      <SortFilter
-          filters={""}
-          appliedFilters={""}
-          collections={""}
+        <SortFilter
+          filters={''}
+          appliedFilters={''}
+          collections={''}
           locale={language}
-
           menudata={
             shop?.aico_navigation_menu?.value
               ? JSON.parse(shop?.aico_navigation_menu?.value)
               : []
           }
         >
-        <div className="grid items-start md:gap-6 lg:gap-20 md:grid-cols-2 lg:grid-cols-3">
-          <ProductGallery
-            media={media.nodes}
-            className="w-full lg:col-span-2"
-          />
-          <div className="sticky md:-mb-nav md:top-nav md:-translate-y-nav md:h-screen md:pt-nav hiddenScroll md:overflow-y-scroll">
-            <section className="flex flex-col w-full max-w-xl gap-8 p-6 md:mx-auto md:max-w-sm md:px-0">
-              <div className="grid gap-2">
-                <Heading as="h1" className="whitespace-normal">
-                  {title}
-                </Heading>
-                {vendor && (
-                  <Text className={'opacity-50 font-medium'}>{vendor}</Text>
-                )}
-              </div>
-              <ProductForm />
-              <div className="grid gap-4 py-4">
-                {descriptionHtml && (
-                  <ProductDetail
-                    title="Product Details"
-                    content={descriptionHtml}
-                  />
-                )}
-                {shippingPolicy?.body && (
-                  <ProductDetail
-                    title="Shipping"
-                    content={getExcerpt(shippingPolicy.body)}
-                    learnMore={`/policies/${shippingPolicy.handle}`}
-                  />
-                )}
-                {refundPolicy?.body && (
-                  <ProductDetail
-                    title="Returns"
-                    content={getExcerpt(refundPolicy.body)}
-                    learnMore={`/policies/${refundPolicy.handle}`}
-                  />
-                )}
-              </div>
-            </section>
+          <div className="grid items-start md:gap-6 lg:gap-20 md:grid-cols-2 lg:grid-cols-3">
+            <ProductGallery
+              media={media.nodes}
+              className="w-full lg:col-span-2"
+            />
+            <div className="sticky md:-mb-nav md:top-nav md:-translate-y-nav md:h-screen md:pt-nav hiddenScroll md:overflow-y-scroll">
+              <section className="flex flex-col w-full max-w-xl gap-8 p-6 md:mx-auto md:max-w-sm md:px-0">
+                <div className="grid gap-2">
+                  <Heading as="h1" className="whitespace-normal">
+                    {title}
+                  </Heading>
+                  {vendor && (
+                    <Text className={'opacity-50 font-medium'}>{vendor}</Text>
+                  )}
+                </div>
+                <ProductForm locale={language} />
+                <div className="grid gap-4 py-4">
+                  {descriptionHtml && (
+                    <ProductDetail
+                      title="Product Details"
+                      content={descriptionHtml}
+                    />
+                  )}
+                  {shippingPolicy?.body && (
+                    <ProductDetail
+                      title="Shipping"
+                      content={getExcerpt(shippingPolicy.body)}
+                      learnMore={`/policies/${shippingPolicy.handle}`}
+                    />
+                  )}
+                  {refundPolicy?.body && (
+                    <ProductDetail
+                      title="Returns"
+                      content={getExcerpt(refundPolicy.body)}
+                      learnMore={`/policies/${refundPolicy.handle}`}
+                    />
+                  )}
+                </div>
+              </section>
+            </div>
           </div>
-        </div>
         </SortFilter>
       </Section>
       <Suspense fallback={<Skeleton className="h-32" />}>
@@ -175,7 +172,7 @@ export default function Product() {
   );
 }
 
-export function ProductForm() {
+export function ProductForm(locale) {
   const {product, analytics, storeDomain} = useLoaderData();
 
   const [currentSearchParams] = useSearchParams();
@@ -225,6 +222,8 @@ export function ProductForm() {
     selectedVariant?.compareAtPrice?.amount &&
     selectedVariant?.price?.amount < selectedVariant?.compareAtPrice?.amount;
 
+  const [quantity, setQuantity] = useState(1);
+
   const productAnalytics = {
     ...analytics.products[0],
     quantity: 1,
@@ -237,6 +236,11 @@ export function ProductForm() {
           options={product.options}
           searchParamsWithDefaults={searchParamsWithDefaults}
         />
+        <QuantityComponent
+          quantity={quantity}
+          setQuantity={setQuantity}
+          locale={locale}
+        />
         {selectedVariant && (
           <div className="grid items-stretch gap-4">
             {isOutOfStock ? (
@@ -248,7 +252,7 @@ export function ProductForm() {
                 lines={[
                   {
                     merchandiseId: selectedVariant.id,
-                    quantity: 1,
+                    quantity: quantity,
                   },
                 ]}
                 variant="primary"
@@ -293,6 +297,52 @@ export function ProductForm() {
   );
 }
 
+function QuantityComponent({quantity, setQuantity, locale}) {
+  const decreaseQuantity = () => {
+    if (quantity > 0) {
+      setQuantity((prevQuantity) => prevQuantity - 1);
+    }
+  };
+
+  const increaseQuantity = () => {
+    setQuantity((prevQuantity) => prevQuantity + 1);
+  };
+
+  const handleInputChange = (event) => {
+    const inputValue = event.target.value;
+    // Ensure input value is a number
+    if (!isNaN(inputValue)) {
+      setQuantity(parseInt(inputValue));
+    }
+  };
+
+  return (
+    <div className="flex items-center flex-wrap">
+      <input
+        type="number"
+        id="quantity"
+        className='h-[52px] w-[80px] flex items-center justify-center border-[2px] !border-[#18A1DC] rounded-[10px] mr-[9px] text-[16px] font-bold font-["Open_Sans"] text-[#18A1DC] !ring-0 !shadow-none appearance-none text-center'
+        value={quantity}
+        onChange={handleInputChange}
+      />
+      <button
+        onClick={decreaseQuantity}
+        disabled={quantity === 0}
+        className={`${
+          quantity === 0 ? '!bg-[#E7EFFF]' : ''
+        } w-[37px] h-[37px] flex items-center justify-center text-[14px] text-[#18A1DC] bg-[#CCDDF1] rounded-[100px] mr-[2px]`}
+      >
+        <IconMinus />
+      </button>
+      <button
+        onClick={increaseQuantity}
+        className="w-[37px] h-[37px] flex items-center justify-center text-[14px] text-[#18A1DC] bg-[#CCDDF1] rounded-[100px] mr-[2px]"
+      >
+        <IconPlus />
+      </button>
+    </div>
+  );
+}
 function ProductOptions({options, searchParamsWithDefaults}) {
   const closeRef = useRef(null);
   return (
@@ -476,8 +526,6 @@ function ProductDetail({title, content, learnMore}) {
     </Disclosure>
   );
 }
-
-
 
 const PRODUCT_VARIANT_FRAGMENT = `#graphql
   fragment ProductVariantFragment on ProductVariant {

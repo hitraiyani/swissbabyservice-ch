@@ -155,6 +155,16 @@ export function IconCaret({
     </Icon>
   );
 }
+export function IconMinus(props) {
+  return (
+    <svg  {...props} width={13} height={4} viewBox="0 0 13 4" fill="none" xmlns="http://www.w3.org/2000/svg" > <path d="M11.75 0.4375C12.2148 0.4375 12.625 0.847656 12.625 1.3125V2.1875C12.625 2.67969 12.2148 3.0625 11.75 3.0625H1.25C0.757812 3.0625 0.375 2.67969 0.375 2.1875V1.3125C0.375 0.847656 0.757812 0.4375 1.25 0.4375H11.75Z" fill="currentColor" /> </svg>
+  );
+}
+export function IconPlus(props) {
+  return (
+    <svg {...props} width={13} height={13} viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg" > <path d="M11.75 5.4375C12.2148 5.4375 12.625 5.84766 12.625 6.3125V7.1875C12.625 7.67969 12.2148 8.0625 11.75 8.0625H7.8125V12C7.8125 12.4922 7.40234 12.875 6.9375 12.875H6.0625C5.57031 12.875 5.1875 12.4922 5.1875 12V8.0625H1.25C0.757812 8.0625 0.375 7.67969 0.375 7.1875V6.3125C0.375 5.84766 0.757812 5.4375 1.25 5.4375H5.1875V1.5C5.1875 1.03516 5.57031 0.625 6.0625 0.625H6.9375C7.40234 0.625 7.8125 1.03516 7.8125 1.5V5.4375H11.75Z" fill="currentColor" /> </svg>  
+  );
+}
 
 export function IconSelect(props) {
   return (
