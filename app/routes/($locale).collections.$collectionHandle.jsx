@@ -28,6 +28,7 @@ export async function loader({params, request, context}) {
   const paginationVariables = getPaginationVariables(request, {
     pageBy: 8,
   });
+  const {language, country} = context.storefront.i18n;
   const {collectionHandle} = params;
 
   invariant(collectionHandle, 'Missing collectionHandle param');
@@ -83,6 +84,12 @@ export async function loader({params, request, context}) {
       price,
     });
   }
+  const {shop} = await context.storefront.query(MENU_QUERY, {
+    variables: {
+      country: context.storefront.i18n.country,
+      language: context.storefront.i18n.language,
+    },
+  });
 
   const {collection, collections} = await context.storefront.query(
     COLLECTION_QUERY,
@@ -107,6 +114,7 @@ export async function loader({params, request, context}) {
 
   return json({
     collection,
+    shop,
     appliedFilters,
     collections: flattenConnection(collections),
     analytics: {
@@ -119,7 +127,7 @@ export async function loader({params, request, context}) {
 }
 
 export default function Collection() {
-  const {collection, collections, appliedFilters} = useLoaderData();
+  const {collection, collections, appliedFilters,shop,language} = useLoaderData();
 
   return (
     <>
@@ -139,6 +147,13 @@ export default function Collection() {
           filters={collection.products.filters}
           appliedFilters={appliedFilters}
           collections={collections}
+          locale={language}
+
+          menudata={
+            shop?.aico_navigation_menu?.value
+              ? JSON.parse(shop?.aico_navigation_menu?.value)
+              : []
+          }
         >
           <Pagination connection={collection.products}>
             {({nodes, isLoading, PreviousLink, NextLink}) => (
@@ -170,7 +185,20 @@ export default function Collection() {
     </>
   );
 }
-
+const MENU_QUERY = `#graphql
+  query CollectionDetails(
+    $country: CountryCode
+    $language: LanguageCode
+    
+  ) @inContext(country: $country, language: $language) {
+    shop {
+      id
+      name
+      aico_navigation_menu: metafield(namespace: "aico_metafields", key: "aico_navigation_menu") {
+        value
+      }
+    }
+  }`;
 const COLLECTION_QUERY = `#graphql
   query CollectionDetails(
     $handle: String!

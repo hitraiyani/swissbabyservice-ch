@@ -25,6 +25,7 @@ import {
   Link,
   AddToCartButton,
   Button,
+  SortFilter,
 } from '~/components';
 import {getExcerpt} from '~/lib/utils';
 import {seoPayload} from '~/lib/seo.server';
@@ -35,6 +36,7 @@ export const headers = routeHeaders;
 
 export async function loader({params, request, context}) {
   const {productHandle} = params;
+  const {language, country} = context.storefront.i18n;
   invariant(productHandle, 'Missing productHandle param, check route filename');
 
   const searchParams = new URL(request.url).searchParams;
@@ -76,6 +78,9 @@ export async function loader({params, request, context}) {
     url: request.url,
   });
 
+ 
+  
+
   return defer({
     product,
     shop,
@@ -88,17 +93,31 @@ export async function loader({params, request, context}) {
       totalValue: parseFloat(selectedVariant.price.amount),
     },
     seo,
+    language
   });
 }
 
 export default function Product() {
-  const {product, shop, recommended} = useLoaderData();
+  const {product, shop, recommended,language} = useLoaderData();
   const {media, title, vendor, descriptionHtml} = product;
   const {shippingPolicy, refundPolicy} = shop;
 
   return (
     <>
       <Section className="px-0 md:px-8 lg:px-12">
+        
+      <SortFilter
+          filters={""}
+          appliedFilters={""}
+          collections={""}
+          locale={language}
+
+          menudata={
+            shop?.aico_navigation_menu?.value
+              ? JSON.parse(shop?.aico_navigation_menu?.value)
+              : []
+          }
+        >
         <div className="grid items-start md:gap-6 lg:gap-20 md:grid-cols-2 lg:grid-cols-3">
           <ProductGallery
             media={media.nodes}
@@ -140,6 +159,7 @@ export default function Product() {
             </section>
           </div>
         </div>
+        </SortFilter>
       </Section>
       <Suspense fallback={<Skeleton className="h-32" />}>
         <Await
@@ -457,6 +477,8 @@ function ProductDetail({title, content, learnMore}) {
   );
 }
 
+
+
 const PRODUCT_VARIANT_FRAGMENT = `#graphql
   fragment ProductVariantFragment on ProductVariant {
     id
@@ -531,6 +553,9 @@ const PRODUCT_QUERY = `#graphql
     }
     shop {
       name
+      aico_navigation_menu: metafield(namespace: "aico_metafields", key: "aico_navigation_menu") {
+        value
+      }
       primaryDomain {
         url
       }

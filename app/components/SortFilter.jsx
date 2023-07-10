@@ -5,19 +5,27 @@ import {
   useLocation,
   useSearchParams,
   useNavigate,
+  NavLink,
 } from '@remix-run/react';
 import {useDebounce} from 'react-use';
 import {Disclosure} from '@headlessui/react';
 
 import {Heading, IconFilters, IconCaret, IconXMark, Text} from '~/components';
+import {getMenuHandle, translate} from '~/lib/utils';
 
 export function SortFilter({
   filters,
   appliedFilters = [],
   children,
+  menudata = [],
   collections = [],
+  locale,
 }) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
+
+  console.log(menudata);
+  console.log('menudata');
+
   return (
     <>
       <div className="flex items-center justify-between w-full">
@@ -27,9 +35,9 @@ export function SortFilter({
             'relative flex items-center justify-center w-8 h-8 focus:ring-primary/5'
           }
         >
-          <IconFilters />
+          {/* <IconFilters /> */}
         </button>
-        <SortMenu />
+        {/* <SortMenu /> */}
       </div>
       <div className="flex flex-col flex-wrap md:flex-row">
         <div
@@ -42,7 +50,9 @@ export function SortFilter({
           <FiltersDrawer
             collections={collections}
             filters={filters}
+            menudata={menudata}
             appliedFilters={appliedFilters}
+            locale={locale}
           />
         </div>
         <div className="flex-1">{children}</div>
@@ -53,11 +63,14 @@ export function SortFilter({
 
 export function FiltersDrawer({
   filters = [],
+  menudata = [],
   appliedFilters = [],
   collections = [],
+  locale,
 }) {
   const [params] = useSearchParams();
   const location = useLocation();
+  const [categoryName, setCategoryName] = useState('null');
 
   const filterMarkup = (filter, option) => {
     switch (filter.type) {
@@ -88,58 +101,104 @@ export function FiltersDrawer({
     }
   };
 
-  const collectionsMarkup = collections.map((collection) => {
-    return (
-      <li key={collection.handle} className="pb-4">
-        <Link
-          to={`/collections/${collection.handle}`}
-          className="focus:underline hover:underline"
-          key={collection.handle}
-          prefetch="intent"
-        >
-          {collection.title}
-        </Link>
-      </li>
-    );
-  });
+  // const collectionsMarkup = collections.map((collection) => {
+  //   return (
+  //     <li key={collection.handle} className="pb-4">
+  //       <Link
+  //         to={`/collections/${collection.handle}`}
+  //         className="focus:underline hover:underline"
+  //         key={collection.handle}
+  //         prefetch="intent"
+  //       >
+  //         {collection.title}
+  //       </Link>
+  //     </li>
+  //   );
+  // });
 
   return (
     <>
-      <nav className="py-8">
-        {appliedFilters.length > 0 ? (
-          <div className="pb-8">
-            <AppliedFilters filters={appliedFilters} />
-          </div>
-        ) : null}
-
-        <Heading as="h4" size="lead" className="pb-4">
-          Filter By
+      <nav className="filter-list-wrap bg-[#E7EFFF] rounded-[30px] overflow-hidden">
+        <Heading
+          as="h4"
+          size="lead"
+          className="text-[#1C5F7B] text-[24px] xl:text-[28px] font-bold py-[27px] bg-[#CCDDF1] leading-none px-[30px] xl:px-[48px]"
+        >
+          {translate('category', locale)}
         </Heading>
-        <div className="divide-y">
-          {filters.map(
+        <div className="px-[30px] xl:px-[48px] py-[27px] hidden">
+          {appliedFilters.length > 0 ? (
+            <div className="">
+              <AppliedFilters filters={appliedFilters} />
+            </div>
+          ) : null}
+        </div>
+        <div className="px-[30px] xl:px-[48px] py-[25px] flex flex-col gap-y-[10px]">
+          {menudata?.map(
             (filter) =>
-              filter.values.length > 1 && (
-                <Disclosure as="div" key={filter.id} className="w-full">
-                  {({open}) => (
-                    <>
-                      <Disclosure.Button className="flex justify-between w-full py-4">
-                        <Text size="lead">{filter.label}</Text>
-                        <IconCaret direction={open ? 'up' : 'down'} />
-                      </Disclosure.Button>
-                      <Disclosure.Panel key={filter.id}>
-                        <ul key={filter.id} className="py-2">
-                          {filter.values?.map((option) => {
-                            return (
-                              <li key={option.id} className="pb-4">
-                                {filterMarkup(filter, option)}
-                              </li>
-                            );
-                          })}
-                        </ul>
-                      </Disclosure.Panel>
-                    </>
-                  )}
-                </Disclosure>
+              filter.category.name != 'Home' && (
+                <div key={filter?.category?.name}>
+                  <ul
+                    key={filter.category.name}
+                    className="py-[18px] flex flex-col gap-y-[18px] filter-sub-items"
+                  >
+                    <li
+                      key={filter.category.name}
+                      className="text-[16px] text-[#292929] font-normal hover:text-[#0A627E] hover:font-bold"
+                    >
+                      <NavLink
+                        className="block border-none"
+                        prefetch="intent"
+                        to={getMenuHandle(filter.category)}
+                      >
+                        {translate(filter.category.name, locale)}
+                      </NavLink>
+                    </li>
+                  </ul>
+
+                  {/* <Disclosure
+                    as="div"
+                    key={filter.category.handle+categoryName}
+                    id={filter.category.handle}
+                    className="w-full"
+                    defaultOpen={
+                      filter.category.handle == categoryName ? true : false
+                    }
+                    >
+                    {({open}) => (
+                      <>
+                        <Disclosure.Button className="flex justify-between items-center w-full text-[20px] text-[#292929] font-medium outline-none text-left">
+                          <Text size="lead" className={'flex-1'}>{translate(filter.category.name,locale)}</Text>
+                          <IconCaret direction={open ? 'up' : 'down'} />
+                        </Disclosure.Button>
+                        <Disclosure.Panel key={filter.category.name}>
+                         
+                          <ul
+                            key={filter.category.name}
+                            className="py-[18px] flex flex-col gap-y-[18px] filter-sub-items"
+                          >
+                           
+                                  
+                                  <li
+                                    key={filter.category.name}
+                                    className="text-[16px] text-[#292929] font-normal hover:text-[#0A627E] hover:font-bold"
+                                  >
+                                    <NavLink
+                                      className="block border-none"
+                                      prefetch="intent"
+                                      to={  getMenuHandle(filter.category)}
+                                    >
+                                      {translate(filter.category.name,locale)}
+                                    </NavLink>
+                                  </li>
+                             
+                            
+                          </ul>
+                        </Disclosure.Panel>
+                      </>
+                    )}
+                  </Disclosure> */}
+                </div>
               ),
           )}
         </div>
