@@ -6,7 +6,7 @@ import {PageHeader, Section, Heading, Link} from '~/components';
 import {routeHeaders} from '~/data/cache';
 import {seoPayload} from '~/lib/seo.server';
 import { translate } from '~/lib/utils';
-import { Contactus } from '~/components/contactus';
+
 
 export const headers = routeHeaders;
 
@@ -30,7 +30,7 @@ export default function Policies() {
     <>
       <PageHeader heading={translate('contact',language)} />
       <Section padding="x" className="mb-24">
-         <Contactus className={''} locale={language}/>
+         <h2>contact us</h2>
       </Section>
     </>
   );
