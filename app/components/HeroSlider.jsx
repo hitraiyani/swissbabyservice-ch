@@ -30,10 +30,19 @@ export function HeroSlider({slides}) {
             prevEl: '#swiper-button-prev-heroslider',
           }}
           loop={true}
+          autoHeight={false}
           // autoplay={{
           //   delay: 5000,
           //   disableOnInteraction: false,
           // }}
+          breakpoints={{
+            0: {
+              autoHeight:true,
+            },
+            992: {
+              autoHeight:false,
+            },
+          }}
           className="myswiper1"
         >
           {slides.map((slide, index) => (
@@ -46,17 +55,17 @@ export function HeroSlider({slides}) {
                     alt=""
                   />
                 </div>
-                <div className="container">
-                  <div className="slide-item-inner flex flex-col-reverse lg:flex-row items-center overflow-hidden rounded-[30px] h-full z-[1] relative">
-                    <div className="content-left w-full lg:w-[50%]">
-                      <div className="col-inner flex flex-col h-full">
+                <div className="container max-[1279px]:max-w-[760px]">
+                  <div className="slide-item-inner flex gap-y-[30px] flex-col min-[992px]:flex-row items-center overflow-hidden rounded-[30px] h-full z-[1] relative">
+                    <div className="content-left w-full min-[992px]:w-[40%] lg:w-[50%]">
+                      <div className="col-inner flex flex-col h-full text-center min-[992px]:text-left">
                         <h2 className="title text-[#00989e] text-[20px] leading-[1.2] font-['Open_Sans'] font-bold tracking-[2px]">
                           {slide?.heading?.value}
                         </h2>
                         <div className="subtitle text-[#00989e] text-[20px] leading-[1.2] tracking-[2px] font-['Open_Sans']">
                           {slide?.sub_heading?.value}
                         </div>
-                        <div className="btn-wrap flex mt-[30px]">
+                        <div className="btn-wrap flex mt-[30px] justify-center min-[992px]:justify-start">
                           <Link
                             to={slide?.cta_redirect?.value}
                             className='leading-none w-fit flex items-center justify-center text-center gap-[10px]  font-["OpenSans"] uppercase text-[20px] h-[50px] min-w-[200px] border-[2px] border-[#2380b1] rounded-[8px] text-[#2380b1] hover:bg-[#2380b1] hover:text-white transition-all duration-700'
@@ -71,9 +80,9 @@ export function HeroSlider({slides}) {
                         </div>
                       </div>
                     </div>
-                    <div className="img-col w-full lg:w-[50%]">
+                    <div className="img-col w-full min-[992px]:w-[60%] lg:w-[50%]">
                       <div className="col-inner h-full">
-                        <div className="img-wrap relative overflow-hidden pb-[57%]">
+                        <div className="img-wrap relative overflow-hidden pb-[42%] min-[992px]:pb-[57%]">
                           <img
                             className="absolute w-full inset-0 h-full object-contain object-center"
                             src={slide?.main_image?.reference?.image?.url}
@@ -110,7 +119,7 @@ export function HeroSlider({slides}) {
         />
       </div>
       </div>
-      <div className='bz-baloons-container '>
+      <div className='bz-baloons-container hidden min-[992px]:block'>
         <div className='baloon-1'>
           <img src="https://cdn.shopify.com/s/files/1/0787/1352/0419/files/baloon-1-de.png?v=1688968486" alt="" />
         </div>
