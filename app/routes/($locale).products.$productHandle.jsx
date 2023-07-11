@@ -103,17 +103,22 @@ export default function Product() {
 
   return (
     <>
+      {console.log()}
+      {console.log("product")}
       <Section className="px-0 md:px-8 lg:px-12">
         <SortFilter
           filters={''}
           appliedFilters={''}
           collections={''}
           locale={language}
+          selectedHandle={product?.collections?.edges?.[0]?.node?.handle}
           menudata={
             shop?.aico_navigation_menu?.value
               ? JSON.parse(shop?.aico_navigation_menu?.value)
               : []
           }
+
+         
         >
           <div className="grid items-start md:gap-6 lg:gap-20 md:grid-cols-2 lg:grid-cols-3">
             <ProductGallery
@@ -577,6 +582,14 @@ const PRODUCT_QUERY = `#graphql
       handle
       descriptionHtml
       description
+      collections(first:1) {
+        edges {
+          node {
+            id,
+            handle,
+         }
+      }
+    }
       options {
         name
         values

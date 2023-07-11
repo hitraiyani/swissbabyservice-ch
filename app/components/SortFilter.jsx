@@ -20,6 +20,7 @@ export function SortFilter({
   menudata = [],
   collections = [],
   locale,
+  selectedHandle=null
 }) {
   const [isOpen, setIsOpen] = useState(true);
 
@@ -50,6 +51,7 @@ export function SortFilter({
             menudata={menudata}
             appliedFilters={appliedFilters}
             locale={locale}
+            selectedHandle={selectedHandle}
           />
         </div>
         <div className="flex-1">{children}</div>
@@ -64,6 +66,7 @@ export function FiltersDrawer({
   appliedFilters = [],
   collections = [],
   locale,
+  selectedHandle
 }) {
   const [params] = useSearchParams();
   const location = useLocation();
@@ -144,7 +147,7 @@ export function FiltersDrawer({
                       className="text-[16px] text-[#292929] font-normal hover:text-[#0A627E] hover:font-bold"
                     >
                       <NavLink
-                        className="block border-none"
+                        className={`block border-none ${(selectedHandle === filter.category.handle) ? "active": ""}  `}
                         prefetch="intent"
                         to={getMenuHandle(filter.category)}
                       >
