@@ -258,7 +258,7 @@ export function HeroSlider({slides}) {
         </div>
         <div className="baloon-3">
           <img
-            src="https://cdn.shopify.com/s/files/1/0787/1352/0419/files/baloon-4-de.png?v=1688968485"
+            src="https://cdn.shopify.com/s/files/1/0787/1352/0419/files/baloon-3-de.png?v=1688968485"
             alt=""
           />
         </div>

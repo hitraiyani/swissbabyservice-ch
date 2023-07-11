@@ -23,7 +23,16 @@ font-family: 'Roboto', sans-serif; */
   font-weight: normal;
   font-style: normal;
 }
-
+@font-face {
+  font-family: 'dkpisang';
+  src: url('./fonts/icomoon.eot?x9znww');
+  src: url('./fonts/icomoon.eot?x9znww#iefix') format('embedded-opentype'),
+    url('./fonts/icomoon.ttf?x9znww') format('truetype'),
+    url('./fonts/icomoon.woff?x9znww') format('woff'),
+    url('./fonts/icomoon.svg#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -216,7 +225,31 @@ body {
   overflow-x: hidden;
   background-color: #e4f0fa;
 }
-
+h1,
+.h1 {
+  font-size: 30px;
+}
+h2 {
+  font-size: 25px;
+}
+h3 {
+  font-size: 20px;
+}
+h4 {
+  font-size: 16px;
+}
+h5 {
+  font-size: 13px;
+}
+h6 {
+  font-size: 10.2px;
+}
+p {
+  margin-bottom: 10px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
 .container {
   max-width: 1100px;
   padding-right: 15px;
@@ -387,6 +420,38 @@ body {
       top: -200px;
     }
   }
+  &.bottom-baloon {
+    [class^='baloon'] {
+      &.baloon-1 {
+        left: 100px;
+        top: 0px;
+      }
+      &.baloon-2 {
+        left: auto;
+        right: 380px;
+        top: 130px;
+      }
+      &.baloon-3 {
+        left: 380px;
+        top: -20px;
+      }
+      &.baloon-4 {
+        left: auto;
+        right: 500px;
+        top: 0px;
+      }
+      &.baloon-5 {
+        left: auto;
+        right: 250px;
+        top: 100px;
+      }
+      &.baloon-6 {
+        left: auto;
+        right: 50px;
+        top: 30px;
+      }
+    }
+  }
 }
 /* End Hero slider css */
 
@@ -422,6 +487,35 @@ body {
 }
 /* End Hero new-in-Shop-section css */
 
+/* page-information css */
+.page-information {
+  .page-content {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin: 0 0 5px;
+      line-height: 1.35;
+      font-family: 'open sans', arial;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+  }
+}
+.how-it-works-section {
+  .balloon-block {
+    .desc {
+      p {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+/* End page-information css */
+
+/* Footer css */
 .bz-footer-row {
   height: auto;
   width: 100%;
@@ -449,20 +543,19 @@ body {
     no-repeat center bottom;
   width: 100%;
   height: 464px;
-  margin-top: 0;
+  margin-top: -104px;
   background-size: contain;
-  position: absolute;
-  z-index: 1;
+  position: relative;
+  z-index: -1;
   pointer-events: none;
-  top: -464px;
 }
 
 .main-footer {
-  margin-top: 310px;
   padding-top: 0px !important;
   padding-left: 0px !important;
   padding-right: 0px !important;
   padding-bottom: 30px !important;
+  border: none;
 }
 .main-footer p {
   b,
@@ -470,3 +563,4 @@ body {
     font-weight: 700;
   }
 }
+/* Emd Footer css */

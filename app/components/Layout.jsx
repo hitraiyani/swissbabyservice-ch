@@ -1,4 +1,10 @@
-import {useParams, Form, Await, useMatches, useLocation} from '@remix-run/react';
+import {
+  useParams,
+  Form,
+  Await,
+  useMatches,
+  useLocation,
+} from '@remix-run/react';
 import {useWindowScroll} from 'react-use';
 import {Disclosure} from '@headlessui/react';
 import {Suspense, useEffect, useMemo} from 'react';
@@ -123,17 +129,22 @@ function CartDrawer({isOpen, onClose}) {
   );
 }
 
-export function MenuDrawer({isOpen, onClose, menu,aicoMenu,locale}) {
+export function MenuDrawer({isOpen, onClose, menu, aicoMenu, locale}) {
   return (
     <Drawer open={isOpen} onClose={onClose} openFrom="left" heading="Menu">
       <div className="grid">
-        <MenuMobileNav menu={menu} onClose={onClose} aicoMenu={aicoMenu} locale={locale} />
+        <MenuMobileNav
+          menu={menu}
+          onClose={onClose}
+          aicoMenu={aicoMenu}
+          locale={locale}
+        />
       </div>
     </Drawer>
   );
 }
 
-function MenuMobileNav({menu, onClose,aicoMenu,locale}) {
+function MenuMobileNav({menu, onClose, aicoMenu, locale}) {
   const {pathname} = useLocation();
   return (
     <nav className="grid px-[15px]">
@@ -154,24 +165,29 @@ function MenuMobileNav({menu, onClose,aicoMenu,locale}) {
           </Link>
         </span>
       ))} */}
-      <div className='flex justify-between gap-[20px] xl:gap-[40px] items-center'>
-          <div className="navbar-wrap flex-1">
-            <ul className="navbar-items flex flex-col">
+      <div className="flex justify-between gap-[20px] xl:gap-[40px] items-center">
+        <div className="navbar-wrap flex-1">
+          <ul className="navbar-items flex flex-col">
             {aicoMenu?.map((item, index) => {
-              const itemHandle = item.category.name == 'Home' ? '/' : getMenuHandle(item.category);
-                return (
-                  <li key={index} className='navbar-item flex-1'>
-                    <Link
-                      to={itemHandle}
-                       onClick={onClose}
-                       className={`${itemHandle == pathname ? 'active': ''} nav-link font-["OpenSans"] text-[#333] py-[22px] text-[20px] font-normal uppercase inline-block relative`}
-                    >
-                      {translate(item.category.name,locale)}
-                    </Link>
-                  </li>
-                );
-              })}
-                {/* <li className='navbar-item flex-1'>
+              const itemHandle =
+                item.category.name == 'Home'
+                  ? '/'
+                  : getMenuHandle(item.category);
+              return (
+                <li key={index} className="navbar-item flex-1">
+                  <Link
+                    to={itemHandle}
+                    onClick={onClose}
+                    className={`${
+                      itemHandle == pathname ? 'active' : ''
+                    } nav-link font-["OpenSans"] text-[#333] py-[22px] text-[20px] font-normal uppercase inline-block relative`}
+                  >
+                    {translate(item.category.name, locale)}
+                  </Link>
+                </li>
+              );
+            })}
+            {/* <li className='navbar-item flex-1'>
                   <a href="#" className='nav-link font-["OpenSans"] text-[#333] py-[22px] text-[20px] font-normal uppercase inline-block relative'>Produkte</a>
                 </li>
                 <li className='navbar-item flex-1'>
@@ -183,67 +199,79 @@ function MenuMobileNav({menu, onClose,aicoMenu,locale}) {
                 <li className='navbar-item flex-1'>
                   <a href="#" className='nav-link font-["OpenSans"] text-[#333] py-[22px] text-[20px] font-normal uppercase inline-block relative'>Kontakt</a>
                 </li> */}
-            </ul>
-          </div>
+          </ul>
         </div>
+      </div>
     </nav>
   );
 }
 
-function MobileHeader({title, isHome, openCart, openMenu,aicoMenu,locale }) {
+function MobileHeader({title, isHome, openCart, openMenu, aicoMenu, locale}) {
   // useHeaderStyleFix(containerStyle, setContainerStyle, isHome);
-  
+
   const params = useParams();
 
   return (
     <header
       role="banner"
       className={`${
-        isHome
-          ? ''
-          : ''
+        isHome ? '' : ''
       } mobile-header min-[992px]:hidden bg-white pb-[16px] border-b-[1px] border-[#3890bf] relative`}
     >
-      <div className='container'>
-        <div className='row flex justify-between py-[8px] mb-[16px]'>
-          <button
-            onClick={openMenu}
-            className=""
-          >
-            <IconMenu className={'text-[#2380b1] w-[28px] h-[32px] scale-[1.5]'} />
+      <div className="container">
+        <div className="row flex justify-between py-[8px] mb-[16px]">
+          <button onClick={openMenu} className="">
+            <IconMenu
+              className={'text-[#2380b1] w-[28px] h-[32px] scale-[1.5]'}
+            />
           </button>
-          <div className='my-account-mobile'>
-          <a
+          <div className="my-account-mobile">
+            <a
               href="/account"
-              className='header-login pt-[4px] flex text-[11px] text-[#2380b1] font-["Open_Sans"] font-medium items-baseline gap-[2px]' 
+              className='header-login pt-[4px] flex text-[11px] text-[#2380b1] font-["Open_Sans"] font-medium items-baseline gap-[2px]'
             >
               <span className="icon">
                 <i className="hr-icon-login"></i>
               </span>
-              <span className="name"> {translate("register",locale)}</span>
+              <span className="name"> {translate('register', locale)}</span>
             </a>
           </div>
-          <div className='header-cart mobile'> 
+          <div className="header-cart mobile">
             <CartCount isHome={isHome} openCart={openCart} locale={locale} />
           </div>
           <div className="language-col">
             <div className="language-block flex gap-[5px] items-start mt-[-8px]">
-              <button  data-lang="de"
-                 onClick={handleLanguageChange} className= {`p-[7px] text-[12px] text-white bg-[#428bca] leading-none rounded-[0_0_3px_3px] hover:bg-[#3071a9] font-bold font-["Roboto"] ${locale == 'DE' ? 'active' : ''} `}>
+              <button
+                data-lang="de"
+                onClick={handleLanguageChange}
+                className={`p-[7px] text-[12px] text-white bg-[#428bca] leading-none rounded-[0_0_3px_3px] hover:bg-[#3071a9] font-bold font-["Roboto"] ${
+                  locale == 'DE' ? 'active' : ''
+                } `}
+              >
                 de
               </button>
-              <button data-lang="it"
-                 onClick={handleLanguageChange} className={`p-[7px] text-[12px] text-white bg-[#428bca] leading-none rounded-[0_0_3px_3px] hover:bg-[#3071a9] font-bold font-["Roboto"] ${locale == 'IT' ? 'active' : ''} `}>
+              <button
+                data-lang="it"
+                onClick={handleLanguageChange}
+                className={`p-[7px] text-[12px] text-white bg-[#428bca] leading-none rounded-[0_0_3px_3px] hover:bg-[#3071a9] font-bold font-["Roboto"] ${
+                  locale == 'IT' ? 'active' : ''
+                } `}
+              >
                 it
               </button>
-              <button data-lang="fr"
-                 onClick={handleLanguageChange}  className={`p-[7px] text-[12px] text-white bg-[#428bca] leading-none rounded-[0_0_3px_3px] hover:bg-[#3071a9] font-bold font-["Roboto"] ${locale == 'FR' ? 'active' : ''}  `}>
+              <button
+                data-lang="fr"
+                onClick={handleLanguageChange}
+                className={`p-[7px] text-[12px] text-white bg-[#428bca] leading-none rounded-[0_0_3px_3px] hover:bg-[#3071a9] font-bold font-["Roboto"] ${
+                  locale == 'FR' ? 'active' : ''
+                }  `}
+              >
                 fr
               </button>
             </div>
           </div>
         </div>
-        <div className='row mb-[20px]'>
+        <div className="row mb-[20px]">
           <div className="logo-col max-w-[400px] mx-auto">
             <a href="/" className="block w-full">
               <img
@@ -254,7 +282,7 @@ function MobileHeader({title, isHome, openCart, openMenu,aicoMenu,locale }) {
             </a>
           </div>
         </div>
-        <div className='row'>
+        <div className="row">
           <Form
             method="get"
             action={params.locale ? `/${params.locale}/search` : '/search'}
@@ -267,11 +295,7 @@ function MobileHeader({title, isHome, openCart, openMenu,aicoMenu,locale }) {
               <IconSearch />
             </button> */}
             <Input
-              className={
-                isHome
-                  ? ''
-                  : ''
-              }
+              className={isHome ? '' : ''}
               type="search"
               variant="minisearch"
               placeholder="Produkt suchen"
@@ -369,19 +393,31 @@ function DesktopHeader({isHome, aicoMenu, menu, openCart, title, locale}) {
           </div>
           <div className="language-col">
             <div className="language-block flex gap-[5px] mt-[-16px] items-start ml-[-79px]">
-              <button data-lang="de" onClick={handleLanguageChange} className={`p-[7px] text-[12px] text-white bg-[#428bca] leading-none rounded-[0_0_3px_3px] hover:bg-[#3071a9] font-bold font-["Roboto"] ${
+              <button
+                data-lang="de"
+                onClick={handleLanguageChange}
+                className={`p-[7px] text-[12px] text-white bg-[#428bca] leading-none rounded-[0_0_3px_3px] hover:bg-[#3071a9] font-bold font-["Roboto"] ${
                   locale == 'DE' ? 'active' : ''
-                }`}>
+                }`}
+              >
                 de
               </button>
-              <button data-lang="it" onClick={handleLanguageChange} className={`p-[7px] text-[12px] text-white bg-[#428bca] leading-none rounded-[0_0_3px_3px] hover:bg-[#3071a9] font-bold font-["Roboto"] ${
+              <button
+                data-lang="it"
+                onClick={handleLanguageChange}
+                className={`p-[7px] text-[12px] text-white bg-[#428bca] leading-none rounded-[0_0_3px_3px] hover:bg-[#3071a9] font-bold font-["Roboto"] ${
                   locale == 'IT' ? 'active' : ''
-                } `}>
+                } `}
+              >
                 it
               </button>
-              <button data-lang="fr" onClick={handleLanguageChange}  className={`p-[7px] text-[12px] text-white bg-[#428bca] leading-none rounded-[0_0_3px_3px] hover:bg-[#3071a9] font-bold font-["Roboto"] ${
+              <button
+                data-lang="fr"
+                onClick={handleLanguageChange}
+                className={`p-[7px] text-[12px] text-white bg-[#428bca] leading-none rounded-[0_0_3px_3px] hover:bg-[#3071a9] font-bold font-["Roboto"] ${
                   locale == 'FR' ? 'active' : ''
-                }`}>
+                }`}
+              >
                 fr
               </button>
             </div>
@@ -389,15 +425,15 @@ function DesktopHeader({isHome, aicoMenu, menu, openCart, title, locale}) {
           <div className="right-col flex items-center">
             <a
               href="/account"
-              className='header-login p-[16px] flex text-[13px] text-[#2A6496] font-["Open_Sans"] font-medium mr-[16px] items-baseline gap-[2px]' 
+              className='header-login p-[16px] flex text-[13px] text-[#2A6496] font-["Open_Sans"] font-medium mr-[16px] items-baseline gap-[2px]'
             >
               <span className="icon text-[30px]">
                 <i className="hr-icon-login"></i>
               </span>
-              <span className="name"> {translate("register",locale)}</span>
+              <span className="name"> {translate('register', locale)}</span>
             </a>
             <div className="header-cart">
-              <CartCount isHome={isHome} openCart={openCart}  locale={locale} />
+              <CartCount isHome={isHome} openCart={openCart} locale={locale} />
             </div>
           </div>
         </div>
@@ -405,23 +441,28 @@ function DesktopHeader({isHome, aicoMenu, menu, openCart, title, locale}) {
       </div>
       <div className="nav-header bg-[#e4f0fa] border-b-[1px] border-[#3890bf] relative">
         <div className="container">
-          <div className='flex justify-between gap-[20px] xl:gap-[40px] items-center'>
-          <div className="navbar-wrap flex-1">
-            <ul className="navbar-items flex gap-[20px]">
-              {aicoMenu?.map((item, index) => {
-                const itemHandle = item.category.name == 'Home' ? '/' : getMenuHandle(item.category);
-                return (
-                  <li key={index} className="navbar-item flex-auto">
-                    <Link
-                      to={itemHandle}
-                      className={`${itemHandle == pathname ? 'active': ''} nav-link font-["OpenSans"] text-[#2380b1] py-[23px] text-[18px] xl:text-[20px] font-normal uppercase inline-block relative`}
-                    >
-                      {translate(item.category.name,locale)}
-                    </Link>
-                  </li>
-                );
-              })}
-              {/* <li className='navbar-item flex-1'>
+          <div className="flex justify-between gap-[20px] xl:gap-[40px] items-center">
+            <div className="navbar-wrap flex-1">
+              <ul className="navbar-items flex gap-[20px]">
+                {aicoMenu?.map((item, index) => {
+                  const itemHandle =
+                    item.category.name == 'Home'
+                      ? '/'
+                      : getMenuHandle(item.category);
+                  return (
+                    <li key={index} className="navbar-item flex-auto">
+                      <Link
+                        to={itemHandle}
+                        className={`${
+                          itemHandle == pathname ? 'active' : ''
+                        } nav-link font-["OpenSans"] text-[#2380b1] py-[23px] text-[18px] xl:text-[20px] font-normal uppercase inline-block relative`}
+                      >
+                        {translate(item.category.name, locale)}
+                      </Link>
+                    </li>
+                  );
+                })}
+                {/* <li className='navbar-item flex-1'>
                   <a href="#" className='nav-link font-["OpenSans"] text-[#2380b1] py-[23px] text-[18px] xl:text-[20px] font-normal uppercase inline-block relative'>Produkte</a>
                 </li>
                 <li className='navbar-item flex-1'>
@@ -433,33 +474,29 @@ function DesktopHeader({isHome, aicoMenu, menu, openCart, title, locale}) {
                 <li className='navbar-item flex-1'>
                   <a href="#" className='nav-link font-["OpenSans"] text-[#2380b1] py-[23px] text-[18px] xl:text-[20px] font-normal uppercase inline-block relative'>Kontakt</a>
                 </li> */}
-            </ul>
-          </div>
-          <div className="search-bar-col max-w-[190px]">
-            <Form
-              method="get"
-              action={params.locale ? `/${params.locale}/search` : '/search'}
-              className="flex items-center gap-2"
-            >
-              <Input
-                className={
-                  isHome
-                    ? ''
-                    : ''
-                }
-                type="search"
-                variant="minisearch"
-                placeholder="Produkt suchen"
-                name="q"
-              />
-              {/* <button
+              </ul>
+            </div>
+            <div className="search-bar-col max-w-[190px]">
+              <Form
+                method="get"
+                action={params.locale ? `/${params.locale}/search` : '/search'}
+                className="flex items-center gap-2"
+              >
+                <Input
+                  className={isHome ? '' : ''}
+                  type="search"
+                  variant="minisearch"
+                  placeholder="Produkt suchen"
+                  name="q"
+                />
+                {/* <button
                 type="submit"
                 className="relative flex items-center justify-center w-8 h-8 focus:ring-primary/5"
               >
                 <IconSearch />
               </button> */}
-            </Form>
-          </div>
+              </Form>
+            </div>
           </div>
         </div>
       </div>
@@ -481,11 +518,15 @@ function AccountLink({className}) {
   );
 }
 
-function CartCount({isHome, openCart,locale}) {
+function CartCount({isHome, openCart, locale}) {
   const [root] = useMatches();
 
   return (
-    <Suspense fallback={<Badge count={0} dark={isHome} openCart={openCart}  locale={locale} />}>
+    <Suspense
+      fallback={
+        <Badge count={0} dark={isHome} openCart={openCart} locale={locale} />
+      }
+    >
       <Await resolve={root.data?.cart}>
         {(cart) => (
           <Badge
@@ -500,7 +541,7 @@ function CartCount({isHome, openCart,locale}) {
   );
 }
 
-function Badge({openCart, dark, count,locale}) {
+function Badge({openCart, dark, count, locale}) {
   const isHydrated = useIsHydrated();
 
   const BadgeCounter = useMemo(
@@ -509,8 +550,12 @@ function Badge({openCart, dark, count,locale}) {
         {/* <IconBag /> */}
         <div className={`${dark ? '' : ''} flex items-center`}>
           <i className="hr-icon-cart mr-2"></i>
-          <span className="cart-text text-[12px] min-[992px]:text-[13px] font-['Open_Sans']">{translate("shoping_cart",locale)}</span>
-          <span className='bg-[#e4f0fa] px-[4px] min-[992px]:px-[10px] py-[2px] min-[992px]:py-[5px] text-[12px] min-[992px]:text-[13px] ml-[8px] rounded-[2px] min-[992px]:rounded-[5px] text-[#2380b1] font-["Open_Sans"]'>{count || 0}</span>
+          <span className="cart-text text-[12px] min-[992px]:text-[13px] font-['Open_Sans']">
+            {translate('shoping_cart', locale)}
+          </span>
+          <span className='bg-[#e4f0fa] px-[4px] min-[992px]:px-[10px] py-[2px] min-[992px]:py-[5px] text-[12px] min-[992px]:text-[13px] ml-[8px] rounded-[2px] min-[992px]:rounded-[5px] text-[#2380b1] font-["Open_Sans"]'>
+            {count || 0}
+          </span>
         </div>
       </>
     ),
@@ -534,117 +579,166 @@ function Badge({openCart, dark, count,locale}) {
   );
 }
 
-function Footer({menu,locale}) {
-
+function Footer({menu, locale}) {
   const isHome = useIsHomePath();
 
   return (
-    <Section
-      divider={isHome ? 'none' : 'top'}
-      as="footer"
-      role="contentinfo"
-      className={`w-full p-0 lg:p-0 md:p-0 bg-[#fff] text[#3391c2] relative main-footer`}
-    >
+    <>
+      <div id="baloons" className="bz-baloons-container block bottom-baloon">
+        <div className="baloon-1">
+          <img
+            src="https://cdn.shopify.com/s/files/1/0787/1352/0419/files/baloon-1-de.png?v=1688968486"
+            alt=""
+          />
+        </div>
+        <div className="baloon-2">
+          <img
+            src="https://cdn.shopify.com/s/files/1/0787/1352/0419/files/baloon-2-de.png?v=1688968485"
+            alt=""
+          />
+        </div>
+        <div className="baloon-3">
+          <img
+            src="https://cdn.shopify.com/s/files/1/0787/1352/0419/files/baloon-3-de.png?v=1688968485"
+            alt=""
+          />
+        </div>
+        <div className="baloon-4">
+          <img
+            src="https://cdn.shopify.com/s/files/1/0787/1352/0419/files/baloon-4-de.png?v=1688968485"
+            alt=""
+          />
+        </div>
+        <div className="baloon-5">
+          <img
+            src="https://cdn.shopify.com/s/files/1/0787/1352/0419/files/baloon-5-de.png?v=1688968486"
+            alt=""
+          />
+        </div>
+        <div className="baloon-6">
+          <img
+            src="https://cdn.shopify.com/s/files/1/0787/1352/0419/files/baloon-6-de.png?v=1688968485"
+            alt=""
+          />
+        </div>
+      </div>
       <div className="footer-cloud"></div>
-      <div className="container max-w-[1100px] m-auto pl-[15px] pr-[15px] pt-[40px]">
-        <div className="footer-row-wrap relative">
-          <div className="bz-footer-row hidden sm:hidden lg:block xl:block"></div>
-          <div className="flex flex-row flex-wrap xl:flex-nowrap mx-[-15px] gap-y-5">
-            <div className="px-[15px] w-[100%] md:w-[50%] lg:w-[25%] xl:w-[25%]">
-              <div className="col-inner">
-                <h4 className="title text-[20px] text-[#3391c2] font-semibold font-['Open_Sans'] pb-[15px] lg:pb-[0px] mb-[5px] lg:mb-[40px] mt-[0px] lg:mt-[-35px] border-b lg:border-b-0 border-[#3890bf]">
-                  Swissbabyservice
-                </h4>
-                <p className="text-[13px] text-[#3391c2] font-normal font-['Open_Sans'] leading-[18px]">
-                   {translate("footer_desc",locale) } 
-                </p>
+      <Section
+        divider={isHome ? 'none' : 'top'}
+        as="footer"
+        role="contentinfo"
+        className={`w-full p-0 lg:p-0 md:p-0 bg-[#fff] text[#3391c2] relative main-footer`}
+      >
+        <div className="container max-w-[1100px] m-auto pl-[15px] pr-[15px] pt-[40px]">
+          <div className="footer-row-wrap relative">
+            <div className="bz-footer-row hidden sm:hidden lg:block xl:block"></div>
+            <div className="flex flex-row flex-wrap xl:flex-nowrap mx-[-15px] gap-y-5">
+              <div className="px-[15px] w-[100%] md:w-[50%] lg:w-[25%] xl:w-[25%]">
+                <div className="col-inner">
+                  <h4 className="title text-[20px] text-[#3391c2] font-semibold font-['Open_Sans'] pb-[15px] lg:pb-[0px] mb-[5px] lg:mb-[40px] mt-[0px] lg:mt-[-35px] border-b lg:border-b-0 border-[#3890bf]">
+                    Swissbabyservice
+                  </h4>
+                  <p className="text-[13px] text-[#3391c2] font-normal font-['Open_Sans'] leading-[18px]">
+                    {translate('footer_desc', locale)}
+                  </p>
+                </div>
               </div>
-            </div>
-            <div className="px-[15px] w-[100%] md:w-[50%] lg:w-[25%] xl:w-[25%]">
-              <div className="col-inner">
-                <h4 className="title text-[20px] text-[#3391c2] font-semibold font-['Open_Sans'] pb-[15px] lg:pb-[0px] mb-[5px] lg:mb-[40px] mt-[0px] lg:mt-[-35px] border-b lg:border-b-0 border-[#3890bf]">
-                 {translate("information",locale) }
-                </h4>
-                <ul className="nav-list flex flex-col gap-[10px] mb-[10px]">
-                  {menu?.items?.map((item,index) => {
-                    return (
-                      <li key={index} className="text-[13px] text-[#2380b1] font-normal font-['Open_Sans']">
-                        <Link
-                          className="hover:text-[#2A6496] transition-all duration-500 underline"
-                          href="/"
-                          to={item.to}
+              <div className="px-[15px] w-[100%] md:w-[50%] lg:w-[25%] xl:w-[25%]">
+                <div className="col-inner">
+                  <h4 className="title text-[20px] text-[#3391c2] font-semibold font-['Open_Sans'] pb-[15px] lg:pb-[0px] mb-[5px] lg:mb-[40px] mt-[0px] lg:mt-[-35px] border-b lg:border-b-0 border-[#3890bf]">
+                    {translate('information', locale)}
+                  </h4>
+                  <ul className="nav-list flex flex-col gap-[10px] mb-[10px]">
+                    {menu?.items?.map((item, index) => {
+                      return (
+                        <li
+                          key={index}
+                          className="text-[13px] text-[#2380b1] font-normal font-['Open_Sans']"
                         >
-                          {item.title}
-                        </Link>
-                      </li>
-                    );
-                  })}
-                </ul>
+                          <Link
+                            className="hover:text-[#2A6496] transition-all duration-500 underline"
+                            href="/"
+                            to={item.to}
+                          >
+                            {item.title}
+                          </Link>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
               </div>
-            </div>
-            <div className="px-[15px] w-[100%] md:w-[50%] lg:w-[25%] xl:w-[25%]">
-              <div className="col-inner">
-                <h4 className="title text-[20px] text-[#3391c2] font-semibold font-['Open_Sans'] pb-[15px] lg:pb-[0px] mb-[5px] lg:mb-[40px] mt-[0px] lg:mt-[-35px] border-b lg:border-b-0 border-[#3890bf]">
-                 {translate("shipment",locale) }
-                </h4>
-                <p className="text-[13px] text-[#3391c2] font-normal font-['Open_Sans'] leading-[18px] mb-[10px]">
-                  {translate("delivery_cost",locale)} <strong>CHF 6.90</strong>
-                </p>
-                <p className="text-[13px] text-[#3391c2] font-normal font-['Open_Sans'] leading-[18px] mb-[10px]">
-                  {translate("free_delivery_of_order",locale)} {' '}
-                  <strong>CHF 65.00</strong>
-                </p>
-                <div className="flex items-start gap-[5px]">
-                  <img
-                    src="https://cdn.shopify.com/s/files/1/0787/1352/0419/files/rechnung.png?v=1688561840"
-                    height="auto"
-                    alt=""
-                  />
-                  <div className="flex">
-                    <p className="text-[13px] text-[#3391c2] font-normal font-['Open_Sans'] leading-[18px] mb-[10px]">
-                      <strong className="font-semibold">{translate("invoice",locale)}</strong>
+              <div className="px-[15px] w-[100%] md:w-[50%] lg:w-[25%] xl:w-[25%]">
+                <div className="col-inner">
+                  <h4 className="title text-[20px] text-[#3391c2] font-semibold font-['Open_Sans'] pb-[15px] lg:pb-[0px] mb-[5px] lg:mb-[40px] mt-[0px] lg:mt-[-35px] border-b lg:border-b-0 border-[#3890bf]">
+                    {translate('shipment', locale)}
+                  </h4>
+                  <p className="text-[13px] text-[#3391c2] font-normal font-['Open_Sans'] leading-[18px] mb-[10px]">
+                    {translate('delivery_cost', locale)}{' '}
+                    <strong>CHF 6.90</strong>
+                  </p>
+                  <p className="text-[13px] text-[#3391c2] font-normal font-['Open_Sans'] leading-[18px] mb-[10px]">
+                    {translate('free_delivery_of_order', locale)}{' '}
+                    <strong>CHF 65.00</strong>
+                  </p>
+                  <div className="flex items-start gap-[5px]">
+                    <img
+                      src="https://cdn.shopify.com/s/files/1/0787/1352/0419/files/rechnung.png?v=1688561840"
+                      height="auto"
+                      alt=""
+                    />
+                    <div className="flex">
+                      <p className="text-[13px] text-[#3391c2] font-normal font-['Open_Sans'] leading-[18px] mb-[10px]">
+                        <strong className="font-semibold">
+                          {translate('invoice', locale)}
+                        </strong>
+                        <br />
+                        30 {translate('take_net', locale)}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="px-[15px] w-[100%] md:w-[50%] lg:w-[25%] xl:w-[25%]">
+                <div className="col-inner">
+                  <h4 className="title text-[20px] text-[#3391c2] font-semibold font-['Open_Sans'] pb-[15px] lg:pb-[0px] mb-[5px] lg:mb-[40px] mt-[0px] lg:mt-[-35px] border-b lg:border-b-0 border-[#3890bf]">
+                    {translate('contact', locale)}
+                  </h4>
+                  <div className="contact-info">
+                    <p className="text-[13px] text-[#3391c2] font-normal font-['Open_Sans'] leading-[18px] mb-[10px] ">
+                      <b className="font-semibold">SWISSBABYSERVICE</b>
                       <br />
-                      30 {translate("take_net",locale)}
+                      Schulstrasse 13a
+                      <br />
+                      9553 Bettwiesen
+                      <br />
+                    </p>
+                    <p className="text-[13px] text-[#3391c2] font-normal font-['Open_Sans'] leading-[18px] mb-[10px]">
+                      <strong className="font-semibold">
+                        FR 079 434 62 99
+                      </strong>
+                    </p>
+                    <p className="text-[13px] text-[#3391c2] font-normal font-['Open_Sans'] leading-[18px] mb-[10px]">
+                      <strong className="font-semibold">
+                        DE 052 720 58 58
+                      </strong>
+                    </p>
+                    <p className="text-[13px] text-[#3391c2] font-normal font-['Open_Sans'] leading-[18px] mb-[10px]">
+                      <a
+                        href="mailto:info@swissbabyservice.ch"
+                        className="hover:text-[#2A6496] transition-all duration-500 underline"
+                      >
+                        info@swissbabyservice.ch
+                      </a>
                     </p>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="px-[15px] w-[100%] md:w-[50%] lg:w-[25%] xl:w-[25%]">
-              <div className="col-inner">
-                <h4 className="title text-[20px] text-[#3391c2] font-semibold font-['Open_Sans'] pb-[15px] lg:pb-[0px] mb-[5px] lg:mb-[40px] mt-[0px] lg:mt-[-35px] border-b lg:border-b-0 border-[#3890bf]">
-                 {translate("contact",locale) }
-                </h4>
-                <div className="contact-info">
-                  <p className="text-[13px] text-[#3391c2] font-normal font-['Open_Sans'] leading-[18px] mb-[10px] ">
-                    <b className="font-semibold">SWISSBABYSERVICE</b>
-                    <br />
-                    Schulstrasse 13a
-                    <br />
-                    9553 Bettwiesen
-                    <br />
-                  </p>
-                  <p className="text-[13px] text-[#3391c2] font-normal font-['Open_Sans'] leading-[18px] mb-[10px]">
-                    <strong className="font-semibold">FR 079 434 62 99</strong>
-                  </p>
-                  <p className="text-[13px] text-[#3391c2] font-normal font-['Open_Sans'] leading-[18px] mb-[10px]">
-                    <strong className="font-semibold">DE 052 720 58 58</strong>
-                  </p>
-                  <p className="text-[13px] text-[#3391c2] font-normal font-['Open_Sans'] leading-[18px] mb-[10px]">
-                    <a
-                      href="mailto:info@swissbabyservice.ch"
-                      className="hover:text-[#2A6496] transition-all duration-500 underline"
-                    >
-                      info@swissbabyservice.ch
-                    </a>
-                  </p>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
-      </div>
-    </Section>
+      </Section>
+    </>
   );
 }
 
