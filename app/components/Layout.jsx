@@ -581,10 +581,68 @@ function Badge({openCart, dark, count, locale}) {
 
 function Footer({menu, locale}) {
   const isHome = useIsHomePath();
+  useEffect(() => {
+    window.addEventListener('scroll', function (e) {
+      parallaxScroll();
+    });
 
+    function parallaxScroll() {
+      if (true) {
+        {
+          var windowHeight =
+            window.innerHeight || document.documentElement.clientHeight;
+          var baloonsElement = document.getElementById('baloons');
+          var baloonsHeight = baloonsElement.offsetHeight;
+          var baloonsOffsetTop = baloonsElement.offsetTop;
+          var scrollPosition =
+            window.pageYOffset || document.documentElement.scrollTop;
+
+          if (
+            scrollPosition + windowHeight >=
+            baloonsHeight + baloonsOffsetTop + 100
+          ) {
+            var scrolled =
+              scrollPosition +
+              windowHeight -
+              (baloonsHeight + baloonsOffsetTop + 100);
+            if (scrolled < 0) {
+              scrolled = 0;
+            }
+          } else {
+            var scrolled = 0;
+          }
+
+          document.querySelector('.baloon-1').style.marginTop =
+            0 + scrolled * 0.09 + 'px';
+          document.querySelector('.baloon-1').style.marginLeft =
+            0 + scrolled * 0.1 + 'px';
+          document.querySelector('.baloon-2').style.marginTop =
+            0 - scrolled * 0.15 + 'px';
+          document.querySelector('.baloon-2').style.marginRight =
+            0 + scrolled * 0.05 + 'px';
+          document.querySelector('.baloon-3').style.marginTop =
+            0 - scrolled * 0.05 + 'px';
+          document.querySelector('.baloon-3').style.marginLeft =
+            0 - scrolled * 0.15 + 'px';
+          document.querySelector('.baloon-4').style.marginTop =
+            0 - scrolled * 0.16 + 'px';
+          document.querySelector('.baloon-4').style.marginRight =
+            0 + scrolled * 0.15 + 'px';
+          document.querySelector('.baloon-5').style.marginTop =
+            0 - scrolled * 0.21 + 'px';
+          document.querySelector('.baloon-5').style.marginRight =
+            0 - scrolled * 0.08 + 'px';
+          document.querySelector('.baloon-6').style.marginTop =
+            0 + scrolled * 0.15 + 'px';
+          document.querySelector('.baloon-6').style.marginRight =
+            0 + scrolled * 0.18 + 'px';
+        }
+      }
+    }
+  }, []);
   return (
     <>
-      <div id="baloons" className="bz-baloons-container block bottom-baloon">
+    {isHome ? '' : (<div id="baloons" className="bz-baloons-container block bottom-baloon">
         <div className="baloon-1">
           <img
             src="https://cdn.shopify.com/s/files/1/0787/1352/0419/files/baloon-1-de.png?v=1688968486"
@@ -621,7 +679,7 @@ function Footer({menu, locale}) {
             alt=""
           />
         </div>
-      </div>
+      </div>)}
       <div className="footer-cloud"></div>
       <Section
         divider={isHome ? 'none' : 'top'}

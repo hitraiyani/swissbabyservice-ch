@@ -17,120 +17,39 @@ export function HeroSlider({slides}) {
   const slideTwo = slides[1] ? slides[1] : {};
 
   useEffect(() => {
-    document.addEventListener('DOMContentLoaded', function () {
-      'use strict';
-
-      var baloonContainerDivs = document.querySelectorAll(
-        '.bz-baloons-container div',
-      );
-      baloonContainerDivs.forEach(function (element, index) {
-        var delay = (Math.floor(Math.random() * 300) + 100) * index;
-        var fadeInDuration = Math.floor(Math.random() * 1000) + 300;
-        setTimeout(function () {
-          fadeIn(element, fadeInDuration);
-        }, delay);
-      });
-
-      window.addEventListener('scroll', function (e) {
-        parallaxScroll();
-      });
-
-      function parallaxScroll() {
-        if (document.body.classList.contains('common-home')) {
-          var scrolled =
-            window.pageYOffset || document.documentElement.scrollTop;
-          document.querySelector('.baloon-1').style.marginTop =
-            0 + scrolled * 0.09 + 'px';
-          document.querySelector('.baloon-1').style.marginLeft =
-            0 - scrolled * 0.1 + 'px';
-          document.querySelector('.baloon-2').style.marginTop =
-            0 - scrolled * 0.15 + 'px';
-          document.querySelector('.baloon-2').style.marginRight =
-            0 + scrolled * 0.05 + 'px';
-          document.querySelector('.baloon-3').style.marginTop =
-            0 - scrolled * 0.05 + 'px';
-          document.querySelector('.baloon-3').style.marginLeft =
-            0 + scrolled * 0.02 + 'px';
-          document.querySelector('.baloon-4').style.marginTop =
-            0 - scrolled * 0.13 + 'px';
-          document.querySelector('.baloon-4').style.marginRight =
-            0 - scrolled * 0.13 + 'px';
-          document.querySelector('.baloon-5').style.marginTop =
-            0 + scrolled * 0.2 + 'px';
-          document.querySelector('.baloon-5').style.marginRight =
-            0 + scrolled * 0.09 + 'px';
-          document.querySelector('.baloon-6').style.marginTop =
-            0 - scrolled * 0.35 + 'px';
-          document.querySelector('.baloon-6').style.marginRight =
-            0 + scrolled * 0.1 + 'px';
-        } else if (
-          document.body.classList.contains('product-category') ||
-          document.body.classList.contains('product-product') ||
-          document.body.classList.contains('information-information') ||
-          document.body.classList.contains('information-contact')
-        ) {
-          var windowHeight =
-            window.innerHeight || document.documentElement.clientHeight;
-          var baloonsElement = document.getElementById('baloons');
-          var baloonsHeight = baloonsElement.offsetHeight;
-          var baloonsOffsetTop = baloonsElement.offsetTop;
-          var scrollPosition =
-            window.pageYOffset || document.documentElement.scrollTop;
-
-          if (
-            scrollPosition + windowHeight >=
-            baloonsHeight + baloonsOffsetTop + 100
-          ) {
-            var scrolled =
-              scrollPosition +
-              windowHeight -
-              (baloonsHeight + baloonsOffsetTop + 100);
-            if (scrolled < 0) {
-              scrolled = 0;
-            }
-          } else {
-            var scrolled = 0;
-          }
-
-          document.querySelector('.baloon-1').style.marginTop =
-            0 + scrolled * 0.09 + 'px';
-          document.querySelector('.baloon-1').style.marginLeft =
-            0 + scrolled * 0.1 + 'px';
-          document.querySelector('.baloon-2').style.marginTop =
-            0 - scrolled * 0.15 + 'px';
-          document.querySelector('.baloon-2').style.marginRight =
-            0 + scrolled * 0.05 + 'px';
-          document.querySelector('.baloon-3').style.marginTop =
-            0 - scrolled * 0.05 + 'px';
-          document.querySelector('.baloon-3').style.marginLeft =
-            0 - scrolled * 0.15 + 'px';
-          document.querySelector('.baloon-4').style.marginTop =
-            0 - scrolled * 0.16 + 'px';
-          document.querySelector('.baloon-4').style.marginRight =
-            0 + scrolled * 0.15 + 'px';
-          document.querySelector('.baloon-5').style.marginTop =
-            0 - scrolled * 0.21 + 'px';
-          document.querySelector('.baloon-5').style.marginRight =
-            0 - scrolled * 0.08 + 'px';
-          document.querySelector('.baloon-6').style.marginTop =
-            0 + scrolled * 0.15 + 'px';
-          document.querySelector('.baloon-6').style.marginRight =
-            0 + scrolled * 0.18 + 'px';
-        }
-      }
-
-      function fadeIn(element, duration) {
-        var op = 0; // initial opacity
-        var timer = setInterval(function () {
-          if (op >= 1) {
-            clearInterval(timer);
-          }
-          element.style.opacity = op;
-          element.style.filter = 'alpha(opacity=' + op * 100 + ')';
-          op += op + 0.1;
-        }, duration / 10);
-      }
+    window.addEventListener('scroll', function (e) {
+      parallaxScroll();
     });
+
+    function parallaxScroll() {
+      if (true) {
+        var scrolled = window.pageYOffset || document.documentElement.scrollTop;
+        document.querySelector('.baloon-1').style.marginTop =
+          0 + scrolled * 0.09 + 'px';
+        document.querySelector('.baloon-1').style.marginLeft =
+          0 - scrolled * 0.1 + 'px';
+        document.querySelector('.baloon-2').style.marginTop =
+          0 - scrolled * 0.15 + 'px';
+        document.querySelector('.baloon-2').style.marginRight =
+          0 + scrolled * 0.05 + 'px';
+        document.querySelector('.baloon-3').style.marginTop =
+          0 - scrolled * 0.05 + 'px';
+        document.querySelector('.baloon-3').style.marginLeft =
+          0 + scrolled * 0.02 + 'px';
+        document.querySelector('.baloon-4').style.marginTop =
+          0 - scrolled * 0.13 + 'px';
+        document.querySelector('.baloon-4').style.marginRight =
+          0 - scrolled * 0.13 + 'px';
+        document.querySelector('.baloon-5').style.marginTop =
+          0 + scrolled * 0.2 + 'px';
+        document.querySelector('.baloon-5').style.marginRight =
+          0 + scrolled * 0.09 + 'px';
+        document.querySelector('.baloon-6').style.marginTop =
+          0 - scrolled * 0.35 + 'px';
+        document.querySelector('.baloon-6').style.marginRight =
+          0 + scrolled * 0.1 + 'px';
+      }
+    }
   }, []);
 
   return (
