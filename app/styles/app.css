@@ -333,6 +333,19 @@ body {
 /* End header css */
 
 /* Hero slider css */
+.heroslider-section {
+  #swiper-button-next-heroslider,
+  #swiper-button-prev-heroslider {
+    opacity: 0;
+    transition: all 0.5s;
+  }
+  &:hover {
+    #swiper-button-next-heroslider,
+    #swiper-button-prev-heroslider {
+      opacity: 1;
+    }
+  }
+}
 .bz-baloons-container {
   position: relative;
   width: 100%;
@@ -380,6 +393,7 @@ body {
 /* Hero new-in-Shop-section css */
 .new-in-Shop-section {
   .slide-item {
+    height: 100%;
     .buy-now-btn {
       opacity: 0;
     }
@@ -389,8 +403,21 @@ body {
       }
     }
   }
-  .swiper-button-disabled{
-    display: none;
+  .swiper-slide {
+    height: auto;
+  }
+  .new-in-Shop-slider {
+    #swiper-button-next-new-in-Shop,
+    #swiper-button-prev-new-in-Shop {
+      opacity: 0;
+      transition: all 0.7s;
+    }
+    &:hover {
+      #swiper-button-next-new-in-Shop,
+      #swiper-button-prev-new-in-Shop {
+        opacity: 1;
+      }
+    }
   }
 }
 /* End Hero new-in-Shop-section css */
