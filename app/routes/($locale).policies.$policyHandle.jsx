@@ -32,8 +32,15 @@ export async function loader({request, params, context}) {
   if (!policy) {
     throw new Response(null, {status: 404});
   }
-  
-  const seo = seoPayload.customPage({ 'title' : translate(`${policy.handle}-title`,context.storefront.i18n.language), url: request.url, description : ''});
+
+  const seo = seoPayload.customPage({
+    title: translate(
+      `${policy.handle}-title`,
+      context.storefront.i18n.language,
+    ),
+    url: request.url,
+    description: '',
+  });
 
   return json({policy, seo});
 }
@@ -43,18 +50,16 @@ export default function Policies() {
 
   return (
     <>
-      <Section
-        padding="all"
-        display="flex"
-        className="flex-col items-baseline w-full gap-8 md:flex-row"
-      >
-        <div className="flex-grow w-full md:w-7/12">
-          <div
-            dangerouslySetInnerHTML={{__html: policy.body}}
-            className="prose dark:prose-invert"
-          />
+      <div className="page-information py-[48px]">
+        <div className="container">
+          <div className="page-content">
+            <div
+              dangerouslySetInnerHTML={{__html: policy.body}}
+              className="w-full font-['Roboto'] text-[13px] text-[#2380B1] leading-[1.2]"
+            />
+          </div>
         </div>
-      </Section>
+      </div>
     </>
   );
 }

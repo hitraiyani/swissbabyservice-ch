@@ -488,6 +488,9 @@ p {
 /* End Hero new-in-Shop-section css */
 
 /* page-information css */
+b, strong{
+  font-weight: 700;
+}
 .page-information {
   .page-content {
     h1,
@@ -498,9 +501,60 @@ p {
     h6 {
       margin: 0 0 5px;
       line-height: 1.35;
-      font-family: 'open sans', arial;
+      font-family: 'open sans', sans-serif;
       font-weight: 600;
       margin-bottom: 5px;
+    }
+  }
+  .table,
+  table {
+    font-family: 'open sans', sans-serif;
+    width: 100%;
+    thead {
+      th {
+        background: #92bcdc;
+        border: none;
+        font-weight: normal;
+        padding: 10px;
+        color: #fff;
+        text-align: left;
+        vertical-align: middle;
+        & + th {
+          border-left: 1px solid #fff;
+        }
+      }
+    }
+    td {
+      border: 1px solid #92bcdc !important;
+      color: #2380b1;
+      padding: 10px;
+      &.price {
+        font-family: 'opensans', arial;
+        color: rgb(154, 46, 163);
+        font-size: 25px;
+      }
+    }
+    dl {
+      &.item-option {
+        color: rgb(154, 46, 163);
+      }
+    }
+    td,
+    th {
+      border-top: 0;
+      vertical-align: middle;
+    }
+    a{
+      transition: all 0.7s;
+      &:hover{
+        opacity: 0.7;
+      }
+    }
+  }
+  .table-bg-white {
+    .table,
+    table {
+      background: #fff;
     }
   }
 }

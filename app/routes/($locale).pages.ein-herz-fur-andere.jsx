@@ -9,7 +9,6 @@ import {seoPayload} from '~/lib/seo.server';
 export const headers = routeHeaders;
 
 export async function loader({request, params, context}) {
-  
   const {page} = await context.storefront.query(PAGE_QUERY, {
     variables: {
       handle: 'ein-herz-fur-andere',
@@ -21,7 +20,7 @@ export async function loader({request, params, context}) {
     throw new Response(null, {status: 404});
   }
 
-  const seo = seoPayload.customPage({title : page.title, url: request.url});
+  const seo = seoPayload.customPage({title: page.title, url: request.url});
 
   return json({page, seo});
 }
@@ -31,12 +30,16 @@ export default function supportNGO() {
 
   return (
     <>
-      <PageHeader>
-        <div
-          dangerouslySetInnerHTML={{__html: page.body}}
-          className="prose dark:prose-invert"
-        />
-      </PageHeader>
+      <div className="page-information py-[48px]">
+        <div className="container">
+          <div className="page-content">
+            <div
+              dangerouslySetInnerHTML={{__html: page.body}}
+              className="w-full font-['Open_Sans'] text-[13px] text-[#2380B1] leading-[1.2]"
+            />
+          </div>
+        </div>
+      </div> 
     </>
   );
 }
