@@ -15,8 +15,9 @@ import {
   Link,
 } from '~/components';
 import {flattenConnection, Image, Money, useMoney} from '@shopify/hydrogen';
-import {isDiscounted, productTranslate, translate} from '~/lib/utils';
+import {discountedPer, isDiscounted, productTranslate, translate} from '~/lib/utils';
 import {CompareAtPrice} from './CompareAtPrice';
+import { DiscountPercentage } from './DiscountPercentage';
 
 export function NewInTheShop({products, title, locale}) {
   return (
@@ -89,7 +90,7 @@ export function NewInTheShop({products, title, locale}) {
                   <div className="slide-item p-[15px] bg-white relative">
                     <div className="product-card">
                       <div className="product-card-inner">
-                        <div className='sale-label bg-[#9a2ea3] text-white p-[5px] leading-none uppercase text-[13px] absolute right-0 top-0 z-[1]'> SALE <span>-19%</span> </div>
+                        <div className={`sale-label ${isDiscounted(price, compareAtPrice) ? "bg-[#9a2ea3]" : '' }  text-white p-[5px] leading-none uppercase text-[13px] absolute right-0 top-0 z-[1]`}> {(isDiscounted(price, compareAtPrice)) &&   (<>SALE <span>{discountedPer(price,compareAtPrice)}</span></> )}  </div>
                         <Link
                           to={`/products/${product.handle}`}
                           prefetch="intent"
@@ -109,7 +110,8 @@ export function NewInTheShop({products, title, locale}) {
                           </div>
                         </Link>
                         <h4 className="pro-name text-[13px] text-[#2380b1] font-normal pt-[20px]">
-                          {product.title}
+                          {productTranslate(product,'title',locale)}
+                          {/* {console.log(product)} */}
                         </h4>
                         {/* <div className="rating flex gap-[6px] text-[#666666] mt-[12px]">
                         <IconStar className={'w-[17px] h-[15px]'} />
@@ -119,14 +121,33 @@ export function NewInTheShop({products, title, locale}) {
                         <IconStar className={'w-[17px] h-[15px]'} />
                       </div> */}
                         <div className="price text-[20px] text-black mt-[8px] flex flex-wrap items-center font-['OpenSans'] gap-x-[15px] gap-y-[10px] leading-none">
-                          <span className="price-old text-[#b7d4e9] line-through">
-                            CHF 88.10
-                          </span>
-                          <span className="pd-price bg-[#b7d4e9] p-[5px] text-white">
-                            -19%
-                          </span>
+                          
+                            {/* CHF 88.10 */}
+                            {/* {isDiscounted(price, compareAtPrice) && 
+                            console.log(product)
+                            } */}
+                            
+                            {isDiscounted(price, compareAtPrice) && (
+                              <CompareAtPrice
+                                // className={'opacity-50'}
+                                data={compareAtPrice}
+                              />
+                            )}
+                              {isDiscounted(price, compareAtPrice) && (
+                                 <DiscountPercentage
+                                 // className={'opacity-50'}
+                                 price={price}
+                                 compareAtPrice={compareAtPrice}
+                               />
+                              )
+                              }
+                         
+                          {/* <span className="pd-price bg-[#b7d4e9] p-[5px] text-white">
+                             {discountedPer(price, compareAtPrice)}
+                          </span> */}
                           <span className="price-new price-old text-[#9a2ea3]">
-                            CHF 71.35
+                            {/* CHF 71.35 */}
+                            <Money withoutTrailingZeros data={price} />
                           </span>
                           {/* <Money withoutTrailingZeros data={price} />
                             {isDiscounted(price, compareAtPrice) && (
@@ -137,11 +158,19 @@ export function NewInTheShop({products, title, locale}) {
                             )} */}
                         </div>
                         <div className="buy-now-btn flex flex-col gap-[15px] absolute top-1/2 -translate-y-1/2 left-0 w-full right-0 mx-auto p-[20px] h-full bg-[#dbd4e9f2] items-center justify-center">
+                        
                           <button className='!p-[8.2px_16px] text-[20px] rounded-[5px] bg-transparent border-[2px] border-[#9a2ea3] text-[#9a2ea3] font-["OpenSans"] hover:bg-[#9a2ea3] hover:text-white leading-none transition-all duration-500 w-full'>
+                          <Link
+                          to={`/products/${product.handle}`}
+                          prefetch="intent"
+                         
+                        >
                             <Text as="span" className="block !text-[20px]">
-                              Artikel ansehen
+                              {translate("view_detail",locale)}
                             </Text>
+                            </Link>
                           </button>
+                         
                           <AddToCartButton
                             lines={[
                               {

@@ -29,5 +29,7 @@
   "name" : "Nome",
   "email" : "Indirizzo E-Mail",
   "message" : "Richiesta",
-  "send" : "Invia"
+  "send" : "Invia",
+  "view_detail":"Visualizza prodotto"
+
 }

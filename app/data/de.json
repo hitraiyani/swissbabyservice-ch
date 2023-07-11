@@ -22,6 +22,8 @@
   "name" : "Name",
   "email" : "Emailadresse",
   "message" : "Anfrage / Text",
-  "send" : "Abschicken"
+  "send" : "Abschicken",
+  "view_detail":"Artikel ansehen"
+
 
 }

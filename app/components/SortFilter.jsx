@@ -23,9 +23,6 @@ export function SortFilter({
 }) {
   const [isOpen, setIsOpen] = useState(true);
 
-  console.log(menudata);
-  console.log('menudata');
-
   return (
     <>
       <div className="flex items-center justify-between w-full">

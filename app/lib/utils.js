@@ -106,6 +106,17 @@ export function isDiscounted(price, compareAtPrice) {
   }
   return false;
 }
+export function discountedPer(price, compareAtPrice) {
+  if (compareAtPrice?.amount > price?.amount) {
+    let mainPrice = compareAtPrice?.amount;
+    let sellingPrice = price?.amount;
+    // let percentageDecres = ((mainPrice - sellingPrice) / 100) * 100;
+    // let percentage = (percentageDecres / mainPrice) * 100;
+    const percentageDecrease = ((mainPrice - sellingPrice) / mainPrice) * 100;
+    return '-'+percentageDecrease.toFixed(0)+"%";
+  }
+  return 0;
+}
 
 function resolveToFromType(
   {customPrefixes, pathname, type} = {
