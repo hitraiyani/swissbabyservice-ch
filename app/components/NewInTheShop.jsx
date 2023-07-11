@@ -37,10 +37,13 @@ export function NewInTheShop({products, title, locale}) {
             spaceBetween={28}
             slidesPerView={4}
             navigation={{
-              nextEl: '#swiper-button-next-new-in-Shop',
               prevEl: '#swiper-button-prev-new-in-Shop',
+              nextEl: '#swiper-button-next-new-in-Shop',
             }}
-            // loop={true}
+            // pagination={{
+            //   clickable: true,
+            // }}
+            loop={true}
             // autoplay={{
             //   delay: 5000,
             //   disableOnInteraction: false,
