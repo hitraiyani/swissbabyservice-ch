@@ -62,12 +62,12 @@ export function NewInTheShop({products, title, locale}) {
                 slidesPerView: 3,
                 spaceBetween: 20,
               },
-              1200: {
+              1201: {
                 slidesPerView: 4,
                 spaceBetween: 28,
               },
             }}
-            className="myswiper2"
+            className="new-in-Shop-slider"
           >
             {products.map((product, index) => {
               const firstVariant = flattenConnection(product?.variants)[0];
