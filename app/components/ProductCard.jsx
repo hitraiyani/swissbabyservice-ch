@@ -82,7 +82,7 @@ export function ProductCard({
             data={compareAtPrice}
           />
         )}
-        <span className='pd-price bg-[#b7d4e9] p-[5px] text-white'>-24%</span>
+        <span className="pd-price bg-[#b7d4e9] p-[5px] text-white">-24%</span>
         <Money
           withoutTrailingZeros
           data={price}
@@ -91,11 +91,15 @@ export function ProductCard({
       </div>
       <div className="buy-now-btn flex flex-col gap-[15px] absolute top-1/2 -translate-y-1/2 left-0 w-full right-0 mx-auto p-[20px] h-full bg-[#dbd4e9f2] items-center justify-center z-[2]">
         <button className='!p-[8.2px_16px] text-[20px] rounded-[5px] bg-transparent border-[2px] border-[#9a2ea3] text-[#9a2ea3] font-["OpenSans"] hover:bg-[#9a2ea3] hover:text-white leading-none transition-all duration-500 w-full'>
-          <a href="#">
+          <Link
+            onClick={onClick}
+            to={`/products/${product.handle}`}
+            prefetch="intent"
+          >
             <Text as="span" className="block !text-[20px]">
               Artikel ansehen
             </Text>
-          </a>
+          </Link>
         </button>
         <AddToCartButton
           lines={[

@@ -198,7 +198,7 @@ export default function Collection() {
                     </>
                   )}
                 </Pagination>
-                <div className="you-might-also-be-interested-in-this border-t-[1px] border-[#0000001a] mt-[16px] pt-[16px]">
+                <div className="you-might-also-be-interested-in-this border-t-[1px] border-b-[1px] border-[#0000001a] my-[16px] py-[26px]">
                   <div className="section-title flex items-center gap-[20px]">
                     <h3 className='text-[20px] font-["Open_Sans"] leading-[1.3] font-semibold text-[#2380B1]'>
                       Das könnte Sie auch noch interessieren
