@@ -36,7 +36,12 @@ export function ProductGallery({media, dicountedPr, className}) {
   return (
     <div className={` ${className}`}>
       <div className="slider__flex flex flex-col">
-        <div className="slider__images w-full border-b-[1px] border-[#eee]">
+        <div className="slider__images w-full border-b-[1px] border-[#eee] relative">
+          {dicountedPr != 0 && (
+            <div className="sale-label bg-[#9a2ea3] text-white p-[5px] leading-none uppercase text-[13px] absolute left-0 top-0 z-[5]">
+              <span>sale-{dicountedPr}%</span>
+            </div>
+          )}
           <Swiper
             modules={[Navigation, Pagination, Scrollbar, A11y, Thumbs]}
             thumbs={{swiper: thumbsSwiper}}
@@ -113,11 +118,6 @@ export function ProductGallery({media, dicountedPr, className}) {
                       }}
                       {...mediaProps}
                     />
-                    {dicountedPr != 0 && (
-                      <div className="sale-label bg-[#9a2ea3] text-white p-[5px] leading-none uppercase text-[13px] absolute left-0 top-0 z-[1]">
-                        <span>sale-{dicountedPr}%</span>
-                      </div>
-                    )}
                   </div>
                 </SwiperSlide>
               );
@@ -136,7 +136,7 @@ export function ProductGallery({media, dicountedPr, className}) {
             watchOverflow="true"
             watchslidesvisibility="true"
             watchSlidesProgress="true"
-            className="swiper-container1" 
+            className="swiper-container1"
             navigation
             loop={true}
             breakpoints={{

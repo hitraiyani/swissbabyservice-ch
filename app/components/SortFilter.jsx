@@ -45,7 +45,7 @@ export function SortFilter({
         <SortMenu />
       </div> */}
       <div
-        className={`transition-all duration-200 w-[25%] ${isOpen ? '' : ''}`}
+        className={`transition-all duration-200 w-[25%] hidden min-[992px]:block ${isOpen ? '' : ''}`}
       >
         <FiltersDrawer
           collections={collections}

@@ -107,11 +107,11 @@ export default function Product() {
     <>
       {console.log()}
       {console.log('product')}
-      <Section className="!p-0 !gap-0">
+      <Section className="!p-0 !gap-0 !block">
         <div className="breadcrumb-wrap my-[20px]">
           <div className="container">
             <div className="breadcrumb flex items-center gap-[20px]">
-              <ul className="flex flex-wrap gap-y-[15px] text-[13px] leading-[1.2] text-[#337ab7] [&>li>a:hover]:opacity-70 [&>li>a:hover]:transition-all [&>li>a:hover]:duration-500 [&>*:last-child]:font-semibold">
+              <ul className="flex flex-wrap gap-y-[5px] gap-x-[10px] text-[12px] leading-[1.2] text-[#337ab7] [&>li>a:hover]:opacity-70 [&>li>a:hover]:transition-all [&>li>a:hover]:duration-500 [&>*:last-child]:font-semibold">
                 <li>
                   <a href="#">
                     <IconHome className={'w-[15px] h-[15px]'} />
@@ -129,7 +129,7 @@ export default function Product() {
                   </a>
                 </li>
               </ul>
-              <span className="flex-1 border-b-[1px] border-[#3890bf] relative before:bg-no-repeat before:content-[''] before:inline-block before:w-5 before:h-5 before:bg-[url('https://cdn.shopify.com/s/files/1/0787/1352/0419/files/heart.png?v=1688561823')] before:absolute before:z-[2] before:-mt-1.5 before:right-[5px] md:before:right-[15px] before:top-full"></span>
+              <span className="flex-1 border-b-[1px] border-[#3890bf] relative before:bg-no-repeat before:content-[''] before:inline-block before:w-5 before:h-5 before:bg-[url('https://cdn.shopify.com/s/files/1/0787/1352/0419/files/heart.png?v=1688561823')] before:absolute before:z-[2] before:-mt-1.5 before:right-[5px] md:before:right-[15px] before:top-full hidden sm:block"></span>
             </div>
           </div>
         </div>
@@ -148,10 +148,10 @@ export default function Product() {
                     : []
                 }
               ></SortFilter>
-              <div className="w-[75%]">
+              <div className="w-full min-[992px]:w-[75%]">
                 <div className="flex flex-wrap">
-                  <ProductGallery media={media.nodes} className="w-[50%]" />
-                  <div className="w-[50%] product-info-wrap pl-[30px]">
+                  <ProductGallery media={media.nodes} className="w-full md:w-[50%]" />
+                  <div className="w-full md:w-[50%] product-info-wrap pl-0 md:pl-[30px] pt-[30px] md:pt-0">
                     <section className="product-info">
                       <Heading
                         as="h1"

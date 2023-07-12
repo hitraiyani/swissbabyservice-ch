@@ -573,7 +573,7 @@ strong {
 /* breadcrumb css */
 .breadcrumb ul > li + li:before {
   content: ' | ';
-  padding: 0 5px 0 5px;
+  padding: 0 5px 0 0;
 }
 /* End breadcrumb css */
 
