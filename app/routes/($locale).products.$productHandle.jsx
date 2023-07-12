@@ -28,6 +28,8 @@ import {
   SortFilter,
   IconMinus,
   IconPlus,
+  IconHome,
+  IconCart,
 } from '~/components';
 import {getExcerpt} from '~/lib/utils';
 import {seoPayload} from '~/lib/seo.server';
@@ -104,66 +106,99 @@ export default function Product() {
   return (
     <>
       {console.log()}
-      {console.log("product")}
-      <Section className="px-0 md:px-8 lg:px-12">
-        <SortFilter
-          filters={''}
-          appliedFilters={''}
-          collections={''}
-          locale={language}
-          selectedHandle={product?.collections?.edges?.[0]?.node?.handle}
-          menudata={
-            shop?.aico_navigation_menu?.value
-              ? JSON.parse(shop?.aico_navigation_menu?.value)
-              : []
-          }
-
-         
-        >
-          <div className="grid items-start md:gap-6 lg:gap-20 md:grid-cols-2 lg:grid-cols-3">
-            <ProductGallery
-              media={media.nodes}
-              className="w-full lg:col-span-2"
-            />
-            <div className="sticky md:-mb-nav md:top-nav md:-translate-y-nav md:h-screen md:pt-nav hiddenScroll md:overflow-y-scroll">
-              <section className="flex flex-col w-full max-w-xl gap-8 p-6 md:mx-auto md:max-w-sm md:px-0">
-                <div className="grid gap-2">
-                  <Heading as="h1" className="whitespace-normal">
-                    {title}
-                  </Heading>
-                  {vendor && (
-                    <Text className={'opacity-50 font-medium'}>{vendor}</Text>
-                  )}
-                </div>
-                <ProductForm locale={language} />
-                <div className="grid gap-4 py-4">
-                  {descriptionHtml && (
-                    <ProductDetail
-                      title="Product Details"
-                      content={descriptionHtml}
-                    />
-                  )}
-                  {shippingPolicy?.body && (
-                    <ProductDetail
-                      title="Shipping"
-                      content={getExcerpt(shippingPolicy.body)}
-                      learnMore={`/policies/${shippingPolicy.handle}`}
-                    />
-                  )}
-                  {refundPolicy?.body && (
-                    <ProductDetail
-                      title="Returns"
-                      content={getExcerpt(refundPolicy.body)}
-                      learnMore={`/policies/${refundPolicy.handle}`}
-                    />
-                  )}
-                </div>
-              </section>
+      {console.log('product')}
+      <Section className="!p-0 !gap-0">
+        <div className="breadcrumb-wrap my-[20px]">
+          <div className="container">
+            <div className="breadcrumb flex items-center gap-[20px]">
+              <ul className="flex flex-wrap gap-y-[15px] text-[13px] leading-[1.2] text-[#337ab7] [&>li>a:hover]:opacity-70 [&>li>a:hover]:transition-all [&>li>a:hover]:duration-500 [&>*:last-child]:font-semibold">
+                <li>
+                  <a href="#">
+                    <IconHome className={'w-[15px] h-[15px]'} />
+                  </a>
+                </li>
+                <li>
+                  <a href="#">Produkte</a>
+                </li>
+                <li>
+                  <a href="#">Pingo</a>
+                </li>
+                <li>
+                  <a href="#">
+                    Pampers Baby-Dry Gr.3 Midi 6-10kg (124 STK) Maxi Pack
+                  </a>
+                </li>
+              </ul>
+              <span className="flex-1 border-b-[1px] border-[#3890bf] relative before:bg-no-repeat before:content-[''] before:inline-block before:w-5 before:h-5 before:bg-[url('https://cdn.shopify.com/s/files/1/0787/1352/0419/files/heart.png?v=1688561823')] before:absolute before:z-[2] before:-mt-1.5 before:right-[5px] md:before:right-[15px] before:top-full"></span>
             </div>
           </div>
-        </SortFilter>
+        </div>
+        <div className="product-detail">
+          <div className="container">
+            <div className="flex flex-col md:flex-row gap-[30px]">
+              <SortFilter
+                filters={''}
+                appliedFilters={''}
+                collections={''}
+                locale={language}
+                selectedHandle={product?.collections?.edges?.[0]?.node?.handle}
+                menudata={
+                  shop?.aico_navigation_menu?.value
+                    ? JSON.parse(shop?.aico_navigation_menu?.value)
+                    : []
+                }
+              ></SortFilter>
+              <div className="w-[75%]">
+                <div className="flex flex-wrap">
+                  <ProductGallery media={media.nodes} className="w-[50%]" />
+                  <div className="w-[50%] product-info-wrap pl-[30px]">
+                    <section className="product-info">
+                      <Heading
+                        as="h1"
+                        className="text-[20px] font-['Open_Sans'] font-semibold text-[#2380B1] mb-[15px]"
+                      >
+                        {title}
+                      </Heading>
+                      {vendor && (
+                        <Text className={'!text-[14px] text-[#2380B1] block'}>
+                          {vendor}
+                        </Text>
+                      )}
+                      <ProductForm locale={language} />
+                    </section>
+                  </div>
+                  <div className="product-desc w-full mt-[48px]">
+                    {descriptionHtml && (
+                      <ProductDetail
+                        title="Produktdetails"
+                        content={descriptionHtml}
+                      />
+                    )}
+                    {shippingPolicy?.body && (
+                      <ProductDetail
+                        title="Shipping"
+                        content={getExcerpt(shippingPolicy.body)}
+                        learnMore={`/policies/${shippingPolicy.handle}`}
+                      />
+                    )}
+                    {refundPolicy?.body && (
+                      <ProductDetail
+                        title="Returns"
+                        content={getExcerpt(refundPolicy.body)}
+                        learnMore={`/policies/${refundPolicy.handle}`}
+                      />
+                    )}
+                  </div>
+                  <div className='pro-tags font-["Open_Sans"] text-[13px] text-[#2380B1] leading-[1.2] [&>p>a]:underline [&>p>a:hover]:opacity-70 border-t-[1px] border-[#0000001a] mt-[16px] pt-[16px]'>
+                  <p><span><b>Schnellsuche: </b></span> <a href="https://www.swissbabyservice.ch/index.php?route=product/search&amp;tag=pingo pants">pingo pants</a>, <a href="https://www.swissbabyservice.ch/index.php?route=product/search&amp;tag=pants">pants</a>, <a href="https://www.swissbabyservice.ch/index.php?route=product/search&amp;tag=pingo">pingo</a>, <a href="https://www.swissbabyservice.ch/index.php?route=product/search&amp;tag=superweich">superweich</a>, <a href="https://www.swissbabyservice.ch/index.php?route=product/search&amp;tag=hautfreundlich">hautfreundlich</a>, <a href="https://www.swissbabyservice.ch/index.php?route=product/search&amp;tag=atmungsaktiv">atmungsaktiv</a>, <a href="https://www.swissbabyservice.ch/index.php?route=product/search&amp;tag=perfekte passform">perfekte passform</a>, <a href="https://www.swissbabyservice.ch/index.php?route=product/search&amp;tag=dünner windelkern">dünner windelkern</a>, <a href="https://www.swissbabyservice.ch/index.php?route=product/search&amp;tag=zuverlässig">zuverlässig</a>, <a href="https://www.swissbabyservice.ch/index.php?route=product/search&amp;tag=trocken">trocken</a>, <a href="https://www.swissbabyservice.ch/index.php?route=product/search&amp;tag=kein parfum">kein parfum</a>, <a href="https://www.swissbabyservice.ch/index.php?route=product/search&amp;tag=keine parabene">keine parabene</a>, <a href="https://www.swissbabyservice.ch/index.php?route=product/search&amp;tag=kein latex">kein latex</a>, <a href="https://www.swissbabyservice.ch/index.php?route=product/search&amp;tag=keine lotion">keine lotion</a> 																				 <a href=""></a> 										 </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </Section>
-      <Suspense fallback={<Skeleton className="h-32" />}>
+      {/* <Suspense fallback={<Skeleton className="h-32" />}>
         <Await
           errorElement="There was a problem loading related products"
           resolve={recommended}
@@ -172,7 +207,7 @@ export default function Product() {
             <ProductSwimlane title="Related Products" products={products} />
           )}
         </Await>
-      </Suspense>
+      </Suspense> */}
     </>
   );
 }
@@ -235,70 +270,81 @@ export function ProductForm(locale) {
   };
 
   return (
-    <div className="grid gap-10">
-      <div className="grid gap-4">
-        <ProductOptions
-          options={product.options}
-          searchParamsWithDefaults={searchParamsWithDefaults}
-        />
+    <>
+      <ProductOptions
+        options={product.options}
+        searchParamsWithDefaults={searchParamsWithDefaults}
+      />
+      <div className="flex flex-wrap gap-[20px] justify-between items-center mt-[20px]">
         <QuantityComponent
           quantity={quantity}
           setQuantity={setQuantity}
           locale={locale}
         />
-        {selectedVariant && (
-          <div className="grid items-stretch gap-4">
-            {isOutOfStock ? (
-              <Button variant="secondary" disabled>
-                <Text>Sold out</Text>
-              </Button>
-            ) : (
-              <AddToCartButton
-                lines={[
-                  {
-                    merchandiseId: selectedVariant.id,
-                    quantity: quantity,
-                  },
-                ]}
-                variant="primary"
-                data-test="add-to-cart"
-                analytics={{
-                  products: [productAnalytics],
-                  totalValue: parseFloat(productAnalytics.price),
-                }}
-              >
-                <Text
-                  as="span"
-                  className="flex items-center justify-center gap-2"
-                >
-                  <span>Add to Cart</span> <span>·</span>{' '}
-                  <Money
-                    withoutTrailingZeros
-                    data={selectedVariant?.price}
-                    as="span"
-                  />
-                  {isOnSale && (
-                    <Money
-                      withoutTrailingZeros
-                      data={selectedVariant?.compareAtPrice}
-                      as="span"
-                      className="opacity-50 strike"
-                    />
-                  )}
-                </Text>
-              </AddToCartButton>
-            )}
-            {!isOutOfStock && (
-              <ShopPayButton
-                width="100%"
-                variantIds={[selectedVariant?.id]}
-                storeDomain={storeDomain}
-              />
-            )}
-          </div>
-        )}
+        <div className='flex flex-col text-[30px] font-["opensans"] gap-[5px] text-right'>
+          {isOnSale && (
+            <Money
+              withoutTrailingZeros
+              data={selectedVariant?.compareAtPrice}
+              as="span"
+              className="text-[#b7d4e9] line-through"
+            />
+          )}
+          <Money
+            withoutTrailingZeros
+            data={selectedVariant?.price}
+            as="span"
+            className="text-[#9a2ea3]"
+          />
+        </div>
       </div>
-    </div>
+      {selectedVariant && (
+        <div className="flex flex-col gap-[20px] mt-[30px]">
+          {isOutOfStock ? (
+            <Button
+              variant="secondary"
+              disabled
+              className="border-[2px] border-[#9a2ea3]  px-[20px] py-[10px] rounded-[5px] w-full bg-[#9a2ea3] text-white transition-all duration-500 opacity-50"
+            >
+              <Text className={'!text-[20px]'}>Sold out</Text>
+            </Button>
+          ) : (
+            <AddToCartButton
+              lines={[
+                {
+                  merchandiseId: selectedVariant.id,
+                  quantity: quantity,
+                },
+              ]}
+              variant="primary"
+              data-test="add-to-cart"
+              analytics={{
+                products: [productAnalytics],
+                totalValue: parseFloat(productAnalytics.price),
+              }}
+              className="border-[2px] border-[#9a2ea3]  px-[20px] py-[10px] rounded-[5px] w-full text-[#9a2ea3] hover:bg-[#9a2ea3] hover:text-white transition-all duration-500"
+            >
+              <Text
+                as="span"
+                className="flex items-center justify-center gap-[10px] !text-[20px] leading-none"
+              >
+                <span>
+                  <IconCart className={'w-[25px] h-[25px]'} />
+                </span>
+                <span>In den Warenkorb</span>
+              </Text>
+            </AddToCartButton>
+          )}
+          {/* {!isOutOfStock && (
+            <ShopPayButton
+              width="100%"
+              variantIds={[selectedVariant?.id]}
+              storeDomain={storeDomain}
+            />
+          )} */}
+        </div>
+      )}
+    </>
   );
 }
 
@@ -322,29 +368,33 @@ function QuantityComponent({quantity, setQuantity, locale}) {
   };
 
   return (
-    <div className="flex items-center flex-wrap">
-      <input
-        type="number"
-        id="quantity"
-        className='h-[52px] w-[80px] flex items-center justify-center border-[2px] !border-[#18A1DC] rounded-[10px] mr-[9px] text-[16px] font-bold font-["Open_Sans"] text-[#18A1DC] !ring-0 !shadow-none appearance-none text-center'
-        value={quantity}
-        onChange={handleInputChange}
-      />
-      <button
-        onClick={decreaseQuantity}
-        disabled={quantity === 0}
-        className={`${
-          quantity === 0 ? '!bg-[#E7EFFF]' : ''
-        } w-[37px] h-[37px] flex items-center justify-center text-[14px] text-[#18A1DC] bg-[#CCDDF1] rounded-[100px] mr-[2px]`}
-      >
-        <IconMinus />
-      </button>
-      <button
-        onClick={increaseQuantity}
-        className="w-[37px] h-[37px] flex items-center justify-center text-[14px] text-[#18A1DC] bg-[#CCDDF1] rounded-[100px] mr-[2px]"
-      >
-        <IconPlus />
-      </button>
+    <div className="qty-box">
+      <div className="flex border-[2px] border-[#2380b1] rounded-[8px] w-[120px]">
+        <div className="flex flex-col w-[50px]">
+          <button
+            onClick={decreaseQuantity}
+            disabled={quantity === 0}
+            className={`${
+              quantity === 0 ? 'bg-opacity-50 pointer-events-none' : ''
+            } bg-[#3291c2] h-[35px] w-[50px] py-[6px] px-[12px] text-white text-center`}
+          >
+            <IconMinus className={'m-auto'} />
+          </button>
+          <button
+            onClick={increaseQuantity}
+            className="bg-[#3291c2] h-[35px] w-[50px] py-[6px] px-[12px] text-white text-center"
+          >
+            <IconPlus className={'m-auto'} />
+          </button>
+        </div>
+        <input
+          type="number"
+          id="quantity"
+          className='flex-1 w-full flex items-center justify-center border-none text-[30px] font-bold font-["Open_Sans"] text-[#18A1DC] !ring-0 !shadow-none appearance-none text-center bg-transparent'
+          value={quantity}
+          onChange={handleInputChange}
+        />
+      </div>
     </div>
   );
 }
@@ -493,42 +543,64 @@ function ProductOptionLink({
 
 function ProductDetail({title, content, learnMore}) {
   return (
-    <Disclosure key={title} as="div" className="grid w-full gap-2">
-      {({open}) => (
-        <>
-          <Disclosure.Button className="text-left">
-            <div className="flex justify-between">
-              <Text size="lead" as="h4">
-                {title}
-              </Text>
-              <IconClose
-                className={clsx(
-                  'transition-transform transform-gpu duration-200',
-                  !open && 'rotate-[45deg]',
-                )}
-              />
-            </div>
-          </Disclosure.Button>
-
-          <Disclosure.Panel className={'pb-4 pt-2 grid gap-2'}>
-            <div
-              className="prose dark:prose-invert"
-              dangerouslySetInnerHTML={{__html: content}}
-            />
-            {learnMore && (
-              <div className="">
-                <Link
-                  className="pb-px border-b border-primary/30 text-primary/50"
-                  to={learnMore}
-                >
-                  Learn more
-                </Link>
+    <>
+      <Text size="lead" as="h3" className={'flex items-center gap-[20px] relative text-[#2380B1] !text-[20px] font-["Open_Sans"] font-semibold mb-[20px]'}>
+        {title}
+        <span className="flex-1 border-b-[1px] border-[#3890bf] relative before:bg-no-repeat before:content-[''] before:inline-block before:w-5 before:h-5 before:bg-[url('https://cdn.shopify.com/s/files/1/0787/1352/0419/files/heart.png?v=1688561823')] before:absolute before:z-[2] before:-mt-1.5 before:right-[5px] md:before:right-[15px] before:top-full"></span>
+      </Text>
+      <div className='tab-content'>
+        <div
+          className="w-full font-['Open_Sans'] text-[13px] text-[#2380B1] leading-[1.2]"
+          dangerouslySetInnerHTML={{__html: content}}
+        />
+        {learnMore && (
+          <div className="">
+            <Link
+              className="pb-px border-b border-primary/30 text-primary/50"
+              to={learnMore}
+            >
+              Learn more
+            </Link>
+          </div>
+        )}
+      </div>
+      {/* <Disclosure key={title} as="div" className="grid w-full gap-2">
+        {({open}) => (
+          <>
+            <Disclosure.Button className="text-left">
+              <div className="flex justify-between">
+                <Text size="lead" as="h4">
+                  {title}
+                </Text>
+                <IconClose
+                  className={clsx(
+                    'transition-transform transform-gpu duration-200',
+                    !open && 'rotate-[45deg]',
+                  )}
+                />
               </div>
-            )}
-          </Disclosure.Panel>
-        </>
-      )}
-    </Disclosure>
+            </Disclosure.Button>
+
+            <Disclosure.Panel className={'pb-4 pt-2 grid gap-2'}>
+              <div
+                className="prose dark:prose-invert"
+                dangerouslySetInnerHTML={{__html: content}}
+              />
+              {learnMore && (
+                <div className="">
+                  <Link
+                    className="pb-px border-b border-primary/30 text-primary/50"
+                    to={learnMore}
+                  >
+                    Learn more
+                  </Link>
+                </div>
+              )}
+            </Disclosure.Panel>
+          </>
+        )}
+      </Disclosure> */}
+    </>
   );
 }
 

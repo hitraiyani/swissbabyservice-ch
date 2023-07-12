@@ -5,7 +5,7 @@ import {
   Pagination,
   Scrollbar,
   A11y,
-} from 'swiper/modules';
+} from 'swiper';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import {
   IconChevronRight,

@@ -10,7 +10,14 @@ import {
 import {useDebounce} from 'react-use';
 import {Disclosure} from '@headlessui/react';
 
-import {Heading, IconFilters, IconCaret, IconXMark, Text} from '~/components';
+import {
+  Heading,
+  IconFilters,
+  IconCaret,
+  IconXMark,
+  Text,
+  IconHome,
+} from '~/components';
 import {getMenuHandle, translate} from '~/lib/utils';
 
 export function SortFilter({
@@ -20,42 +27,36 @@ export function SortFilter({
   menudata = [],
   collections = [],
   locale,
-  selectedHandle=null
+  selectedHandle = null,
 }) {
   const [isOpen, setIsOpen] = useState(true);
 
   return (
     <>
-      <div className="flex items-center justify-between w-full">
+      {/* <div className="flex items-center justify-between w-full">
         <button
           onClick={() => setIsOpen(!isOpen)}
           className={
             'relative flex items-center justify-center w-8 h-8 focus:ring-primary/5'
           }
         >
-          {/* <IconFilters /> */}
+          <IconFilters />
         </button>
-        {/* <SortMenu /> */}
+        <SortMenu />
+      </div> */}
+      <div
+        className={`transition-all duration-200 w-[25%] ${isOpen ? '' : ''}`}
+      >
+        <FiltersDrawer
+          collections={collections}
+          filters={filters}
+          menudata={menudata}
+          appliedFilters={appliedFilters}
+          locale={locale}
+          selectedHandle={selectedHandle}
+        />
       </div>
-      <div className="flex flex-col flex-wrap md:flex-row">
-        <div
-          className={`transition-all duration-200 ${
-            isOpen
-              ? 'opacity-100 min-w-full md:min-w-[240px] md:w-[240px] md:pr-8 max-h-full'
-              : 'opacity-0 md:min-w-[0px] md:w-[0px] pr-0 max-h-0 md:max-h-full'
-          }`}
-        >
-          <FiltersDrawer
-            collections={collections}
-            filters={filters}
-            menudata={menudata}
-            appliedFilters={appliedFilters}
-            locale={locale}
-            selectedHandle={selectedHandle}
-          />
-        </div>
-        <div className="flex-1">{children}</div>
-      </div>
+      {/* <div className="w-[75%]">{children}</div> */}
     </>
   );
 }
@@ -66,7 +67,7 @@ export function FiltersDrawer({
   appliedFilters = [],
   collections = [],
   locale,
-  selectedHandle
+  selectedHandle,
 }) {
   const [params] = useSearchParams();
   const location = useLocation();
@@ -118,11 +119,11 @@ export function FiltersDrawer({
 
   return (
     <>
-      <nav className="filter-list-wrap bg-[#E7EFFF] rounded-[30px] overflow-hidden">
+      <nav className="filter-list-wrap bg-[#978bbc] min-h-[245px] overflow-hidden px-[15px] py-[24px]">
         <Heading
           as="h4"
           size="lead"
-          className="text-[#1C5F7B] text-[24px] xl:text-[28px] font-bold py-[27px] bg-[#CCDDF1] leading-none px-[30px] xl:px-[48px]"
+          className="text-[#1C5F7B] text-[24px] xl:text-[28px] font-bold py-[27px] bg-[#CCDDF1] leading-none px-[30px] xl:px-[48px] hidden"
         >
           {translate('category', locale)}
         </Heading>
@@ -133,21 +134,22 @@ export function FiltersDrawer({
             </div>
           ) : null}
         </div>
-        <div className="px-[30px] xl:px-[48px] py-[25px] flex flex-col gap-y-[10px]">
+        <div className="flex flex-col gap-y-[10px]">
           {menudata?.map(
             (filter) =>
               filter.category.name != 'Home' && (
                 <div key={filter?.category?.name}>
                   <ul
                     key={filter.category.name}
-                    className="py-[18px] flex flex-col gap-y-[18px] filter-sub-items"
+                    className="flex flex-col gap-y-[8px] filter-sub-items"
                   >
-                    <li
-                      key={filter.category.name}
-                      className="text-[16px] text-[#292929] font-normal hover:text-[#0A627E] hover:font-bold"
-                    >
+                    <li key={filter.category.name} className="">
                       <NavLink
-                        className={`block border-none ${(selectedHandle === filter.category.handle) ? "active": ""}  `}
+                        className={`block border-none ${
+                          selectedHandle === filter.category.handle
+                            ? 'active bg-[#8f2999]'
+                            : ''
+                        } text-white p-[12px] transition-all duration-700 hover:bg-[#8f2999] font-['OpenSans'] rounded-[8px] text-[20px] leading-[1.2]`}
                         prefetch="intent"
                         to={getMenuHandle(filter.category)}
                       >

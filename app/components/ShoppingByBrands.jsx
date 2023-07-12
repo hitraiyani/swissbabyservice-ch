@@ -5,9 +5,9 @@ import {
   Navigation,
   Pagination,
   Scrollbar,
-  A11y,
+  A11y, 
   EffectFade,
-} from 'swiper/modules';
+} from 'swiper';
 import {Swiper, SwiperSlide} from 'swiper/react';
 
 import {Link} from '~/components';

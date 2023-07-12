@@ -307,3 +307,14 @@ export function IconFilters(props) {
     </Icon>
   );
 }
+export function IconHome(props) {
+  return (
+    <svg {...props} xmlns="http://www.w3.org/2000/svg" width={512} height={512} viewBox="0 0 512 512"><path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={32} d="M80 212v236a16 16 0 0 0 16 16h96V328a24 24 0 0 1 24-24h80a24 24 0 0 1 24 24v136h96a16 16 0 0 0 16-16V212" /><path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={32} d="M480 256L266.89 52c-5-5.28-16.69-5.34-21.78 0L32 256m368-77V64h-48v69" /></svg>
+  );
+}
+
+export function IconCart(props) {
+  return (
+    <svg {...props} xmlns="http://www.w3.org/2000/svg" width={512} height={512} viewBox="0 0 512 512" > <circle cx={176} cy={416} r={32} fill="currentColor" /> <circle cx={400} cy={416} r={32} fill="currentColor" /> <path fill="currentColor" d="M456.8 120.78a23.92 23.92 0 0 0-18.56-8.78H133.89l-6.13-34.78A16 16 0 0 0 112 64H48a16 16 0 0 0 0 32h50.58l45.66 258.78A16 16 0 0 0 160 368h256a16 16 0 0 0 0-32H173.42l-5.64-32h241.66A24.07 24.07 0 0 0 433 284.71l28.8-144a24 24 0 0 0-5-19.93Z" /> </svg>
+  );
+}

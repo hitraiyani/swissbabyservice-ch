@@ -5,7 +5,7 @@ import {
   Scrollbar,
   A11y,
   EffectFade,
-} from 'swiper/modules';
+} from 'swiper';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import {IconArrowRight, IconChevronRight, Link} from '~/components';
 import {useEffect} from 'react';

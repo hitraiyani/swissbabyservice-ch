@@ -127,7 +127,8 @@ export async function loader({params, request, context}) {
 }
 
 export default function Collection() {
-  const {collection, collections, appliedFilters,shop,language} = useLoaderData();
+  const {collection, collections, appliedFilters, shop, language} =
+    useLoaderData();
 
   return (
     <>
@@ -148,39 +149,37 @@ export default function Collection() {
           appliedFilters={appliedFilters}
           collections={collections}
           locale={language}
-
           menudata={
             shop?.aico_navigation_menu?.value
               ? JSON.parse(shop?.aico_navigation_menu?.value)
               : []
           }
-        >
-          <Pagination connection={collection.products}>
-            {({nodes, isLoading, PreviousLink, NextLink}) => (
-              <>
-                <div className="flex items-center justify-center mb-6">
-                  <Button as={PreviousLink} variant="secondary" width="full">
-                    {isLoading ? 'Loading...' : 'Load previous'}
-                  </Button>
-                </div>
-                <Grid layout="products">
-                  {nodes.map((product, i) => (
-                    <ProductCard
-                      key={product.id}
-                      product={product}
-                      loading={getImageLoadingPriority(i)}
-                    />
-                  ))}
-                </Grid>
-                <div className="flex items-center justify-center mt-6">
-                  <Button as={NextLink} variant="secondary" width="full">
-                    {isLoading ? 'Loading...' : 'Load more products'}
-                  </Button>
-                </div>
-              </>
-            )}
-          </Pagination>
-        </SortFilter>
+        ></SortFilter>
+        <Pagination connection={collection.products}>
+          {({nodes, isLoading, PreviousLink, NextLink}) => (
+            <>
+              <div className="flex items-center justify-center mb-6">
+                <Button as={PreviousLink} variant="secondary" width="full">
+                  {isLoading ? 'Loading...' : 'Load previous'}
+                </Button>
+              </div>
+              <Grid layout="products">
+                {nodes.map((product, i) => (
+                  <ProductCard
+                    key={product.id}
+                    product={product}
+                    loading={getImageLoadingPriority(i)}
+                  />
+                ))}
+              </Grid>
+              <div className="flex items-center justify-center mt-6">
+                <Button as={NextLink} variant="secondary" width="full">
+                  {isLoading ? 'Loading...' : 'Load more products'}
+                </Button>
+              </div>
+            </>
+          )}
+        </Pagination>
       </Section>
     </>
   );

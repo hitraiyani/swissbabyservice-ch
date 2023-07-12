@@ -488,7 +488,8 @@ p {
 /* End Hero new-in-Shop-section css */
 
 /* page-information css */
-b, strong{
+b,
+strong {
   font-weight: 700;
 }
 .page-information {
@@ -544,9 +545,9 @@ b, strong{
       border-top: 0;
       vertical-align: middle;
     }
-    a{
+    a {
       transition: all 0.7s;
-      &:hover{
+      &:hover {
         opacity: 0.7;
       }
     }
@@ -568,6 +569,51 @@ b, strong{
   }
 }
 /* End page-information css */
+
+/* breadcrumb css */
+.breadcrumb ul > li + li:before {
+  content: ' | ';
+  padding: 0 5px 0 5px;
+}
+/* End breadcrumb css */
+
+/* product detasil page css */
+.slider__flex {
+  .swiper-button-next:after,
+  .swiper-button-prev:after {
+    color: #000;
+    font-size: 20px;
+  }
+  .swiper-button-next,
+  .swiper-rtl .swiper-button-prev {
+    right: 0;
+  }
+  .swiper-button-prev,
+  .swiper-rtl .swiper-button-next {
+    left: 0;
+  }
+  .swiper-button-next,
+  .swiper-button-prev {
+    opacity: 0;
+    transition: all 0.5s;
+  }
+  .slider__col {
+    &:hover {
+      .swiper-button-next,
+      .swiper-button-prev {
+        opacity: 1;
+      }
+    }
+    .swiper-slide {
+      opacity: 0.6;
+      transition: all 0.5s;
+      &.swiper-slide-thumb-active {
+        opacity: 1;
+      }
+    }
+  }
+}
+/* End product detasil page css */
 
 /* Footer css */
 .bz-footer-row {
@@ -618,3 +664,19 @@ b, strong{
   }
 }
 /* Emd Footer css */
+
+
+/* Remove Arrows/Spinners */
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+/* End Remove Arrows/Spinners */
