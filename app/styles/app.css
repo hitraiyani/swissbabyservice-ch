@@ -577,7 +577,7 @@ strong {
 }
 /* End breadcrumb css */
 
-/* product detasil page css */
+/* product detail page css */
 .slider__flex {
   .swiper-button-next:after,
   .swiper-button-prev:after {
@@ -613,7 +613,20 @@ strong {
     }
   }
 }
-/* End product detasil page css */
+/* End product detail page css */
+
+/* product category page css */
+.product-card {
+  .buy-now-btn {
+    opacity: 0;
+  }
+  &:hover {
+    .buy-now-btn {
+      opacity: 1;
+    }
+  }
+}
+/* End product category page css */
 
 /* Footer css */
 .bz-footer-row {
@@ -665,7 +678,6 @@ strong {
 }
 /* Emd Footer css */
 
-
 /* Remove Arrows/Spinners */
 
 /* Chrome, Safari, Edge, Opera */
@@ -676,7 +688,7 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type=number] {
+input[type='number'] {
   -moz-appearance: textfield;
 }
 /* End Remove Arrows/Spinners */
