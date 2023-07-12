@@ -166,6 +166,9 @@ export default function Collection() {
                 }
               ></SortFilter>
               <div className="product-grid-wrap w-full min-[992px]:w-[75%]">
+                <div className='product-category-description text-[13px] font-["Open_Sans"] text-[#2380B1] mb-[20px]'>
+                  <p>Pingo Windeln werden in der Schweiz produziert und haben alle Eigenschaften sowie den Leistungsstandard des Marktführers. Swiss Made seit über 30 Jahren.</p>
+                </div>
                 <Pagination connection={collection.products}>
                   {({nodes, isLoading, PreviousLink, NextLink}) => (
                     <>
