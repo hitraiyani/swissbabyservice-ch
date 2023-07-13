@@ -43,9 +43,12 @@ export function FeaturedProducts({
 
   return (
     <>
-      <Heading format size="copy" className="t-4">
-        {heading}
-      </Heading>
+      <div className="section-title flex items-center gap-[20px]">
+        <Heading format size="copy" className='text-[20px] font-["Open_Sans"] leading-[1.3] font-semibold text-[#2380B1]'>
+          {heading}
+        </Heading>
+        <span className="flex-1 border-b-[1px] border-[#3890bf] relative before:bg-no-repeat before:content-[''] before:inline-block before:w-5 before:h-5 before:bg-[url('https://cdn.shopify.com/s/files/1/0787/1352/0419/files/heart.png?v=1688561823')] before:absolute before:z-[2] before:-mt-1.5 before:right-[5px] md:before:right-[15px] before:top-full"></span>
+      </div>
       <div
         className={clsx([
           `grid grid-cols-2 gap-x-6 gap-y-8`,

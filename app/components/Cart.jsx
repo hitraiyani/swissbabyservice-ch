@@ -11,6 +11,7 @@ import {
   Text,
   Link,
   FeaturedProducts,
+  Iconclose2,
 } from '~/components';
 import {getInputStyleClasses} from '~/lib/utils';
 import {CartAction} from '~/lib/type';
@@ -35,7 +36,7 @@ export function CartDetails({layout, cart}) {
   };
 
   return (
-    <div className={container[layout]}>
+    <div className="mt-[38px]">
       <CartLines lines={cart?.lines} layout={layout} />
       {cartHasItems && (
         <CartSummary cost={cart.cost} layout={layout}>
@@ -120,7 +121,7 @@ function CartLines({layout = 'drawer', lines: cartLines}) {
   const className = clsx([
     y > 0 ? 'border-t' : '',
     layout === 'page'
-      ? 'flex-grow md:translate-y-4'
+      ? 'flex-grow'
       : 'px-6 pb-6 sm-max:pt-2 overflow-auto transition md:px-12',
   ]);
 
@@ -130,7 +131,31 @@ function CartLines({layout = 'drawer', lines: cartLines}) {
       aria-labelledby="cart-contents"
       className={className}
     >
-      <ul className="grid gap-6 md:gap-10">
+      <div className="section-title flex items-center gap-[20px] mb-[35px]">
+        <h1 className='text-[30px] font-["Open_Sans"] leading-[1.3] font-semibold text-[#2380B1]'>
+          Warenkorb
+        </h1>
+        <span className="flex-1 border-b-[1px] border-[#3890bf] relative before:bg-no-repeat before:content-[''] before:inline-block before:w-5 before:h-5 before:bg-[url('https://cdn.shopify.com/s/files/1/0787/1352/0419/files/heart.png?v=1688561823')] before:absolute before:z-[2] before:-mt-1.5 before:right-[5px] md:before:right-[15px] before:top-full"></span>
+      </div>
+      <ul className="flex flex-col">
+        <li className="flex bg-[#92BCDC] [&>*:first-child]:border-l-0">
+          <div className="p-[10px] border-l-[1px] border-white text-white text-center Bild w-[100px]">
+            Bild
+          </div>
+          <div className="p-[10px] border-l-[1px] border-white text-white text-left Name flex-1">
+            Name
+          </div>
+          <div className="p-[10px] border-l-[1px] border-white text-white text-left Menge w-[130px]">
+            Menge
+          </div>
+          <div className="p-[10px] border-l-[1px] border-white text-white text-right Einzelpreis w-[130px]">
+            Einzelpreis
+          </div>
+          <div className="p-[10px] border-l-[1px] border-white text-white text-right TotalBetrag w-[130px]">
+            Total Betrag
+          </div>
+          <div className="p-[10px] border-l-[1px] border-white text-white text-center remove-btn w-[70px]"></div>
+        </li>
         {currentLines.map((line) => (
           <CartLineItem key={line.id} line={line} />
         ))}
@@ -161,8 +186,50 @@ function CartSummary({cost, layout, children = null}) {
   };
 
   return (
-    <section aria-labelledby="summary-heading" className={summary[layout]}>
-      <h2 id="summary-heading" className="sr-only">
+    <section
+      aria-labelledby="summary-heading"
+      className="cart-footer pt-[30px]"
+    >
+      <div className="flex flex-row gap-[30px]">
+        <div className="col-left flex-1">
+          <div className="section-title flex items-center gap-[20px] mb-[35px]">
+            <h3 className='text-[25px] font-["Open_Sans"] leading-[1.3] font-semibold text-[#2380B1]'>
+              Nächster Schritt
+            </h3>
+            <span className="flex-1 border-b-[1px] border-[#3890bf] relative before:bg-no-repeat before:content-[''] before:inline-block before:w-5 before:h-5 before:bg-[url('https://cdn.shopify.com/s/files/1/0787/1352/0419/files/heart.png?v=1688561823')] before:absolute before:z-[2] before:-mt-1.5 before:right-[5px] md:before:right-[15px] before:top-full"></span>
+          </div>
+          <div className='desc text-[13px] font-["Open_Sans"] text-[#2380B1]'>
+            <p>
+              Eine der nachstehenden Möglichkeiten auswählen, oder zur Kassa
+              gehen
+            </p>
+          </div>
+          {/* {children} */}
+        </div>
+        <div className="col-right flex-1">
+          <ul className='flex gap-[20px] border-b-[1px] border-[#92bcdc] p-[10px] items-center font-semibold text-[#2380b1]'>
+            <li className='flex-1 text-right text-[16px]'>Zwischensumme:</li>
+            <li className='w-[150px] text-right text-[#9a2ea3] text-[25px] font-["opensans"] font-normal'>CHF 00.00</li>
+          </ul>
+          <ul className='flex gap-[20px] border-b-[1px] border-[#92bcdc] p-[10px] items-center font-semibold text-[#2380b1]'>
+            <li className='flex-1 text-right text-[16px]'>Enthaltene MwSt. 7.7%:</li>
+            <li className='w-[150px] text-right text-[#9a2ea3] text-[25px] font-["opensans"] font-normal'>CHF 00.00</li>
+          </ul>
+          <ul className='flex gap-[20px] border-b-[1px] border-[#92bcdc] p-[10px] items-center font-semibold text-[#2380b1]'>
+            <li className='flex-1 text-right text-[16px]'>Gesamtsumme:</li>
+            <li className='w-[150px] text-right'>
+              <Text as="dd" data-test="subtotal" className={'text-[#9a2ea3] text-[25px] font-["opensans"] font-normal'}>
+                {cost?.subtotalAmount?.amount ? (
+                  <Money data={cost?.subtotalAmount} />
+                ) : (
+                  '-'
+                )}
+              </Text>
+            </li>
+          </ul>
+        </div>
+      </div>
+      {/* <h2 id="summary-heading" className="sr-only">
         Order summary
       </h2>
       <dl className="grid">
@@ -176,8 +243,7 @@ function CartSummary({cost, layout, children = null}) {
             )}
           </Text>
         </div>
-      </dl>
-      {children}
+      </dl> */}
     </section>
   );
 }
@@ -190,31 +256,51 @@ function CartLineItem({line}) {
   if (typeof quantity === 'undefined' || !merchandise?.product) return null;
 
   return (
-    <li key={id} className="flex gap-4">
-      <div className="flex-shrink">
+    <li key={id} className="flex items-center border-b-[1px] border-[#92bcdc]">
+      <div className="w-[100px] flex items-center justify-center img-col p-[10px]">
         {merchandise.image && (
           <Image
-            width={110}
-            height={110}
+            width={57}
+            height={57}
             data={merchandise.image}
-            className="object-cover object-center w-24 h-24 border rounded md:w-28 md:h-28"
+            className="object-cover object-center w-[57px] h-[57px] rounded-[4px] border-[#dee2e6] border-[1px] p-[4px] bg-white block"
             alt={merchandise.title}
           />
         )}
       </div>
-
-      <div className="flex justify-between flex-grow">
+      <div className="name-col flex-1 p-[10px]">
+        <Heading as="h3" className="text-[16px] font-normal text-[#2380b1]">
+          {merchandise?.product?.handle ? (
+            <Link to={`/products/${merchandise.product.handle}`}>
+              {merchandise?.product?.title || ''}
+            </Link>
+          ) : (
+            <Text>{merchandise?.product?.title || ''}</Text>
+          )}
+        </Heading>
+      </div>
+      <div className="qty-col w-[130px] p-[10px]">
+        <div className="qty-inner w-[106px] mx-auto">
+          <CartLineQuantityAdjust line={line} />
+        </div>
+      </div>
+      <div className="unit-price-col w-[130px] p-[10px] text-right">
+        <Text className={'text-[#9a2ea3] text-[25px] font-["OpenSans"]'}>
+          <CartLinePrice line={line} as="span" />
+        </Text>
+      </div>
+      <div className="price-col w-[130px] p-[10px] text-right">
+        <Text className={'text-[#9a2ea3] text-[25px] font-["OpenSans"]'}>
+          <CartLinePrice line={line} as="span" />
+        </Text>
+      </div>
+      <div className="remove-btn-col w-[70px] p-[10px]">
+        <div className="remove-btn-inner">
+          <ItemRemoveButton lineIds={[id]} />
+        </div>
+      </div>
+      {/* <div className="flex justify-between flex-grow">
         <div className="grid gap-2">
-          <Heading as="h3" size="copy">
-            {merchandise?.product?.handle ? (
-              <Link to={`/products/${merchandise.product.handle}`}>
-                {merchandise?.product?.title || ''}
-              </Link>
-            ) : (
-              <Text>{merchandise?.product?.title || ''}</Text>
-            )}
-          </Heading>
-
           <div className="grid pb-2">
             {(merchandise?.selectedOptions || []).map((option) => (
               <Text color="subtle" key={option.name}>
@@ -222,18 +308,8 @@ function CartLineItem({line}) {
               </Text>
             ))}
           </div>
-
-          <div className="flex items-center gap-2">
-            <div className="flex justify-start text-copy">
-              <CartLineQuantityAdjust line={line} />
-            </div>
-            <ItemRemoveButton lineIds={[id]} />
-          </div>
         </div>
-        <Text>
-          <CartLinePrice line={line} as="span" />
-        </Text>
-      </div>
+      </div> */}
     </li>
   );
 }
@@ -250,11 +326,10 @@ function ItemRemoveButton({lineIds}) {
       />
       <input type="hidden" name="linesIds" value={JSON.stringify(lineIds)} />
       <button
-        className="flex items-center justify-center w-10 h-10 border rounded"
+        className="flex items-center justify-center w-[34px] h-[27px] mx-auto rounded-[4px] p-[4px] py-[4px] text-[#dc3545] border-[1px] border-[#dc3545] hover:bg-[#dc3545] hover:text-white transition-all duration-500"
         type="submit"
       >
-        <span className="sr-only">Remove</span>
-        <IconRemove aria-hidden="true" />
+        <Iconclose2 className="w-full h-full" />
       </button>
     </fetcher.Form>
   );
@@ -271,12 +346,12 @@ function CartLineQuantityAdjust({line}) {
       <label htmlFor={`quantity-${lineId}`} className="sr-only">
         Quantity, {quantity}
       </label>
-      <div className="flex items-center border rounded">
+      <div className="flex items-center border rounded bg-white">
         <UpdateCartButton lines={[{id: lineId, quantity: prevQuantity}]}>
           <button
             name="decrease-quantity"
             aria-label="Decrease quantity"
-            className="w-10 h-10 transition text-primary/50 hover:text-primary disabled:text-primary/10"
+            className="w-10 h-10 transition text-primary/50 hover:text-primary disabled:text-primary/10 font-bold"
             value={prevQuantity}
             disabled={quantity <= 1}
           >
@@ -290,7 +365,7 @@ function CartLineQuantityAdjust({line}) {
 
         <UpdateCartButton lines={[{id: lineId, quantity: nextQuantity}]}>
           <button
-            className="w-10 h-10 transition text-primary/50 hover:text-primary"
+            className="w-10 h-10 transition text-primary/50 hover:text-primary  font-bold"
             name="increase-quantity"
             value={nextQuantity}
             aria-label="Increase quantity"
@@ -346,17 +421,27 @@ export function CartEmpty({hidden = false, layout = 'drawer', onClose}) {
   };
 
   return (
-    <div ref={scrollRef} className={container[layout]} hidden={hidden}>
-      <section className="grid gap-6">
-        <Text format>
-          Looks like you haven&rsquo;t added anything yet, let&rsquo;s get you
-          started!
+    <div ref={scrollRef} className="cartEmpty" hidden={hidden}>
+      <section className="mt-[48px]">
+        <div className="section-title flex items-center gap-[20px] mb-[35px]">
+          <h1 className='text-[30px] font-["Open_Sans"] leading-[1.3] font-semibold text-[#2380B1]'>
+            Warenkorb
+          </h1>
+          <span className="flex-1 border-b-[1px] border-[#3890bf] relative before:bg-no-repeat before:content-[''] before:inline-block before:w-5 before:h-5 before:bg-[url('https://cdn.shopify.com/s/files/1/0787/1352/0419/files/heart.png?v=1688561823')] before:absolute before:z-[2] before:-mt-1.5 before:right-[5px] md:before:right-[15px] before:top-full"></span>
+        </div>
+        <Text className={'text-[13px] font-["Open_Sans"] text-[#2380B1]'}>
+          Warenkorb ist noch leer
         </Text>
         <div>
-          <Button onClick={onClose}>Continue shopping</Button>
+          <Button
+            onClick={onClose}
+            className="border-[#9a2ea3] border-[2px] rounded-[5px] text-[#9a2ea3] text-[16px] px-[15px] py-[10px] leading-none hover:bg-[#9a2ea3] hover:text-white mt-[15px] transition-all duration-500"
+          >
+            Weiter
+          </Button>
         </div>
       </section>
-      <section className="grid gap-8 pt-16">
+      {/* <section className="grid gap-8 pt-16">
         <FeaturedProducts
           count={4}
           heading="Shop Best Sellers"
@@ -364,7 +449,7 @@ export function CartEmpty({hidden = false, layout = 'drawer', onClose}) {
           onClose={onClose}
           sortKey="BEST_SELLING"
         />
-      </section>
+      </section> */}
     </div>
   );
 }

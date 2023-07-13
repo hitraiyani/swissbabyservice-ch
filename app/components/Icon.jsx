@@ -318,3 +318,8 @@ export function IconCart(props) {
     <svg {...props} xmlns="http://www.w3.org/2000/svg" width={512} height={512} viewBox="0 0 512 512" > <circle cx={176} cy={416} r={32} fill="currentColor" /> <circle cx={400} cy={416} r={32} fill="currentColor" /> <path fill="currentColor" d="M456.8 120.78a23.92 23.92 0 0 0-18.56-8.78H133.89l-6.13-34.78A16 16 0 0 0 112 64H48a16 16 0 0 0 0 32h50.58l45.66 258.78A16 16 0 0 0 160 368h256a16 16 0 0 0 0-32H173.42l-5.64-32h241.66A24.07 24.07 0 0 0 433 284.71l28.8-144a24 24 0 0 0-5-19.93Z" /> </svg>
   );
 }
+export function Iconclose2(props) {
+  return (
+    <svg {...props} xmlns="http://www.w3.org/2000/svg" width={32} height={32} viewBox="0 0 32 32" > <path fill="currentColor" d="M16 2C8.2 2 2 8.2 2 16s6.2 14 14 14s14-6.2 14-14S23.8 2 16 2zm5.4 21L16 17.6L10.6 23L9 21.4l5.4-5.4L9 10.6L10.6 9l5.4 5.4L21.4 9l1.6 1.6l-5.4 5.4l5.4 5.4l-1.6 1.6z" /> </svg>
+  );
+}
