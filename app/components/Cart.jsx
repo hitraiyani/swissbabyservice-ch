@@ -218,7 +218,7 @@ function CartSummary({cost, layout, children = null}) {
           <ul className='flex gap-[20px] border-b-[1px] border-[#92bcdc] p-[10px] items-center font-semibold text-[#2380b1]'>
             <li className='flex-1 text-right text-[16px]'>Gesamtsumme:</li>
             <li className='w-[150px] text-right'>
-              <Text as="dd" data-test="subtotal" className={'text-[#9a2ea3] text-[25px] font-["opensans"] font-normal'}>
+              <Text as="dd" data-test="subtotal" className={'text-[#9a2ea3] !text-[25px] font-["opensans"] font-normal'}>
                 {cost?.subtotalAmount?.amount ? (
                   <Money data={cost?.subtotalAmount} />
                 ) : (
