@@ -3,6 +3,7 @@ import {useRef} from 'react';
 import {useScroll} from 'react-use';
 import {flattenConnection, Image, Money} from '@shopify/hydrogen';
 import {useFetcher} from '@remix-run/react';
+import {Disclosure} from '@headlessui/react';
 
 import {
   Button,
@@ -12,6 +13,10 @@ import {
   Link,
   FeaturedProducts,
   Iconclose2,
+  IconCaret,
+  IconShare,
+  IconArrowRight2,
+  IconArrowRight,
 } from '~/components';
 import {getInputStyleClasses} from '~/lib/utils';
 import {CartAction} from '~/lib/type';
@@ -138,7 +143,7 @@ function CartLines({layout = 'drawer', lines: cartLines}) {
         <span className="flex-1 border-b-[1px] border-[#3890bf] relative before:bg-no-repeat before:content-[''] before:inline-block before:w-5 before:h-5 before:bg-[url('https://cdn.shopify.com/s/files/1/0787/1352/0419/files/heart.png?v=1688561823')] before:absolute before:z-[2] before:-mt-1.5 before:right-[5px] md:before:right-[15px] before:top-full"></span>
       </div>
       <ul className="flex flex-col">
-        <li className="flex bg-[#92BCDC] [&>*:first-child]:border-l-0">
+        <li className="hidden md:flex bg-[#92BCDC] [&>*:first-child]:border-l-0">
           <div className="p-[10px] border-l-[1px] border-white text-white text-center Bild w-[100px]">
             Bild
           </div>
@@ -190,35 +195,103 @@ function CartSummary({cost, layout, children = null}) {
       aria-labelledby="summary-heading"
       className="cart-footer pt-[30px]"
     >
-      <div className="flex flex-row gap-[30px]">
+      <div className="flex flex-col md:flex-row gap-[30px]">
         <div className="col-left flex-1">
-          <div className="section-title flex items-center gap-[20px] mb-[35px]">
+          <div className="section-title flex items-center gap-[20px] mb-[20px]">
             <h3 className='text-[25px] font-["Open_Sans"] leading-[1.3] font-semibold text-[#2380B1]'>
               Nächster Schritt
             </h3>
             <span className="flex-1 border-b-[1px] border-[#3890bf] relative before:bg-no-repeat before:content-[''] before:inline-block before:w-5 before:h-5 before:bg-[url('https://cdn.shopify.com/s/files/1/0787/1352/0419/files/heart.png?v=1688561823')] before:absolute before:z-[2] before:-mt-1.5 before:right-[5px] md:before:right-[15px] before:top-full"></span>
           </div>
-          <div className='desc text-[13px] font-["Open_Sans"] text-[#2380B1]'>
+          <div className='desc text-[13px] font-["Open_Sans"] text-[#2380B1] mb-[10px]'>
             <p>
               Eine der nachstehenden Möglichkeiten auswählen, oder zur Kassa
               gehen
             </p>
           </div>
           {/* {children} */}
+          <Disclosure as="div" className="grid w-full mb-[5px]">
+            <>
+              <Disclosure.Button className="text-left">
+                <div className="flex justify-between bg-[#3071a9] p-[8px] text-white text-[16px] items-center">
+                  Rabattcode <IconCaret />
+                </div>
+              </Disclosure.Button>
+
+              <Disclosure.Panel className={'p-[20px] bg-white'}>
+                <label
+                  htmlFor=""
+                  className="text-[16px] text-[#2380B1] mb-[5px] block"
+                >
+                  Rabattcode hier eingeben
+                </label>
+                <div className="input-group flex ">
+                  <input
+                    type="text"
+                    placeholder="Rabattcode hier eingeben"
+                    className="bg-white flex-1 border border-[#92bcdd] text-gray-900 text-[14px] rounded-[4px_0px_0px_4px] placeholder:text-[#6c757d] block w-full px-[12px] py-[6px] form-control border-r-0"
+                  />
+                  <button className="button-search hover:bg-[#9a2ea3] hover:text-white text-[#9a2ea3] border-[1px] border-[#9a2ea3] transition-all duration-500 py-[8px] px-[12px] rounded-[0px_4px_4px_0px] uppercase text-[14px]">
+                    Rabattcode einlösen
+                  </button>
+                </div>
+              </Disclosure.Panel>
+            </>
+          </Disclosure>
+          <Disclosure as="div" className="grid w-full mb-[5px]">
+            <>
+              <Disclosure.Button className="text-left">
+                <div className="flex justify-between bg-[#3071a9] p-[8px] text-white text-[16px] items-center">
+                  Geschenkgutschein <IconCaret />
+                </div>
+              </Disclosure.Button>
+
+              <Disclosure.Panel className={'p-[20px] bg-white'}>
+                <label
+                  htmlFor=""
+                  className="text-[16px] text-[#2380B1] mb-[5px] block"
+                >
+                  Geschenkgutschein hier eingeben
+                </label>
+                <div className="input-group flex ">
+                  <input
+                    type="text"
+                    placeholder="Geschenkgutschein hier eingeben"
+                    className="bg-white flex-1 border border-[#92bcdd] text-gray-900 text-[14px] rounded-[4px_0px_0px_4px] placeholder:text-[#6c757d] block w-full px-[12px] py-[6px] form-control border-r-0"
+                  />
+                  <button className="button-search hover:bg-[#9a2ea3] hover:text-white text-[#9a2ea3] border-[1px] border-[#9a2ea3] transition-all duration-500 py-[8px] px-[12px] rounded-[0px_4px_4px_0px] uppercase text-[14px]">
+                    Geschenkgutschein einlösen
+                  </button>
+                </div>
+              </Disclosure.Panel>
+            </>
+          </Disclosure>
         </div>
         <div className="col-right flex-1">
-          <ul className='flex gap-[20px] border-b-[1px] border-[#92bcdc] p-[10px] items-center font-semibold text-[#2380b1]'>
-            <li className='flex-1 text-right text-[16px]'>Zwischensumme:</li>
-            <li className='w-[150px] text-right text-[#9a2ea3] text-[25px] font-["opensans"] font-normal'>CHF 00.00</li>
+          <ul className="flex gap-[20px] border-b-[1px] border-[#92bcdc] p-[10px] items-center font-semibold text-[#2380b1]">
+            <li className="flex-1 text-right text-[16px]">Zwischensumme:</li>
+            <li className='w-[150px] text-right text-[#9a2ea3] text-[25px] font-["opensans"] font-normal'>
+              CHF 00.00
+            </li>
           </ul>
-          <ul className='flex gap-[20px] border-b-[1px] border-[#92bcdc] p-[10px] items-center font-semibold text-[#2380b1]'>
-            <li className='flex-1 text-right text-[16px]'>Enthaltene MwSt. 7.7%:</li>
-            <li className='w-[150px] text-right text-[#9a2ea3] text-[25px] font-["opensans"] font-normal'>CHF 00.00</li>
+          <ul className="flex gap-[20px] border-b-[1px] border-[#92bcdc] p-[10px] items-center font-semibold text-[#2380b1]">
+            <li className="flex-1 text-right text-[16px]">
+              Enthaltene MwSt. 7.7%:
+            </li>
+            <li className='w-[150px] text-right text-[#9a2ea3] text-[25px] font-["opensans"] font-normal'>
+              CHF 00.00
+            </li>
           </ul>
-          <ul className='flex gap-[20px] border-b-[1px] border-[#92bcdc] p-[10px] items-center font-semibold text-[#2380b1]'>
-            <li className='flex-1 text-right text-[16px]'>Gesamtsumme:</li>
-            <li className='w-[150px] text-right'>
-              <Text as="dd" data-test="subtotal" className={'text-[#9a2ea3] !text-[25px] font-["opensans"] font-normal'}>
+          <ul className="flex gap-[20px] border-b-[1px] border-[#92bcdc] p-[10px] items-center font-semibold text-[#2380b1]">
+            <li className="flex-1 text-right text-[16px]">Gesamtsumme:</li>
+            <li className="w-[150px] text-right">
+              <Text
+                as="dd"
+                data-test="subtotal"
+                className={
+                  'text-[#9a2ea3] !text-[25px] font-["opensans"] font-normal'
+                }
+              >
                 {cost?.subtotalAmount?.amount ? (
                   <Money data={cost?.subtotalAmount} />
                 ) : (
@@ -227,6 +300,14 @@ function CartSummary({cost, layout, children = null}) {
               </Text>
             </li>
           </ul>
+        </div>
+      </div>
+      <div className="cart-btn flex items-center justify-between gap-[30px] flex-wrap mt-[30px]">
+        <div className="btn-left flex">
+          <a href="/" className='hover:bg-[#9a2ea3] uppercase font-semibold hover:text-white text-[#9a2ea3] border-[2px] border-[#9a2ea3] transition-all duration-500 py-[10px] px-[20px] rounded-[4px] flex items-center gap-[5px]'><IconArrowRight className="w-[16px] h-[16px]" /> Einkauf fortsetzen</a>
+        </div>
+        <div className="btn-right flex">
+        <a href="#" className='hover:bg-[#9a2ea3] uppercase font-semibold hover:text-white text-[#9a2ea3] border-[2px] border-[#9a2ea3] transition-all duration-500 py-[10px] px-[20px] rounded-[4px] flex items-center gap-[5px]'> <IconShare className="w-[16px] h-[16px]" />Bezahlen</a>
         </div>
       </div>
       {/* <h2 id="summary-heading" className="sr-only">
@@ -256,7 +337,7 @@ function CartLineItem({line}) {
   if (typeof quantity === 'undefined' || !merchandise?.product) return null;
 
   return (
-    <li key={id} className="flex items-center border-b-[1px] border-[#92bcdc]">
+    <li key={id} className="flex flex-wrap md:flex-nowrap items-center border-b-[1px] border-[#92bcdc]">
       <div className="w-[100px] flex items-center justify-center img-col p-[10px]">
         {merchandise.image && (
           <Image
@@ -268,7 +349,7 @@ function CartLineItem({line}) {
           />
         )}
       </div>
-      <div className="name-col flex-1 p-[10px]">
+      <div className="name-col max-[767px]:w-[50%] md:flex-1 p-[10px]">
         <Heading as="h3" className="text-[16px] font-normal text-[#2380b1]">
           {merchandise?.product?.handle ? (
             <Link to={`/products/${merchandise.product.handle}`}>
@@ -279,22 +360,22 @@ function CartLineItem({line}) {
           )}
         </Heading>
       </div>
-      <div className="qty-col w-[130px] p-[10px]">
+      <div className="qty-col w-auto md:w-[130px] p-[10px]">
         <div className="qty-inner w-[106px] mx-auto">
           <CartLineQuantityAdjust line={line} />
         </div>
       </div>
-      <div className="unit-price-col w-[130px] p-[10px] text-right">
+      <div className="unit-price-col  w-auto md:w-[130px] p-[10px] text-right">
         <Text className={'text-[#9a2ea3] text-[25px] font-["OpenSans"]'}>
           <CartLinePrice line={line} as="span" />
         </Text>
       </div>
-      <div className="price-col w-[130px] p-[10px] text-right">
+      <div className="price-col w-auto md:w-[130px] p-[10px] text-right">
         <Text className={'text-[#9a2ea3] text-[25px] font-["OpenSans"]'}>
           <CartLinePrice line={line} as="span" />
         </Text>
       </div>
-      <div className="remove-btn-col w-[70px] p-[10px]">
+      <div className="remove-btn-col w-full md:w-[70px] p-[10px]">
         <div className="remove-btn-inner">
           <ItemRemoveButton lineIds={[id]} />
         </div>
@@ -326,7 +407,7 @@ function ItemRemoveButton({lineIds}) {
       />
       <input type="hidden" name="linesIds" value={JSON.stringify(lineIds)} />
       <button
-        className="flex items-center justify-center w-[34px] h-[27px] mx-auto rounded-[4px] p-[4px] py-[4px] text-[#dc3545] border-[1px] border-[#dc3545] hover:bg-[#dc3545] hover:text-white transition-all duration-500"
+        className="flex items-center justify-center w-[34px] h-[27px] md:mx-auto rounded-[4px] p-[4px] py-[4px] text-[#dc3545] border-[1px] border-[#dc3545] hover:bg-[#dc3545] hover:text-white transition-all duration-500"
         type="submit"
       >
         <Iconclose2 className="w-full h-full" />

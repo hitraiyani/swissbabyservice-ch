@@ -323,3 +323,13 @@ export function Iconclose2(props) {
     <svg {...props} xmlns="http://www.w3.org/2000/svg" width={32} height={32} viewBox="0 0 32 32" > <path fill="currentColor" d="M16 2C8.2 2 2 8.2 2 16s6.2 14 14 14s14-6.2 14-14S23.8 2 16 2zm5.4 21L16 17.6L10.6 23L9 21.4l5.4-5.4L9 10.6L10.6 9l5.4 5.4L21.4 9l1.6 1.6l-5.4 5.4l5.4 5.4l-1.6 1.6z" /> </svg>
   );
 }
+export function IconShare(props) {
+  return (
+    <svg {...props} xmlns="http://www.w3.org/2000/svg" width={512} height={512} viewBox="0 0 512 512" > <path fill="currentColor" d="M503.691 189.836L327.687 37.851C312.281 24.546 288 35.347 288 56.015v80.053C127.371 137.907 0 170.1 0 322.326c0 61.441 39.581 122.309 83.333 154.132c13.653 9.931 33.111-2.533 28.077-18.631C66.066 312.814 132.917 274.316 288 272.085V360c0 20.7 24.3 31.453 39.687 18.164l176.004-152c11.071-9.562 11.086-26.753 0-36.328z" /> </svg>
+  );
+}
+// export function IconArrowRight2(props) {
+//   return (
+//     <svg {...props} xmlns="http://www.w3.org/2000/svg" width={16} height={9} viewBox="0 0 16 9" > <path fill="currentColor" d="M12.5 5h-9c-.28 0-.5-.22-.5-.5s.22-.5.5-.5h9c.28 0 .5.22.5.5s-.22.5-.5.5Z" /> <path fill="currentColor" d="M10 8.5a.47.47 0 0 1-.35-.15c-.2-.2-.2-.51 0-.71l3.15-3.15l-3.15-3.15c-.2-.2-.2-.51 0-.71c.2-.2.51-.2.71 0l3.5 3.5c.2.2.2.51 0 .71l-3.5 3.5c-.1.1-.23.15-.35.15Z" /> </svg>
+//   );
+// }

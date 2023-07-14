@@ -16,6 +16,7 @@ import {
   ProductSwimlane,
   Section,
   Text,
+  SortFilter,
 } from '~/components';
 import {PAGINATION_SIZE} from '~/lib/const';
 import {PRODUCT_CARD_FRAGMENT} from '~/data/fragments';
@@ -74,7 +75,200 @@ export default function Search() {
 
   return (
     <>
-      <PageHeader>
+      <div className="search-wrap mt-[48px]">
+        <div className="container">
+          <div className="section-title flex items-center gap-[20px] mb-[35px]">
+            <Heading
+              as="h1"
+              className='text-[30px] font-["Open_Sans"] leading-[1.3] font-semibold text-[#2380B1]'
+            >
+              Suche
+            </Heading>
+            <span className="flex-1 border-b-[1px] border-[#3890bf] relative before:bg-no-repeat before:content-[''] before:inline-block before:w-5 before:h-5 before:bg-[url('https://cdn.shopify.com/s/files/1/0787/1352/0419/files/heart.png?v=1688561823')] before:absolute before:z-[2] before:-mt-1.5 before:right-[5px] md:before:right-[15px] before:top-full"></span>
+          </div>
+          <div className="flex flex-row gap-[30px]">
+            <div className="transition-all duration-200 w-[25%] hidden min-[992px]:block ">
+              <nav className="filter-list-wrap bg-[#978bbc] min-h-[245px] overflow-hidden px-[15px] py-[24px]">
+                <h4 className="whitespace-pre-wrap max-w-prose text-[#1C5F7B] text-[24px] xl:text-[28px] font-bold py-[27px] bg-[#CCDDF1] leading-none px-[30px] xl:px-[48px] hidden">
+                  category
+                </h4>
+                <div className="px-[30px] xl:px-[48px] py-[27px] hidden" />
+                <div className="flex flex-col gap-y-[10px]">
+                  <div>
+                    <ul className="flex flex-col gap-y-[8px] filter-sub-items">
+                      <li className="">
+                        <a
+                          className="block border-none  text-white p-[12px] transition-all duration-700 hover:bg-[#8f2999] font-['OpenSans'] rounded-[8px] text-[20px] leading-[1.2]"
+                          href="/collections/windelnundreinigungswaren"
+                        >
+                          Windeln und Reinigungswaren
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div>
+                    <ul className="flex flex-col gap-y-[8px] filter-sub-items">
+                      <li className="">
+                        <a
+                          aria-current="page"
+                          className="block border-none  text-white p-[12px] transition-all duration-700 hover:bg-[#8f2999] font-['OpenSans'] rounded-[8px] text-[20px] leading-[1.2] active"
+                          href="/collections/windeln-und-reinigungswaren-windeln-windeln"
+                        >
+                          Wickelzubehör
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div>
+                    <ul className="flex flex-col gap-y-[8px] filter-sub-items">
+                      <li className="">
+                        <a
+                          aria-current="page"
+                          className="block border-none  text-white p-[12px] transition-all duration-700 hover:bg-[#8f2999] font-['OpenSans'] rounded-[8px] text-[20px] leading-[1.2] active"
+                          href="/collections/windeln-und-reinigungswaren-windeln-windeln"
+                        >
+                          Pflege und Hygiene
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div>
+                    <ul className="flex flex-col gap-y-[8px] filter-sub-items">
+                      <li className="">
+                        <a
+                          aria-current="page"
+                          className="block border-none  text-white p-[12px] transition-all duration-700 hover:bg-[#8f2999] font-['OpenSans'] rounded-[8px] text-[20px] leading-[1.2] active"
+                          href="/collections/windeln-und-reinigungswaren-windeln-windeln"
+                        >
+                          Marken
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div>
+                    <ul className="flex flex-col gap-y-[8px] filter-sub-items">
+                      <li className="">
+                        <a
+                          className="block border-none  text-white p-[12px] transition-all duration-700 hover:bg-[#8f2999] font-['OpenSans'] rounded-[8px] text-[20px] leading-[1.2]"
+                          href="/collections/abo-gutscheine-1"
+                        >
+                          Abo &amp; Gutscheine
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </nav>
+            </div>
+            <div className="w-full min-[992px]:w-[75%]">
+              <div className="filter-form-wrap mb-[40px]">
+                <div className="filter-form-inner bg-[#f8f9fa] p-[20px] border-[1px] border-[#00000020] rounded-[4px]">
+                  <div className="flex flex-col sm:flex-row gap-[20px]">
+                    <div className="flex-1">
+                      <input
+                        type="text"
+                        className="bg-white border border-[#92bcdd] text-black text-[14.4px] rounded-[4px] placeholder:text-[#6c757d] block w-full px-[12px] py-[6px] form-control"
+                        placeholder="Suchbegriff(e)"
+                      />
+                      <div className="flex items-center mt-[15px]">
+                        <input
+                          id="link-checkbox"
+                          type="checkbox"
+                          defaultValue=""
+                          className="w-4 h-4 text-blue-600 bg-white border-[#333333] rounded focus:ring-0 focus:ring-transparent focus:shadow-none"
+                        />
+                        <label
+                          htmlFor="link-checkbox"
+                          className="ml-2 text-[16px] text-[#2380B1]"
+                        >
+                          In Produktbeschreibungen suchen
+                        </label>
+                      </div>
+                    </div>
+                    <div className="flex-1">
+                      <select
+                        id="countries"
+                        className="bg-white border border-[#92bcdd] text-black text-[14.4px] rounded-[4px] placeholder:text-[#6c757d] block w-full px-[12px] py-[6px] form-control"
+                      >
+                        <option selected="">Choose a country</option>
+                        <option value="US">United States</option>
+                        <option value="CA">Canada</option>
+                        <option value="FR">France</option>
+                        <option value="DE">Germany</option>
+                      </select>
+
+                      <div className="flex items-center mt-[15px]">
+                        <input
+                          id="link-checkbox2"
+                          type="checkbox"
+                          defaultValue=""
+                          className="w-4 h-4 text-blue-600 bg-white border-[#333333] rounded focus:ring-0 focus:ring-transparent focus:shadow-none"
+                        />
+                        <label
+                          htmlFor="link-checkbox2"
+                          className="ml-2 text-[16px] text-[#2380B1]"
+                        >
+                          In Unterkategorien suchen
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="btn-wrap flex justify-end mt-[20px]">
+                    <button className='button-search hover:bg-[#9a2ea3] hover:text-white text-[#9a2ea3] border-[2px] border-[#9a2ea3] transition-all duration-500 py-[10px] px-[20px] rounded-[4px]'>Suche</button>
+                  </div>
+                </div>
+              </div>
+              <div className="title flex items-center gap-[20px] mb-[30px]">
+                <h3 className='text-[25px] font-["Open_Sans"] leading-[1.3] font-semibold text-[#2380B1] max-w-[80%]'>
+                  Produkte die den Suchkriterien entsprechen
+                </h3>
+                <span className="flex-1 border-b-[1px] border-[#3890bf] relative before:bg-no-repeat before:content-[''] before:inline-block before:w-5 before:h-5 before:bg-[url('https://cdn.shopify.com/s/files/1/0787/1352/0419/files/heart.png?v=1688561823')] before:absolute before:z-[2] before:-mt-1.5 before:right-[5px] md:before:right-[15px] before:top-full"></span>
+              </div>
+              {!searchTerm || noResults ? (
+                <NoResults
+                  noResults={noResults}
+                  recommendations={noResultRecommendations}
+                />
+              ) : (
+                <Section className={'!p-0 !gap-0'}>
+                  <Pagination connection={products}>
+                    {({nodes, isLoading, NextLink, PreviousLink}) => {
+                      const itemsMarkup = nodes.map((product, i) => (
+                        <ProductCard
+                          key={product.id}
+                          product={product}
+                          loading={getImageLoadingPriority(i)}
+                        />
+                      ));
+                      return (
+                        <>
+                          <div className="flex items-center justify-center">
+                            <PreviousLink className="inline-block rounded font-medium text-center py-3 px-6 border border-primary/10 bg-contrast text-primary w-full">
+                              {isLoading ? 'Loading...' : 'Previous'}
+                            </PreviousLink>
+                          </div>
+                          <div
+                            data-test="product-grid"
+                            className="product-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-[30px]"
+                          >
+                            {itemsMarkup}
+                          </div>
+                          <div className="flex items-center justify-center">
+                            <NextLink className="inline-block rounded font-medium text-center py-3 px-6 border border-primary/10 bg-contrast text-primary w-full">
+                              {isLoading ? 'Loading...' : 'Next'}
+                            </NextLink>
+                          </div>
+                        </>
+                      );
+                    }}
+                  </Pagination>
+                </Section>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* <PageHeader>
         <Heading as="h1" size="copy">
           Search
         </Heading>
@@ -90,43 +284,7 @@ export default function Search() {
             Go
           </button>
         </Form>
-      </PageHeader>
-      {!searchTerm || noResults ? (
-        <NoResults
-          noResults={noResults}
-          recommendations={noResultRecommendations}
-        />
-      ) : (
-        <Section>
-          <Pagination connection={products}>
-            {({nodes, isLoading, NextLink, PreviousLink}) => {
-              const itemsMarkup = nodes.map((product, i) => (
-                <ProductCard
-                  key={product.id}
-                  product={product}
-                  loading={getImageLoadingPriority(i)}
-                />
-              ));
-
-              return (
-                <>
-                  <div className="flex items-center justify-center mt-6">
-                    <PreviousLink className="inline-block rounded font-medium text-center py-3 px-6 border border-primary/10 bg-contrast text-primary w-full">
-                      {isLoading ? 'Loading...' : 'Previous'}
-                    </PreviousLink>
-                  </div>
-                  <Grid data-test="product-grid">{itemsMarkup}</Grid>
-                  <div className="flex items-center justify-center mt-6">
-                    <NextLink className="inline-block rounded font-medium text-center py-3 px-6 border border-primary/10 bg-contrast text-primary w-full">
-                      {isLoading ? 'Loading...' : 'Next'}
-                    </NextLink>
-                  </div>
-                </>
-              );
-            }}
-          </Pagination>
-        </Section>
-      )}
+      </PageHeader> */}
     </>
   );
 }
@@ -135,13 +293,13 @@ function NoResults({noResults, recommendations}) {
   return (
     <>
       {noResults && (
-        <Section padding="x">
-          <Text className="opacity-50">
-            No results, try a different search.
+        <Section className={'!p-0 !gap-0'}>
+          <Text className="!text-[13px] text-[#2380B1] font-['Open_Sans']">
+            Keine Produkte vorhanden, die den Suchkriterien entsprechen
           </Text>
         </Section>
       )}
-      <Suspense>
+      {/* <Suspense>
         <Await
           errorElement="There was a problem loading related products"
           resolve={recommendations}
@@ -164,7 +322,7 @@ function NoResults({noResults, recommendations}) {
             );
           }}
         </Await>
-      </Suspense>
+      </Suspense> */}
     </>
   );
 }
