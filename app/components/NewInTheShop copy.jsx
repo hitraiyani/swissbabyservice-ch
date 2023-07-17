@@ -33,6 +33,7 @@ export function NewInTheShop({products, title, locale}) {
         </div>
         <div className="relative new-in-Shop-slider">
           <Swiper
+            
             modules={[Autoplay, Navigation, Pagination, Scrollbar, A11y]}
             spaceBetween={28}
             slidesPerView={4}
@@ -40,15 +41,9 @@ export function NewInTheShop({products, title, locale}) {
               prevEl: '#swiper-button-prev-new-in-Shop',
               nextEl: '#swiper-button-next-new-in-Shop',
             }}
-            // pagination={{
-            //   clickable: true,
-            // }}
+            
+            
             loop={true}
-           
-            // autoplay={{
-            //   delay: 5000,
-            //   disableOnInteraction: false,
-            // }}
             breakpoints={{
               0: {
                 slidesPerView: 1,

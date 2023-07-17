@@ -23,7 +23,11 @@
   "email" : "Emailadresse",
   "message" : "Anfrage / Text",
   "send" : "Abschicken",
-  "view_detail":"Artikel ansehen"
+  "view_detail":"Artikel ansehen",
+  "search_in_lable" : "In Produktbeschreibungen suchen",
+  "search_in_sub" :"In Unterkategorien suchen",
+  "match_product":" Produkte die den Suchkriterien entsprechen",
+  "search":"Suche"
 
 
 }

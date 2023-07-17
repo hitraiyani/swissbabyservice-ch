@@ -30,6 +30,11 @@
   "email" : "Indirizzo E-Mail",
   "message" : "Richiesta",
   "send" : "Invia",
-  "view_detail":"Visualizza prodotto"
+  "view_detail":"Visualizza prodotto",
+  "search_in_lable" : "In Unterkategorien suchen",
+  "search_in_sub" :"Ricerca nelle sottocategorie",
+  "match_product":"Prodotti che soddisfano i criteri di ricerca",
+  "search":"Ricerca"
+
 
 }

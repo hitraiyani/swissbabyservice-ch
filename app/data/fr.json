@@ -22,7 +22,11 @@
   "footer_desc":"Avec notre gros assortiment des couches classiques, écologiques et biologiques, des produits de soin et d?hygiène et des accessoires nous sommes votre partenaire sérieux non seulement pour les clients privés mais également pour l?entreprise clientes.",
   "privacy-policy-title" : "Datenschutz",
   "terms-of-service-title" : "CG",
-  "view_detail":"Voir produit"
+  "view_detail":"Voir produit",
+  "search_in_lable" : "Recherche dans la description du produit",
+  "search_in_sub" :"Recherche dans les sous-catégories",
+  "match_product": "Produits correspondants aux critères de recherche",
+  "search":"Recherche"
 
 
   

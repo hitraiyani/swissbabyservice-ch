@@ -9,6 +9,8 @@ export function FeaturedCollections({
   const haveCollections = collections?.nodes?.length > 0;
   if (!haveCollections) return null;
 
+  console.log(collections)
+  
   const collectionsWithImage = collections.nodes.filter((item) => item.image);
 
   return (
@@ -19,7 +21,7 @@ export function FeaturedCollections({
             return (
               <Link key={collection.id} to={`/collections/${collection.handle}`}>
                 <div className="grid gap-4">
-                  <div className="card-image relative overflow-hidden pb-[126%] before:!rounded-none bg-white before:hover:border-[3px] before:hover:border-[#7ec24b] !rounded-none">
+                  <div className={`card-image relative overflow-hidden pb-[126%] before:!rounded-none bg-white before:hover:border-[3px]   !rounded-none`} style={{ borderColor: collection.boarder_color ? '#'+collection.boarder_color?.value : '#7ec24b' }}>
                     {collection?.image && (
                       <Image
                         alt={`Image of ${collection.title}`}

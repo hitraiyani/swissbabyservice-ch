@@ -30,6 +30,10 @@ import swiper_pagination from 'swiper/css/pagination';
 import swiper_scrollbar from 'swiper/css/scrollbar';
 import swiper_effect_fade from 'swiper/css/effect-fade';
 
+// Import css files
+import slick_css from "slick-carousel/slick/slick.css";
+import slick_themecss from "slick-carousel/slick/slick-theme.css";
+
 export const links = () => {
   return [
     {rel: 'stylesheet', href: styles},
@@ -43,6 +47,9 @@ export const links = () => {
     {rel: 'stylesheet', href: swiper_pagination},
     {rel: 'stylesheet', href: swiper_scrollbar},
     {rel: 'stylesheet', href: swiper_effect_fade},
+   
+    {rel: 'stylesheet', href: slick_css},
+    {rel: 'stylesheet', href: slick_themecss},
   ];
 };
 

@@ -401,6 +401,9 @@ export const FEATURED_COLLECTIONS_QUERY = `#graphql
           height
           url
         }
+        boarder_color: metafield(namespace: "custom", key: "boadercolor") {
+          value
+        }
       }
     }
   }
