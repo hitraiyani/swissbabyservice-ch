@@ -12,10 +12,12 @@ import {useEffect} from 'react';
 /**
  * Hero component that renders metafields attached to collection resources
  **/
-export function HeroSlider({slides}) {
+export function HeroSlider({slides ,ballon}) {
   const slideOne = slides[0] ? slides[0] : {};
   const slideTwo = slides[1] ? slides[1] : {};
-
+  const ballons = ballon["nodes"] ?ballon["nodes"][0] : {};
+   
+   
   useEffect(() => {
     window.addEventListener('scroll', function (e) {
       parallaxScroll();
@@ -90,11 +92,12 @@ export function HeroSlider({slides}) {
           >
             {slides.map((slide, index) => (
               <SwiperSlide key={index}>
+                
                 <div className="slide-item h-full pt-[30px] pb-[30px]">
                   <div className="bg-img absolute w-full h-full inset-0 z-[-1]">
                     <img
                       className="w-full h-full object-cover"
-                      src="https://cdn.shopify.com/s/files/1/0787/1352/0419/files/Slide-2.jpg?v=1688966228"
+                      src={slide?.background?.reference?.image?.url}
                       alt=""
                     />
                   </div>
@@ -163,7 +166,57 @@ export function HeroSlider({slides}) {
         </div>
       </div>
       <div className="bz-baloons-container hidden min-[992px]:block">
-        <div className="baloon-1">
+        
+      {ballons && (
+          <div className="baloon-1">
+          <img
+            src={ballons?.balloon_1?.reference?.image?.url} 
+            alt=""
+          />
+        </div>
+        )}
+        {ballons && (
+          <div className="baloon-2">
+          <img
+            src={ballons?.balloon_2?.reference?.image?.url} 
+            alt=""
+          />
+        </div>
+        )}
+         {ballons && (
+          <div className="baloon-3">
+          <img
+            src={ballons?.balloon_3?.reference?.image?.url} 
+            alt=""
+          />
+        </div>
+        )}
+         {ballons && (
+          <div className="baloon-4">
+          <img
+            src={ballons?.balloon_4?.reference?.image?.url} 
+            alt=""
+          />
+        </div>
+        )}
+         {ballons && (
+          <div className="baloon-5">
+          <img
+            src={ballons?.balloon_5?.reference?.image?.url} 
+            alt=""
+          />
+        </div>
+        )}
+         {ballons && (
+          <div className="baloon-6">
+          <img
+            src={ballons?.balloon_6?.reference?.image?.url} 
+            alt=""
+          />
+        </div>
+        )}
+        
+         {/* <div className="baloon-1">
           <img
             src="https://cdn.shopify.com/s/files/1/0787/1352/0419/files/baloon-1-de.png?v=1688968486"
             alt=""
@@ -173,15 +226,15 @@ export function HeroSlider({slides}) {
           <img
             src="https://cdn.shopify.com/s/files/1/0787/1352/0419/files/baloon-2-de.png?v=1688968485"
             alt=""
-          />
-        </div>
-        <div className="baloon-3">
+          /> 
+        </div> */}
+        {/* <div className="baloon-3">
           <img
             src="https://cdn.shopify.com/s/files/1/0787/1352/0419/files/baloon-3-de.png?v=1688968485"
             alt=""
           />
-        </div>
-        <div className="baloon-4">
+        </div> */}
+        {/* <div className="baloon-4">
           <img
             src="https://cdn.shopify.com/s/files/1/0787/1352/0419/files/baloon-4-de.png?v=1688968485"
             alt=""
@@ -198,7 +251,7 @@ export function HeroSlider({slides}) {
             src="https://cdn.shopify.com/s/files/1/0787/1352/0419/files/baloon-6-de.png?v=1688968485"
             alt=""
           />
-        </div>
+        </div> */}
       </div>
     </section>
   );

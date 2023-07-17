@@ -29,7 +29,7 @@ export async function loader({params, context}) {
     throw new Response(null, {status: 404});
   }
 
-  const {shop, hero, home_hero_slider} = await context.storefront.query(
+  const {shop, hero, home_hero_slider,slider_ballons} = await context.storefront.query(
     HOMEPAGE_SEO_QUERY,
     {
       variables: {handle: 'freestyle'},
@@ -46,6 +46,7 @@ export async function loader({params, context}) {
   return defer({
     shop,
     homeHeroSlider: home_hero_slider,
+    slider_ballons:slider_ballons,
     language,
     primaryHero: hero,
     // These different queries are separated to illustrate how 3rd party content
@@ -113,6 +114,7 @@ export default function Homepage() {
   const {
     primaryHero,
     homeHeroSlider,
+    slider_ballons,
     secondaryHero,
     tertiaryHero,
     featuredCollections,
@@ -127,7 +129,7 @@ export default function Homepage() {
 
   return (
     <>
-      <HeroSlider slides={homeHeroSlider?.nodes} />
+      <HeroSlider slides={homeHeroSlider?.nodes} ballon={slider_ballons} />
 
       {/* {primaryHero && (
         <Hero {...primaryHero} height="full" top loading="eager" />
@@ -237,7 +239,7 @@ const HOMEPAGE_SLEEPING_CHILD_BANNER_QUERY = `#graphql
 ${MEDIA_FRAGMENT}
   query homeTopCollections($metaObjectId: ID!, $country: CountryCode, $language: LanguageCode)
   @inContext(country: $country, language: $language) {
-    data : metaobject(id : $metaObjectId) {
+    data: metaobject(id : $metaObjectId) {
       handle
       id
       type
@@ -286,7 +288,43 @@ const HOMEPAGE_SEO_QUERY = `#graphql
     hero: collection(handle: $handle) {
       ...CollectionContent
     }
-    home_hero_slider : metaobjects(type: "home_slider", first: 5) {
+    slider_ballons: metaobjects(type: "ballons", first: 1) {
+      nodes {
+        id
+        balloon_1: field(key: "balloon_1") {
+          reference {
+            ...Media
+          }
+        }
+        balloon_2: field(key: "balloon_2") {
+          reference {
+            ...Media
+          }
+        }
+        balloon_3: field(key: "balloon_3") {
+          reference {
+            ...Media
+          }
+        }
+        balloon_4: field(key: "balloon_4") {
+          reference {
+            ...Media
+          }
+        }
+        balloon_5: field(key: "balloon_5") {
+          reference {
+            ...Media
+          }
+        }
+        balloon_6: field(key: "balloon_6") {
+          reference {
+            ...Media
+          }
+        }
+      }
+    }
+
+    home_hero_slider: metaobjects(type: "home_slider", first: 5) {
       nodes {
         id
         heading: field(key: "heading") {
@@ -294,6 +332,11 @@ const HOMEPAGE_SEO_QUERY = `#graphql
         }
         sub_heading: field(key: "sub_heading") {
           value
+        }
+        background: field(key: "background") {
+          reference {
+            ...Media
+          }
         }
         main_image: field(key: "main_image") {
           reference {
