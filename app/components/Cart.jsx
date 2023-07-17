@@ -302,7 +302,7 @@ function CartSummary({cost, layout, children = null}) {
           </ul>
         </div>
       </div>
-      <div className="cart-btn flex items-center justify-between gap-[30px] flex-wrap mt-[30px]">
+      <div className="cart-btn flex items-center justify-between gap-[15px] flex-wrap mt-[30px]">
         <div className="btn-left flex">
           <a href="/" className='hover:bg-[#9a2ea3] uppercase font-semibold hover:text-white text-[#9a2ea3] border-[2px] border-[#9a2ea3] transition-all duration-500 py-[10px] px-[20px] rounded-[4px] flex items-center gap-[5px]'><IconArrowRight className="w-[16px] h-[16px]" /> Einkauf fortsetzen</a>
         </div>
@@ -349,7 +349,7 @@ function CartLineItem({line}) {
           />
         )}
       </div>
-      <div className="name-col max-[767px]:w-[50%] md:flex-1 p-[10px]">
+      <div className="name-col max-[767px]:w-[calc(100%_-_100px)] md:flex-1 p-[10px]">
         <Heading as="h3" className="text-[16px] font-normal text-[#2380b1]">
           {merchandise?.product?.handle ? (
             <Link to={`/products/${merchandise.product.handle}`}>
@@ -375,7 +375,7 @@ function CartLineItem({line}) {
           <CartLinePrice line={line} as="span" />
         </Text>
       </div>
-      <div className="remove-btn-col w-full md:w-[70px] p-[10px]">
+      <div className="remove-btn-col w-[70px] p-[10px]">
         <div className="remove-btn-inner">
           <ItemRemoveButton lineIds={[id]} />
         </div>

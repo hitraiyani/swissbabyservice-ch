@@ -248,11 +248,11 @@ export function parseMenu(menu, customPrefixes = {}) {
 }
 
 export const INPUT_STYLE_CLASSES =
-  'appearance-none rounded dark:bg-transparent border focus:border-primary/50 focus:ring-0 w-full py-2 px-3 text-primary/90 placeholder:text-primary/50 leading-tight focus:shadow-outline';
+  'bg-white border border-[#92bcdd] text-gray-900 text-[14.4px] rounded-[0px_4px_4px_0px] placeholder:text-[#6c757d] block w-full px-[12px] py-[6px] form-control !m-0';
 
 export const getInputStyleClasses = (isError) => {
   return `${INPUT_STYLE_CLASSES} ${
-    isError ? 'border-red-500' : 'border-primary/20'
+    isError ? 'border-red-500' : ''
   }`;
 };
 
