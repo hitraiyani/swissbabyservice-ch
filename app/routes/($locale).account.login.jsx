@@ -130,10 +130,8 @@ export default function Login() {
                   </div>
                   <Form method="post" noValidate className="mt-[20px]">
                     {actionData?.formError && (
-                      <div className="flex items-center justify-center mb-6 bg-zinc-500">
-                        <p className="m-4 text-s text-contrast">
-                          {actionData.formError}
-                        </p>
+                      <div className="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400">
+                        <p className="font-medium">{actionData.formError}</p>
                       </div>
                     )}
                     <div className="mb-[20px]">
@@ -261,17 +259,94 @@ export default function Login() {
                 </div>
                 <p>KONTO</p>
               </div>
-              <ul className='px-[20px] py-[12px]'>
-                <li><a href="#" className='flex items-center gap-[5px] text-[16px] text-[#2380b1] py-[8px] px-[16px] pl-0 hover:text-[#2A6496]'><IconArrowRight2 className="w-[20px] h-[20px]"/> Anmelden</a></li>
-                <li><a href="#" className='flex items-center gap-[5px] text-[16px] text-[#2380b1] py-[8px] px-[16px] pl-0 hover:text-[#2A6496]'><IconArrowRight2 className="w-[20px] h-[20px]"/> Registrieren</a></li>
-                <li><a href="#" className='flex items-center gap-[5px] text-[16px] text-[#2380b1] py-[8px] px-[16px] pl-0 hover:text-[#2A6496]'><IconArrowRight2 className="w-[20px] h-[20px]"/> Password vergessen</a></li>
-                <li><a href="#" className='flex items-center gap-[5px] text-[16px] text-[#2380b1] py-[8px] px-[16px] pl-0 hover:text-[#2A6496]'><IconArrowRight2 className="w-[20px] h-[20px]"/> Adressen</a></li>
-                <li><a href="#" className='flex items-center gap-[5px] text-[16px] text-[#2380b1] py-[8px] px-[16px] pl-0 hover:text-[#2A6496]'><IconArrowRight2 className="w-[20px] h-[20px]"/> Wunschliste</a></li>
-                <li><a href="#" className='flex items-center gap-[5px] text-[16px] text-[#2380b1] py-[8px] px-[16px] pl-0 hover:text-[#2A6496]'><IconArrowRight2 className="w-[20px] h-[20px]"/> Auftragsverlauf</a></li>
-                <li><a href="#" className='flex items-center gap-[5px] text-[16px] text-[#2380b1] py-[8px] px-[16px] pl-0 hover:text-[#2A6496]'><IconArrowRight2 className="w-[20px] h-[20px]"/> Bonuspunkte</a></li>
-                <li><a href="#" className='flex items-center gap-[5px] text-[16px] text-[#2380b1] py-[8px] px-[16px] pl-0 hover:text-[#2A6496]'><IconArrowRight2 className="w-[20px] h-[20px]"/> Transaktionen</a></li>
-                <li><a href="#" className='flex items-center gap-[5px] text-[16px] text-[#2380b1] py-[8px] px-[16px] pl-0 hover:text-[#2A6496]'><IconArrowRight2 className="w-[20px] h-[20px]"/> Newsletter</a></li>
-                <li><a href="#" className='flex items-center gap-[5px] text-[16px] text-[#2380b1] py-[8px] px-[16px] pl-0 hover:text-[#2A6496]'><IconArrowRight2 className="w-[20px] h-[20px]"/> Abonnements</a></li>
+              <ul className="px-[20px] py-[12px]">
+                <li>
+                  <a
+                    href="#"
+                    className="flex items-center gap-[5px] text-[16px] text-[#2380b1] py-[8px] px-[16px] pl-0 hover:text-[#2A6496]"
+                  >
+                    <IconArrowRight2 className="w-[20px] h-[20px]" /> Anmelden
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="flex items-center gap-[5px] text-[16px] text-[#2380b1] py-[8px] px-[16px] pl-0 hover:text-[#2A6496]"
+                  >
+                    <IconArrowRight2 className="w-[20px] h-[20px]" />{' '}
+                    Registrieren
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="flex items-center gap-[5px] text-[16px] text-[#2380b1] py-[8px] px-[16px] pl-0 hover:text-[#2A6496]"
+                  >
+                    <IconArrowRight2 className="w-[20px] h-[20px]" /> Password
+                    vergessen
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="flex items-center gap-[5px] text-[16px] text-[#2380b1] py-[8px] px-[16px] pl-0 hover:text-[#2A6496]"
+                  >
+                    <IconArrowRight2 className="w-[20px] h-[20px]" /> Adressen
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="flex items-center gap-[5px] text-[16px] text-[#2380b1] py-[8px] px-[16px] pl-0 hover:text-[#2A6496]"
+                  >
+                    <IconArrowRight2 className="w-[20px] h-[20px]" />{' '}
+                    Wunschliste
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="flex items-center gap-[5px] text-[16px] text-[#2380b1] py-[8px] px-[16px] pl-0 hover:text-[#2A6496]"
+                  >
+                    <IconArrowRight2 className="w-[20px] h-[20px]" />{' '}
+                    Auftragsverlauf
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="flex items-center gap-[5px] text-[16px] text-[#2380b1] py-[8px] px-[16px] pl-0 hover:text-[#2A6496]"
+                  >
+                    <IconArrowRight2 className="w-[20px] h-[20px]" />{' '}
+                    Bonuspunkte
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="flex items-center gap-[5px] text-[16px] text-[#2380b1] py-[8px] px-[16px] pl-0 hover:text-[#2A6496]"
+                  >
+                    <IconArrowRight2 className="w-[20px] h-[20px]" />{' '}
+                    Transaktionen
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="flex items-center gap-[5px] text-[16px] text-[#2380b1] py-[8px] px-[16px] pl-0 hover:text-[#2A6496]"
+                  >
+                    <IconArrowRight2 className="w-[20px] h-[20px]" /> Newsletter
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="flex items-center gap-[5px] text-[16px] text-[#2380b1] py-[8px] px-[16px] pl-0 hover:text-[#2A6496]"
+                  >
+                    <IconArrowRight2 className="w-[20px] h-[20px]" />{' '}
+                    Abonnements
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
