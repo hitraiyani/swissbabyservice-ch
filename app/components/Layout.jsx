@@ -563,16 +563,22 @@ function Badge({openCart, dark, count, locale}) {
   );
 
   return isHydrated ? (
-    <button
-      onClick={openCart}
-      className="w-full bg-[#c0d4e6] font-['Open_Sans'] p-[7px_6px_7px_8px] min-[992px]:p-[13px_12px_13px_15px] rounded-[4px] min-[992px]:rounded-[8px] text-[#2380b1] hover:bg-[#2380b1] hover:text-white transition-all duration-500"
+    // <button
+    //   onClick={openCart}
+    //   className="w-full bg-[#c0d4e6] font-['Open_Sans'] p-[7px_6px_7px_8px] min-[992px]:p-[13px_12px_13px_15px] rounded-[4px] min-[992px]:rounded-[8px] text-[#2380b1] hover:bg-[#2380b1] hover:text-white transition-all duration-500"
+    // >
+    //   {BadgeCounter}
+    // </button>
+    <Link
+      to="/cart"
+      className="w-full bg-[#c0d4e6] font-['Open_Sans'] p-[7px_6px_7px_8px] min-[992px]:p-[13px_12px_13px_15px] rounded-[4px] min-[992px]:rounded-[8px] text-[#2380b1] hover:bg-[#2380b1] hover:text-white transition-all duration-500 block"
     >
       {BadgeCounter}
-    </button>
+    </Link>
   ) : (
     <Link
       to="/cart"
-      className="w-full bg-[#c0d4e6] font-['Open_Sans'] p-[7px_6px_7px_8px] min-[992px]:p-[13px_12px_13px_15px] rounded-[4px] min-[992px]:rounded-[8px] text-[#2380b1] hover:bg-[#2380b1] hover:text-white transition-all duration-500"
+      className="w-full bg-[#c0d4e6] font-['Open_Sans'] p-[7px_6px_7px_8px] min-[992px]:p-[13px_12px_13px_15px] rounded-[4px] min-[992px]:rounded-[8px] text-[#2380b1] hover:bg-[#2380b1] hover:text-white transition-all duration-500 block"
     >
       {BadgeCounter}
     </Link>
