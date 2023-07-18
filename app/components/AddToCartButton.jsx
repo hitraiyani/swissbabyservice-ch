@@ -36,7 +36,7 @@ export function AddToCartButton({
       // console.log(handledata);
     MySwal.fire({
       //title: <strong>Good job!</strong>,
-      html: <><i> {translate("you_added",locale)} </i><a href={productLink}>{analytics?.products[0].name}</a>{translate("to_your",locale) } <a href='/cart'>{translate("shoppin_cart",locale)}</a> </>,
+      html: <><i> {translate("you_added",locale)} </i><a href={productLink}>{analytics?.products[0].name}</a> { translate("to_your",locale) }  <a href='/cart'> {translate("shoppin_cart",locale)}</a> </>,
       icon: 'success'
     })
    }
