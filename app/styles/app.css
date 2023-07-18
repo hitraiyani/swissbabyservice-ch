@@ -708,9 +708,12 @@ input[type='number'] {
 
 /* cart drawer */
 
-.drawer { 
-  .cartEmpty{
+.drawer {
+  .cartEmpty {
     padding: 0 15px 30px;
+    > div {
+      margin-top: 0;
+    }
   }
   .cart-section-wrap {
     margin-top: 0;
@@ -738,7 +741,7 @@ input[type='number'] {
             flex: none;
             padding-bottom: 0;
           }
-          .price-col{
+          .price-col {
             width: auto;
           }
           .unit-price-col {
@@ -751,7 +754,7 @@ input[type='number'] {
             transform: translateY(-50%);
             width: 35px;
             padding: 0;
-          } 
+          }
           > div {
             padding: 0 5px 0 5px;
           }
@@ -761,8 +764,8 @@ input[type='number'] {
         }
       }
     }
-    .cart-footer{
-      > div:first-child{
+    .cart-footer {
+      > div:first-child {
         flex-flow: column;
         margin-top: 30px;
       }
