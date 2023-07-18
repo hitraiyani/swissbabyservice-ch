@@ -709,6 +709,9 @@ input[type='number'] {
 /* cart drawer */
 
 .drawer { 
+  .cartEmpty{
+    padding: 0 15px 30px;
+  }
   .cart-section-wrap {
     margin-top: 0;
     section {
