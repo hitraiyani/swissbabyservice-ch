@@ -772,5 +772,20 @@ input[type='number'] {
     }
   }
 }
-
+button.swal2-confirm.swal2-styled {
+  text-align: center;
+  font-family: 'OpenSans', arial;
+  border: 2px solid rgb(154,46,163);
+  background: rgb(154,46,163);
+  color: #fff;
+  transition: color 300ms ease-in-out 0s, background-color 300ms ease-in-out 0s, background-position 300ms ease-in-out 0s;
+  font-weight: bold;
+  min-width: 100px;
+  &:focus{
+    outline: none;
+    box-shadow: none;
+  }
+}
 /* End cart drawer */
+
+
