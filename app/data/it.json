@@ -34,7 +34,11 @@
   "search_in_lable" : "In Unterkategorien suchen",
   "search_in_sub" :"Ricerca nelle sottocategorie",
   "match_product":"Prodotti che soddisfano i criteri di ricerca",
-  "search":"Ricerca"
+  "search":"Ricerca",
+  "added_to_cart":"Erfolgreich in den Warenkorb gelegt.",
+  "you_added":"Hai aggiunto",
+  "to_your":"al tuo",
+  "shoppin_cart":"carrello della spesa!"
 
 
 }
