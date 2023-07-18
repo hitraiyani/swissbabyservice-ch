@@ -11006,6 +11006,16 @@
   dependencies:
     "tslib" "^2.0.3"
 
+"sweetalert2-react-content@^5.0.7":
+  "integrity" "sha512-8Fk82Mpk45lFXpJWKIFF/lq8k/dJKDDQGFcuqVosaL/qRdViyAs5+u37LoTGfnOIvf+rfQB3PAXcp1XLLn+0ew=="
+  "resolved" "https://registry.npmjs.org/sweetalert2-react-content/-/sweetalert2-react-content-5.0.7.tgz"
+  "version" "5.0.7"
+
+"sweetalert2@^11.0.0", "sweetalert2@^11.7.18":
+  "integrity" "sha512-Njl5JTDasSP8yRX9cpLdy2fdxHZYPYNmiIGNZykF2Zt1UHIvurwt/W2LmlGe5RbyMDHYDXuHqlD1Q8Vr5/mqlA=="
+  "resolved" "https://registry.npmjs.org/sweetalert2/-/sweetalert2-11.7.18.tgz"
+  "version" "11.7.18"
+
 "swiper@^9.3.2":
   "integrity" "sha512-1nT2T8EzUpZ0FagEqaN/YAhRj33F2x/lN6cyB0/xoYJDMf8KwTFT3hMOeoB8Tg4o3+P/CKqskP+WX0Df046fqA=="
   "resolved" "https://registry.npmjs.org/swiper/-/swiper-9.4.1.tgz"

@@ -26,7 +26,11 @@
   "search_in_lable" : "Recherche dans la description du produit",
   "search_in_sub" :"Recherche dans les sous-catégories",
   "match_product": "Produits correspondants aux critères de recherche",
-  "search":"Recherche"
+  "search":"Recherche",
+  "added_to_cart":"Erfolgreich in den Warenkorb gelegt.",
+  "you_added":"Vous avez ajouté",
+  "to_your":"à ton",
+  "shoppin_cart":"panier!"
 
 
   

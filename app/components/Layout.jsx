@@ -5,6 +5,7 @@ import {
   useMatches,
   useLocation,
 } from '@remix-run/react';
+
 import {useWindowScroll} from 'react-use';
 import {Disclosure} from '@headlessui/react';
 import {Suspense, useEffect, useMemo} from 'react';
@@ -31,6 +32,8 @@ import {
 import {useIsHomePath, getMenuHandle, translate} from '~/lib/utils';
 import {useIsHydrated} from '~/hooks/useIsHydrated';
 import {useCartFetchers} from '~/hooks/useCartFetchers';
+
+
 
 export function Layout({children, layout, locale}) {
   const {headerMenu, footerMenu} = layout;
@@ -60,6 +63,7 @@ export function Layout({children, layout, locale}) {
 
 function Header({title, aicoMenu, menu, locale}) {
   const isHome = useIsHomePath();
+ 
 
   const {
     isOpen: isCartOpen,
@@ -78,7 +82,8 @@ function Header({title, aicoMenu, menu, locale}) {
   // toggle cart drawer when adding to cart
   useEffect(() => {
     if (isCartOpen || !addToCartFetchers.length) return;
-    openCart();
+     //openCart();
+     
   }, [addToCartFetchers, isCartOpen, openCart]);
 
   return (

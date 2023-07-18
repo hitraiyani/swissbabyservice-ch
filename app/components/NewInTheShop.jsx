@@ -183,6 +183,8 @@ export function NewInTheShop({products, title, locale}) {
                               },
                             ]}
                             variant="secondary"
+                            locale={locale}
+                            productLink={`/products/${product.handle}`}
                             analytics={{
                               products: [productAnalytics],
                               totalValue: parseFloat(productAnalytics.price),
