@@ -18,7 +18,7 @@ import {
   IconArrowRight2,
   IconArrowRight,
 } from '~/components';
-import {getInputStyleClasses} from '~/lib/utils'; 
+import {getInputStyleClasses} from '~/lib/utils';
 import {CartAction} from '~/lib/type';
 
 export function Cart({layout, onClose, cart}) {
@@ -211,60 +211,75 @@ function CartSummary({cost, layout, children = null}) {
           </div>
           {/* {children} */}
           <Disclosure as="div" className="grid w-full mb-[5px]">
-            <>
-              <Disclosure.Button className="text-left">
-                <div className="flex justify-between bg-[#3071a9] p-[8px] text-white text-[16px] items-center">
-                  Rabattcode <IconCaret />
-                </div>
-              </Disclosure.Button>
+            {({open}) => (
+              <>
+                <Disclosure.Button className="text-left">
+                  <div className="flex justify-between bg-[#3071a9] p-[8px] text-white text-[16px] items-center">
+                    Rabattcode <IconCaret />
+                  </div>
+                </Disclosure.Button>
 
-              <Disclosure.Panel className={'p-[20px] bg-white'}>
-                <label
-                  htmlFor=""
-                  className="text-[16px] text-[#2380B1] mb-[5px] block"
+                <div
+                  className={`${
+                    open ? `max-h-48 h-fit` : `max-h-0`
+                  } overflow-hidden transition-all duration-300`}
                 >
-                  Rabattcode hier eingeben
-                </label>
-                <div className="input-group flex ">
-                  <input
-                    type="text"
-                    placeholder="Rabattcode hier eingeben"
-                    className="bg-white flex-1 border border-[#92bcdd] text-gray-900 text-[14px] rounded-[4px_0px_0px_4px] placeholder:text-[#6c757d] block w-full px-[12px] py-[6px] form-control border-r-0"
-                  />
-                  <button className="button-search hover:bg-[#9a2ea3] hover:text-white text-[#9a2ea3] border-[1px] border-[#9a2ea3] transition-all duration-500 py-[8px] px-[12px] rounded-[0px_4px_4px_0px] uppercase text-[14px]">
-                    Rabattcode einlösen
-                  </button>
+                  <Disclosure.Panel className={'p-[20px] bg-white'}>
+                    <label
+                      htmlFor=""
+                      className="text-[16px] text-[#2380B1] mb-[5px] block"
+                    >
+                      Rabattcode hier eingeben
+                    </label>
+                    <div className="input-group flex ">
+                      <input
+                        type="text"
+                        placeholder="Rabattcode hier eingeben"
+                        className="bg-white flex-1 border border-[#92bcdd] text-gray-900 text-[14px] rounded-[4px_0px_0px_4px] placeholder:text-[#6c757d] block w-full px-[12px] py-[6px] form-control border-r-0"
+                      />
+                      <button className="button-search hover:bg-[#9a2ea3] hover:text-white text-[#9a2ea3] border-[1px] border-[#9a2ea3] transition-all duration-500 py-[8px] px-[12px] rounded-[0px_4px_4px_0px] uppercase text-[14px]">
+                        Rabattcode einlösen
+                      </button>
+                    </div>
+                  </Disclosure.Panel>
                 </div>
-              </Disclosure.Panel>
-            </>
+              </>
+            )}
           </Disclosure>
           <Disclosure as="div" className="grid w-full mb-[5px]">
-            <>
-              <Disclosure.Button className="text-left">
-                <div className="flex justify-between bg-[#3071a9] p-[8px] text-white text-[16px] items-center">
-                  Geschenkgutschein <IconCaret />
-                </div>
-              </Disclosure.Button>
-
-              <Disclosure.Panel className={'p-[20px] bg-white'}>
-                <label
-                  htmlFor=""
-                  className="text-[16px] text-[#2380B1] mb-[5px] block"
+            {({open}) => (
+              <>
+                <Disclosure.Button className="text-left">
+                  <div className="flex justify-between bg-[#3071a9] p-[8px] text-white text-[16px] items-center">
+                    Geschenkgutschein <IconCaret />
+                  </div>
+                </Disclosure.Button>
+                <div
+                  className={`${
+                    open ? `max-h-48 h-fit` : `max-h-0`
+                  } overflow-hidden transition-all duration-300`}
                 >
-                  Geschenkgutschein hier eingeben
-                </label>
-                <div className="input-group flex ">
-                  <input
-                    type="text"
-                    placeholder="Geschenkgutschein hier eingeben"
-                    className="bg-white flex-1 border border-[#92bcdd] text-gray-900 text-[14px] rounded-[4px_0px_0px_4px] placeholder:text-[#6c757d] block w-full px-[12px] py-[6px] form-control border-r-0"
-                  />
-                  <button className="button-search hover:bg-[#9a2ea3] hover:text-white text-[#9a2ea3] border-[1px] border-[#9a2ea3] transition-all duration-500 py-[8px] px-[12px] rounded-[0px_4px_4px_0px] uppercase text-[14px]">
-                    Geschenkgutschein einlösen
-                  </button>
+                  <Disclosure.Panel className={'p-[20px] bg-white'}>
+                    <label
+                      htmlFor=""
+                      className="text-[16px] text-[#2380B1] mb-[5px] block"
+                    >
+                      Geschenkgutschein hier eingeben
+                    </label>
+                    <div className="input-group flex ">
+                      <input
+                        type="text"
+                        placeholder="Geschenkgutschein hier eingeben"
+                        className="bg-white flex-1 border border-[#92bcdd] text-gray-900 text-[14px] rounded-[4px_0px_0px_4px] placeholder:text-[#6c757d] block w-full px-[12px] py-[6px] form-control border-r-0"
+                      />
+                      <button className="button-search hover:bg-[#9a2ea3] hover:text-white text-[#9a2ea3] border-[1px] border-[#9a2ea3] transition-all duration-500 py-[8px] px-[12px] rounded-[0px_4px_4px_0px] uppercase text-[14px]">
+                        Geschenkgutschein einlösen
+                      </button>
+                    </div>
+                  </Disclosure.Panel>
                 </div>
-              </Disclosure.Panel>
-            </>
+              </>
+            )}
           </Disclosure>
         </div>
         <div className="col-right flex-1">
@@ -304,10 +319,22 @@ function CartSummary({cost, layout, children = null}) {
       </div>
       <div className="cart-btn flex items-center justify-between gap-[15px] flex-wrap mt-[30px]">
         <div className="btn-left flex">
-          <a href="/" className='hover:bg-[#9a2ea3] uppercase font-semibold hover:text-white text-[#9a2ea3] border-[2px] border-[#9a2ea3] transition-all duration-500 py-[10px] px-[20px] rounded-[4px] flex items-center gap-[5px]'><IconArrowRight className="w-[16px] h-[16px]" /> Einkauf fortsetzen</a>
+          <a
+            href="/"
+            className="hover:bg-[#9a2ea3] uppercase font-semibold hover:text-white text-[#9a2ea3] border-[2px] border-[#9a2ea3] transition-all duration-500 py-[10px] px-[20px] rounded-[4px] flex items-center gap-[5px]"
+          >
+            <IconArrowRight className="w-[16px] h-[16px]" /> Einkauf fortsetzen
+          </a>
         </div>
         <div className="btn-right flex">
-        <a href="#" className='hover:bg-[#9a2ea3] uppercase font-semibold hover:text-white text-[#9a2ea3] border-[2px] border-[#9a2ea3] transition-all duration-500 py-[10px] px-[20px] rounded-[4px] flex items-center gap-[5px]'> <IconShare className="w-[16px] h-[16px]" />Bezahlen</a>
+          <a
+            href="#"
+            className="hover:bg-[#9a2ea3] uppercase font-semibold hover:text-white text-[#9a2ea3] border-[2px] border-[#9a2ea3] transition-all duration-500 py-[10px] px-[20px] rounded-[4px] flex items-center gap-[5px]"
+          >
+            {' '}
+            <IconShare className="w-[16px] h-[16px]" />
+            Bezahlen
+          </a>
         </div>
       </div>
       {/* <h2 id="summary-heading" className="sr-only">
@@ -337,7 +364,10 @@ function CartLineItem({line}) {
   if (typeof quantity === 'undefined' || !merchandise?.product) return null;
 
   return (
-    <li key={id} className="flex flex-wrap md:flex-nowrap items-center border-b-[1px] border-[#92bcdc]">
+    <li
+      key={id}
+      className="flex flex-wrap md:flex-nowrap items-center border-b-[1px] border-[#92bcdc]"
+    >
       <div className="w-[100px] flex items-center justify-center img-col p-[10px]">
         {merchandise.image && (
           <Image
