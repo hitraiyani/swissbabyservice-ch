@@ -18,7 +18,7 @@ import {
   IconArrowRight2,
   IconArrowRight,
 } from '~/components';
-import {getInputStyleClasses} from '~/lib/utils';
+import {getInputStyleClasses} from '~/lib/utils'; 
 import {CartAction} from '~/lib/type';
 
 export function Cart({layout, onClose, cart}) {
@@ -41,7 +41,7 @@ export function CartDetails({layout, cart}) {
   };
 
   return (
-    <div className="mt-[38px]">
+    <div className="mt-[38px] cart-section-wrap">
       <CartLines lines={cart?.lines} layout={layout} />
       {cartHasItems && (
         <CartSummary cost={cart.cost} layout={layout}>

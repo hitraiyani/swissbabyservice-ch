@@ -705,3 +705,72 @@ input[type='number'] {
   -moz-appearance: textfield;
 }
 /* End Remove Arrows/Spinners */
+
+/* cart drawer */
+
+.drawer {
+  .cartEmpty {
+    padding: 0 15px 30px;
+    > div {
+      margin-top: 0;
+    }
+  }
+  .cart-section-wrap {
+    margin-top: 0;
+    section {
+      padding: 0 15px;
+      > ul {
+        > li {
+          &:first-child {
+            display: none;
+          }
+          &:last-child {
+            border: none;
+            padding-bottom: 0;
+            margin-bottom: 0;
+          }
+          flex-flow: wrap;
+          padding-right: 40px;
+          position: relative;
+          align-items: center;
+          row-gap: 5px;
+          padding-bottom: 20px;
+          margin-bottom: 20px;
+          .name-col {
+            width: calc(100% - 100px);
+            flex: none;
+            padding-bottom: 0;
+          }
+          .price-col {
+            width: auto;
+          }
+          .unit-price-col {
+            display: none;
+          }
+          .remove-btn-col {
+            position: absolute;
+            right: 0;
+            top: 20px;
+            transform: translateY(-50%);
+            width: 35px;
+            padding: 0;
+          }
+          > div {
+            padding: 0 5px 0 5px;
+          }
+          .qty-col {
+            margin-left: 100px;
+          }
+        }
+      }
+    }
+    .cart-footer {
+      > div:first-child {
+        flex-flow: column;
+        margin-top: 30px;
+      }
+    }
+  }
+}
+
+/* End cart drawer */

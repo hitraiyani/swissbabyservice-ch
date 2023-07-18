@@ -32,7 +32,7 @@ export function Drawer({heading, open, onClose, openFrom = 'right', children}) {
           <div className="fixed inset-0 bg-black bg-opacity-25" />
         </Transition.Child>
 
-        <div className="fixed inset-0">
+        <div className="fixed inset-0 drawer">
           <div className="absolute inset-0 overflow-hidden">
             <div
               className={`fixed inset-y-0 flex max-w-full ${
@@ -41,22 +41,22 @@ export function Drawer({heading, open, onClose, openFrom = 'right', children}) {
             >
               <Transition.Child
                 as={Fragment}
-                enter="transform transition ease-in-out duration-300"
+                enter="transform transition ease-in-out duration-300" 
                 enterFrom={offScreen[openFrom]}
                 enterTo="translate-x-0"
                 leave="transform transition ease-in-out duration-300"
                 leaveFrom="translate-x-0"
                 leaveTo={offScreen[openFrom]}
               >
-                <Dialog.Panel className="w-screen max-w-lg text-left align-middle transition-all transform shadow-xl h-screen-dynamic bg-contrast">
+                <Dialog.Panel className="w-screen max-w-lg text-left align-middle transition-all transform shadow-xl h-screen-dynamic bg-contrast overflow-y-auto overflow-x-hidden pb-[30px]"> 
                   <header
-                    className={`sticky top-0 flex items-center px-[15px] h-nav ${
+                    className={`flex items-center px-[15px] h-nav ${
                       heading ? 'justify-between' : 'justify-end'
                     }`}
                   >
                     {heading !== null && (
                       <Dialog.Title>
-                        <Heading as="span" size="lead" id="cart-contents">
+                        <Heading as="span" size="lead" id="cart-contents" className='text-[20px] text-[#2380b1]'>
                           {heading}
                         </Heading>
                       </Dialog.Title>
