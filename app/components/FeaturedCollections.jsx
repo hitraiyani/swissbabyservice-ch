@@ -16,12 +16,12 @@ export function FeaturedCollections({
   return (
     <Section {...props} heading={title} className={'!pt-[15px] !pb-[15px] !px-[0]'}>
       <div className='container'>
-        <Grid items={collectionsWithImage.length}>
+        <div items={collectionsWithImage.length} className={'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-4'}>
           {collectionsWithImage.map((collection) => {
             return (
               <Link key={collection.id} to={`/collections/${collection.handle}`}>
                 <div className="grid gap-4">
-                  <div className={`card-image relative overflow-hidden pb-[126%] before:!rounded-none bg-white before:hover:border-[3px]   !rounded-none`} style={{ borderColor: collection.boarder_color ? '#'+collection.boarder_color?.value : '#7ec24b' }}>
+                  <div className={`card-image relative overflow-hidden pb-[126%] before:!rounded-none bg-white before:hover:border-[3px] before:border-inherit !rounded-none`} style={{ borderColor: collection.boarder_color ? '#'+collection.boarder_color?.value : '#7ec24b' }}>
                     {collection?.image && (
                       <Image
                         alt={`Image of ${collection.title}`}
@@ -37,7 +37,7 @@ export function FeaturedCollections({
               </Link>
             );
           })}
-        </Grid>
+        </div>
       </div>
     </Section>
   );

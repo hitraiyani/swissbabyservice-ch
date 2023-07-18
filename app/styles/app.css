@@ -468,9 +468,6 @@ p {
       }
     }
   }
-  .swiper-slide {
-    height: auto;
-  }
   .new-in-Shop-slider {
     #swiper-button-next-new-in-Shop,
     #swiper-button-prev-new-in-Shop {
@@ -482,6 +479,22 @@ p {
       #swiper-button-prev-new-in-Shop {
         opacity: 1;
       }
+    }
+    /* the slides */
+    /* the parent */
+    .slick-list {
+      margin: 0 -10px;
+    }
+    /* item */
+    .slick-slide {
+      padding: 0 10px;
+      height: auto;
+      > div {
+        height: 100%;
+      }
+    }
+    .slick-track {
+      display: flex;
     }
   }
 }
