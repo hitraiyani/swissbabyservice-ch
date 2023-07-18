@@ -18,7 +18,7 @@ import {
   IconArrowRight2,
   IconArrowRight,
 } from '~/components';
-import {getInputStyleClasses} from '~/lib/utils';
+import {getInputStyleClasses} from '~/lib/utils'; 
 import {CartAction} from '~/lib/type';
 
 export function Cart({layout, onClose, cart}) {

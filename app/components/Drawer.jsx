@@ -41,14 +41,14 @@ export function Drawer({heading, open, onClose, openFrom = 'right', children}) {
             >
               <Transition.Child
                 as={Fragment}
-                enter="transform transition ease-in-out duration-300"
+                enter="transform transition ease-in-out duration-300" 
                 enterFrom={offScreen[openFrom]}
                 enterTo="translate-x-0"
                 leave="transform transition ease-in-out duration-300"
                 leaveFrom="translate-x-0"
                 leaveTo={offScreen[openFrom]}
               >
-                <Dialog.Panel className="w-screen max-w-lg text-left align-middle transition-all transform shadow-xl h-screen-dynamic bg-contrast overflow-y-auto overflow-x-hidden pb-[30px]">
+                <Dialog.Panel className="w-screen max-w-lg text-left align-middle transition-all transform shadow-xl h-screen-dynamic bg-contrast overflow-y-auto overflow-x-hidden pb-[30px]"> 
                   <header
                     className={`flex items-center px-[15px] h-nav ${
                       heading ? 'justify-between' : 'justify-end'

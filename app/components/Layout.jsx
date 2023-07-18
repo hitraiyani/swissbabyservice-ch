@@ -362,7 +362,7 @@ const handleLanguageChange = (e) => {
         firstPathPart != 'fr' &&
         firstPathPart != 'it' &&
         selectedLanguage == 'it'
-      ) {
+      ) { 
         newUrl =
           location.origin +
           '/it/' +

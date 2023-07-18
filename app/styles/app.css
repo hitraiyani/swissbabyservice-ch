@@ -708,7 +708,7 @@ input[type='number'] {
 
 /* cart drawer */
 
-.drawer {
+.drawer { 
   .cart-section-wrap {
     margin-top: 0;
     section {
