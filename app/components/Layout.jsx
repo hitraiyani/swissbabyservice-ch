@@ -28,12 +28,13 @@ import {
   Cart,
   CartLoading,
   Link,
+  IconSearch2,
+  IconUser2,
+  IconCart2,
 } from '~/components';
 import {useIsHomePath, getMenuHandle, translate} from '~/lib/utils';
 import {useIsHydrated} from '~/hooks/useIsHydrated';
 import {useCartFetchers} from '~/hooks/useCartFetchers';
-
-
 
 export function Layout({children, layout, locale}) {
   const {headerMenu, footerMenu} = layout;
@@ -63,7 +64,6 @@ export function Layout({children, layout, locale}) {
 
 function Header({title, aicoMenu, menu, locale}) {
   const isHome = useIsHomePath();
- 
 
   const {
     isOpen: isCartOpen,
@@ -82,8 +82,7 @@ function Header({title, aicoMenu, menu, locale}) {
   // toggle cart drawer when adding to cart
   useEffect(() => {
     if (isCartOpen || !addToCartFetchers.length) return;
-     //openCart();
-     
+    //openCart();
   }, [addToCartFetchers, isCartOpen, openCart]);
 
   return (
@@ -184,8 +183,8 @@ function MenuMobileNav({menu, onClose, aicoMenu, locale}) {
                     to={itemHandle}
                     onClick={onClose}
                     className={`${
-                      itemHandle == pathname ? 'active' : ''
-                    } nav-link font-["OpenSans"] text-[#333] py-[22px] text-[20px] font-normal uppercase inline-block relative`}
+                      itemHandle == pathname ? '!text-[#1F6B8F]' : ''
+                    } nav-link text-[#333] py-[10px] text-[20px] font-normal uppercase inline-block relative`}
                   >
                     {translate(item.category.name, locale)}
                   </Link>
@@ -205,6 +204,37 @@ function MenuMobileNav({menu, onClose, aicoMenu, locale}) {
                   <a href="#" className='nav-link font-["OpenSans"] text-[#333] py-[22px] text-[20px] font-normal uppercase inline-block relative'>Kontakt</a>
                 </li> */}
           </ul>
+          <div className="language-col mt-[20px]">
+            <div className="language-block flex gap-[5px] items-start">
+              <button
+                data-lang="de"
+                onClick={handleLanguageChange}
+                className={`p-[2px] w-[25px] h-[25px] text-[14px] text-[#05557B] bg-[#D1E7FC] hover:bg-[#1f6b8f] hover:text-white leading-none rounded-full flex items-center justify-center font-bold ${
+                  locale == 'DE' ? '!bg-[#1F6B8F] !text-white' : ''
+                } `}
+              >
+                de
+              </button>
+              <button
+                data-lang="it"
+                onClick={handleLanguageChange}
+                className={`p-[2px] w-[25px] h-[25px] text-[14px] text-[#05557B] bg-[#D1E7FC] hover:bg-[#1f6b8f] hover:text-white leading-none rounded-full flex items-center justify-center font-bold ${
+                  locale == 'IT' ? '!bg-[#1F6B8F] !text-white' : ''
+                } `}
+              >
+                it
+              </button>
+              <button
+                data-lang="fr"
+                onClick={handleLanguageChange}
+                className={`p-[2px] w-[25px] h-[25px] text-[14px] text-[#05557B] bg-[#D1E7FC] hover:bg-[#1f6b8f] hover:text-white leading-none rounded-full flex items-center justify-center font-bold ${
+                  locale == 'FR' ? '!bg-[#1F6B8F] !text-white' : ''
+                }  `}
+              >
+                fr
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </nav>
@@ -221,63 +251,11 @@ function MobileHeader({title, isHome, openCart, openMenu, aicoMenu, locale}) {
       role="banner"
       className={`${
         isHome ? '' : ''
-      } mobile-header min-[992px]:hidden bg-white pb-[16px] border-b-[1px] border-[#3890bf] relative`}
+      } mobile-header min-[992px]:hidden bg-white py-[15px] border-b-[1px] border-[#3890bf] relative`}
     >
       <div className="container">
-        <div className="row flex justify-between py-[8px] mb-[16px]">
-          <button onClick={openMenu} className="">
-            <IconMenu
-              className={'text-[#2380b1] w-[28px] h-[32px] scale-[1.5]'}
-            />
-          </button>
-          <div className="my-account-mobile">
-            <a
-              href="/account"
-              className='header-login pt-[4px] flex text-[11px] text-[#2380b1] font-["Open_Sans"] font-medium items-baseline gap-[2px]'
-            >
-              <span className="icon">
-                <i className="hr-icon-login"></i>
-              </span>
-              <span className="name"> {translate('register', locale)}</span>
-            </a>
-          </div>
-          <div className="header-cart mobile">
-            <CartCount isHome={isHome} openCart={openCart} locale={locale} />
-          </div>
-          <div className="language-col">
-            <div className="language-block flex gap-[5px] items-start mt-[-8px]">
-              <button
-                data-lang="de"
-                onClick={handleLanguageChange}
-                className={`p-[7px] text-[12px] text-white bg-[#428bca] leading-none rounded-[0_0_3px_3px] hover:bg-[#3071a9] font-bold font-["Roboto"] ${
-                  locale == 'DE' ? 'active' : ''
-                } `}
-              >
-                de
-              </button>
-              <button
-                data-lang="it"
-                onClick={handleLanguageChange}
-                className={`p-[7px] text-[12px] text-white bg-[#428bca] leading-none rounded-[0_0_3px_3px] hover:bg-[#3071a9] font-bold font-["Roboto"] ${
-                  locale == 'IT' ? 'active' : ''
-                } `}
-              >
-                it
-              </button>
-              <button
-                data-lang="fr"
-                onClick={handleLanguageChange}
-                className={`p-[7px] text-[12px] text-white bg-[#428bca] leading-none rounded-[0_0_3px_3px] hover:bg-[#3071a9] font-bold font-["Roboto"] ${
-                  locale == 'FR' ? 'active' : ''
-                }  `}
-              >
-                fr
-              </button>
-            </div>
-          </div>
-        </div>
-        <div className="row mb-[20px]">
-          <div className="logo-col max-w-[400px] mx-auto">
+        <div className="row flex items-center justify-between gap-[15px]">
+          <div className="logo-col w-[60%] max-w-[240px]">
             <a href="/" className="block w-full">
               <img
                 className="w-full h-auto"
@@ -286,8 +264,32 @@ function MobileHeader({title, isHome, openCart, openMenu, aicoMenu, locale}) {
               />
             </a>
           </div>
+          <div className="right-col w-[40%] flex flex-col gap-[10px]">
+            <div className="justify-end flex items-center gap-[10px]">
+              <button onClick={openMenu} className="">
+                <IconMenu
+                  className={'text-[#2380b1] w-[20px] h-[20px] scale-[1.5]'}
+                />
+              </button>
+              <div className="my-account-mobile">
+                <a
+                  href="/account"
+                  className='header-login flex text-[11px] text-[#2380b1] font-["Open_Sans"] font-medium items-baseline gap-[2px]'
+                >
+                  <IconUser2 className={'w-[20px] h-[20px] text-[#2380b1] '} />
+                </a>
+              </div>
+              <div className="header-cart mobile">
+                <CartCount
+                  isHome={isHome}
+                  openCart={openCart}
+                  locale={locale}
+                />
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="row">
+        <div className="row hidden">
           <Form
             method="get"
             action={params.locale ? `/${params.locale}/search` : '/search'}
@@ -362,7 +364,7 @@ const handleLanguageChange = (e) => {
         firstPathPart != 'fr' &&
         firstPathPart != 'it' &&
         selectedLanguage == 'it'
-      ) { 
+      ) {
         newUrl =
           location.origin +
           '/it/' +
@@ -385,122 +387,122 @@ function DesktopHeader({isHome, aicoMenu, menu, openCart, title, locale}) {
         !isHome && y > 50 && ''
       } site-header bg-white max-[991px]:hidden`}
     >
-      <div className="container">
-        <div className="row flex justify-between py-[16px]">
-          <div className="logo-col max-w-[400px]">
-            <a href="/" className="block w-full">
-              <img
-                className="w-full h-auto"
-                src="https://cdn.shopify.com/s/files/1/0787/1352/0419/files/swissbabyservice.png?v=1688547438"
-                alt=""
-              />
-            </a>
-          </div>
-          <div className="language-col">
-            <div className="language-block flex gap-[5px] mt-[-16px] items-start ml-[-79px]">
-              <button
-                data-lang="de"
-                onClick={handleLanguageChange}
-                className={`p-[7px] text-[12px] text-white bg-[#428bca] leading-none rounded-[0_0_3px_3px] hover:bg-[#3071a9] font-bold font-["Roboto"] ${
-                  locale == 'DE' ? 'active' : ''
-                }`}
-              >
-                de
-              </button>
-              <button
-                data-lang="it"
-                onClick={handleLanguageChange}
-                className={`p-[7px] text-[12px] text-white bg-[#428bca] leading-none rounded-[0_0_3px_3px] hover:bg-[#3071a9] font-bold font-["Roboto"] ${
-                  locale == 'IT' ? 'active' : ''
-                } `}
-              >
-                it
-              </button>
-              <button
-                data-lang="fr"
-                onClick={handleLanguageChange}
-                className={`p-[7px] text-[12px] text-white bg-[#428bca] leading-none rounded-[0_0_3px_3px] hover:bg-[#3071a9] font-bold font-["Roboto"] ${
-                  locale == 'FR' ? 'active' : ''
-                }`}
-              >
-                fr
-              </button>
+      <div className="top-header py-[20px]">
+        <div className="container">
+          <div className="row flex justify-between items-center">
+            <div className="empty-col flex-1"></div>
+            <div className="language-col flex-1">
+              <div className="language-block flex gap-[5px] items-center justify-center 2xl:mt-[-35px]">
+                <button
+                  data-lang="de"
+                  onClick={handleLanguageChange}
+                  className={`p-[2px] w-[30px] h-[30px] text-[20px] text-[#05557B] bg-[#D1E7FC] hover:bg-[#1f6b8f] hover:text-white leading-none rounded-full flex items-center justify-center font-bold ${
+                    locale == 'DE' ? '!bg-[#1F6B8F] !text-white' : ''
+                  }`}
+                >
+                  de
+                </button>
+                <button
+                  data-lang="it"
+                  onClick={handleLanguageChange}
+                  className={`p-[2px] w-[30px] h-[30px] text-[20px] text-[#05557B] bg-[#D1E7FC] hover:bg-[#1f6b8f] hover:text-white leading-none rounded-full flex items-center justify-center font-bold ${
+                    locale == 'IT' ? '!bg-[#1F6B8F] !text-white' : ''
+                  } `}
+                >
+                  it
+                </button>
+                <button
+                  data-lang="fr"
+                  onClick={handleLanguageChange}
+                  className={`p-[2px] w-[30px] h-[30px] text-[20px] text-[#05557B] bg-[#D1E7FC] hover:bg-[#1f6b8f] hover:text-white leading-none rounded-full flex items-center justify-center font-bold ${
+                    locale == 'FR' ? '!bg-[#1F6B8F] !text-white' : ''
+                  }`}
+                >
+                  fr
+                </button>
+              </div>
             </div>
-          </div>
-          <div className="right-col flex items-center">
-            <a
-              href="/account"
-              className='header-login p-[16px] flex text-[13px] text-[#2A6496] font-["Open_Sans"] font-medium mr-[16px] items-baseline gap-[2px]'
-            >
-              <span className="icon text-[30px]">
-                <i className="hr-icon-login"></i>
-              </span>
-              <span className="name"> {translate('register', locale)}</span>
-            </a>
-            <div className="header-cart">
-              <CartCount isHome={isHome} openCart={openCart} locale={locale} />
+            <div className="right-col flex-1 flex justify-end gap-[30px] items-center">
+              <div className="search-col">
+                <button className="search-btn w-[24px] h-[24px] relative top-[3px]">
+                  <IconSearch2 className={'w-full h-full'} />
+                </button>
+                <Form
+                  method="get"
+                  action={
+                    params.locale ? `/${params.locale}/search` : '/search'
+                  }
+                  className="flex items-center gap-2 !hidden"
+                >
+                  <Input
+                    className={isHome ? '' : ''}
+                    type="search"
+                    variant="minisearch"
+                    placeholder="Produkt suchen"
+                    name="q"
+                  />
+                  <button
+                    type="submit"
+                    className="relative flex items-center justify-center w-8 h-8 focus:ring-primary/5"
+                  >
+                    <IconSearch />
+                  </button>
+                </Form>
+              </div>
+              <a
+                href="/account"
+                className="header-login text-[20px] text-[#00334B] font-normal flex gap-[5px] items-center"
+              >
+                <IconUser2 className={'w-[23px] h-[23px]'} />
+                <span className="name"> {translate('register', locale)}</span>
+              </a>
+              <div className="header-cart">
+                <CartCount
+                  isHome={isHome}
+                  openCart={openCart}
+                  locale={locale}
+                />
+              </div>
             </div>
           </div>
         </div>
-        {/* <AccountLink className="relative flex items-center justify-center w-8 h-8 focus:ring-primary/5" /> */}
       </div>
-      <div className="nav-header bg-[#e4f0fa] border-b-[1px] border-[#3890bf] relative">
+      <div className="bottom-header pb-[20px] 2xl:pb-[40px]">
         <div className="container">
-          <div className="flex justify-between gap-[20px] xl:gap-[40px] items-center">
-            <div className="navbar-wrap flex-1">
-              <ul className="navbar-items flex gap-[20px]">
+          <div className="row flex justify-between items-center gap-[15px]">
+            <div className="logo max-w-[24.6%]">
+              <a href="/" className="block w-full">
+                <img
+                  className="w-full h-auto"
+                  src="https://cdn.shopify.com/s/files/1/0787/1352/0419/files/swissbabyservice.png?v=1688547438"
+                  alt=""
+                />
+              </a>
+            </div>
+            <div className="navbar-col">
+              <ul className="navbar-items flex gap-x-[10px] 2xl:gap-x-[20px]">
                 {aicoMenu?.map((item, index) => {
                   const itemHandle =
                     item.category.name == 'Home'
                       ? '/'
                       : getMenuHandle(item.category);
                   return (
-                    <li key={index} className="navbar-item flex-auto">
+                    <li
+                      key={index}
+                      className="navbar-item flex-auto text-center"
+                    >
                       <Link
-                        to={itemHandle}
+                        to={itemHandle} 
                         className={`${
-                          itemHandle == pathname ? 'active' : ''
-                        } nav-link font-["OpenSans"] text-[#2380b1] py-[23px] text-[18px] xl:text-[20px] font-normal uppercase inline-block relative`}
+                          itemHandle == pathname ? 'text-[#00a0e0]' : ''
+                        } xl:text-[16px] text-[12px] font-bold text-[#00334B] hover:text-[#00a0e0]`}
                       >
                         {translate(item.category.name, locale)}
                       </Link>
-                    </li>
+                    </li> 
                   );
                 })}
-                {/* <li className='navbar-item flex-1'>
-                  <a href="#" className='nav-link font-["OpenSans"] text-[#2380b1] py-[23px] text-[18px] xl:text-[20px] font-normal uppercase inline-block relative'>Produkte</a>
-                </li>
-                <li className='navbar-item flex-1'>
-                  <a href="#" className='nav-link font-["OpenSans"] text-[#2380b1] py-[23px] text-[18px] xl:text-[20px] font-normal uppercase inline-block relative'>Über uns</a>
-                </li>
-                <li className='navbar-item flex-1'>
-                  <a href="#" className='nav-link font-["OpenSans"] text-[#2380b1] py-[23px] text-[18px] xl:text-[20px] font-normal uppercase inline-block relative'>Engagement</a>
-                </li>
-                <li className='navbar-item flex-1'>
-                  <a href="#" className='nav-link font-["OpenSans"] text-[#2380b1] py-[23px] text-[18px] xl:text-[20px] font-normal uppercase inline-block relative'>Kontakt</a>
-                </li> */}
               </ul>
-            </div>
-            <div className="search-bar-col max-w-[190px]">
-              <Form
-                method="get"
-                action={params.locale ? `/${params.locale}/search` : '/search'}
-                className="flex items-center gap-2"
-              >
-                <Input
-                  className={isHome ? '' : ''}
-                  type="search"
-                  variant="minisearch"
-                  placeholder="Produkt suchen"
-                  name="q"
-                />
-                {/* <button
-                type="submit"
-                className="relative flex items-center justify-center w-8 h-8 focus:ring-primary/5"
-              >
-                <IconSearch />
-              </button> */}
-              </Form>
             </div>
           </div>
         </div>
@@ -553,14 +555,20 @@ function Badge({openCart, dark, count, locale}) {
     () => (
       <>
         {/* <IconBag /> */}
-        <div className={`${dark ? '' : ''} flex items-center`}>
-          <i className="hr-icon-cart mr-2"></i>
-          <span className="cart-text text-[12px] min-[992px]:text-[13px] font-['Open_Sans']">
+        <div
+          className={`${
+            dark ? '' : ''
+          } flex items-center gap-[5px] min-[992px]:gap-[15px] px-[10px] min-[992px]:px-[17px] py-[8px] min-[992px]:py-[12px] text-white text-[14px] min-[992px]:text-[20px] leading-none bg-[#05557B] rounded-[32px] hover:opacity-70`}
+        >
+          <IconCart2
+            className={
+              'min-[992px]:w-[24px] min-[992px]:h-[24px] w-[20px] h-[20px]'
+            }
+          />
+          {/* <span className="cart-text">
             {translate('shoping_cart', locale)}
-          </span>
-          <span className='bg-[#e4f0fa] px-[4px] min-[992px]:px-[10px] py-[2px] min-[992px]:py-[5px] text-[12px] min-[992px]:text-[13px] ml-[8px] rounded-[2px] min-[992px]:rounded-[5px] text-[#2380b1] font-["Open_Sans"]'>
-            {count || 0}
-          </span>
+          </span> */}
+          <span className="">{count || 0}</span>
         </div>
       </>
     ),
@@ -568,23 +576,17 @@ function Badge({openCart, dark, count, locale}) {
   );
 
   return isHydrated ? (
-    <button
-      onClick={openCart}
-      className="w-full bg-[#c0d4e6] font-['Open_Sans'] p-[7px_6px_7px_8px] min-[992px]:p-[13px_12px_13px_15px] rounded-[4px] min-[992px]:rounded-[8px] text-[#2380b1] hover:bg-[#2380b1] hover:text-white transition-all duration-500"
-    >
+    <button onClick={openCart} className="">
       {BadgeCounter}
     </button>
+  ) : (
     // <Link
     //   to="/cart"
     //   className="w-full bg-[#c0d4e6] font-['Open_Sans'] p-[7px_6px_7px_8px] min-[992px]:p-[13px_12px_13px_15px] rounded-[4px] min-[992px]:rounded-[8px] text-[#2380b1] hover:bg-[#2380b1] hover:text-white transition-all duration-500 block"
     // >
     //   {BadgeCounter}
     // </Link>
-  ) : (
-    <Link
-      to="/cart"
-      className="w-full bg-[#c0d4e6] font-['Open_Sans'] p-[7px_6px_7px_8px] min-[992px]:p-[13px_12px_13px_15px] rounded-[4px] min-[992px]:rounded-[8px] text-[#2380b1] hover:bg-[#2380b1] hover:text-white transition-all duration-500 block"
-    >
+    <Link to="/cart" className="">
       {BadgeCounter}
     </Link>
   );
@@ -653,44 +655,48 @@ function Footer({menu, locale}) {
   }, []);
   return (
     <>
-    {isHome ? '' : (<div id="baloons" className="bz-baloons-container block bottom-baloon">
-        <div className="baloon-1">
-          <img
-            src="https://cdn.shopify.com/s/files/1/0787/1352/0419/files/baloon-1-de.png?v=1688968486"
-            alt=""
-          />
+      {isHome ? (
+        ''
+      ) : (
+        <div id="baloons" className="bz-baloons-container block bottom-baloon">
+          <div className="baloon-1">
+            <img
+              src="https://cdn.shopify.com/s/files/1/0787/1352/0419/files/baloon-1-de.png?v=1688968486"
+              alt=""
+            />
+          </div>
+          <div className="baloon-2">
+            <img
+              src="https://cdn.shopify.com/s/files/1/0787/1352/0419/files/baloon-2-de.png?v=1688968485"
+              alt=""
+            />
+          </div>
+          <div className="baloon-3">
+            <img
+              src="https://cdn.shopify.com/s/files/1/0787/1352/0419/files/baloon-3-de.png?v=1688968485"
+              alt=""
+            />
+          </div>
+          <div className="baloon-4">
+            <img
+              src="https://cdn.shopify.com/s/files/1/0787/1352/0419/files/baloon-4-de.png?v=1688968485"
+              alt=""
+            />
+          </div>
+          <div className="baloon-5">
+            <img
+              src="https://cdn.shopify.com/s/files/1/0787/1352/0419/files/baloon-5-de.png?v=1688968486"
+              alt=""
+            />
+          </div>
+          <div className="baloon-6">
+            <img
+              src="https://cdn.shopify.com/s/files/1/0787/1352/0419/files/baloon-6-de.png?v=1688968485"
+              alt=""
+            />
+          </div>
         </div>
-        <div className="baloon-2">
-          <img
-            src="https://cdn.shopify.com/s/files/1/0787/1352/0419/files/baloon-2-de.png?v=1688968485"
-            alt=""
-          />
-        </div>
-        <div className="baloon-3">
-          <img
-            src="https://cdn.shopify.com/s/files/1/0787/1352/0419/files/baloon-3-de.png?v=1688968485"
-            alt=""
-          />
-        </div>
-        <div className="baloon-4">
-          <img
-            src="https://cdn.shopify.com/s/files/1/0787/1352/0419/files/baloon-4-de.png?v=1688968485"
-            alt=""
-          />
-        </div>
-        <div className="baloon-5">
-          <img
-            src="https://cdn.shopify.com/s/files/1/0787/1352/0419/files/baloon-5-de.png?v=1688968486"
-            alt=""
-          />
-        </div>
-        <div className="baloon-6">
-          <img
-            src="https://cdn.shopify.com/s/files/1/0787/1352/0419/files/baloon-6-de.png?v=1688968485"
-            alt=""
-          />
-        </div>
-      </div>)}
+      )}
       <div className="footer-cloud"></div>
       <Section
         divider={isHome ? 'none' : 'top'}
