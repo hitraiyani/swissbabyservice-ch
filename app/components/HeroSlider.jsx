@@ -91,7 +91,7 @@ export function HeroSlider({slides, ballon}) {
           >
             {slides.map((slide, index) => (
               <SwiperSlide key={index}>
-                <div className="slide-item h-full pt-[114px] pb-[140px] bg-[#D1E7FC] relative overflow-hidden min-h-[670px]">
+                <div className="slide-item pt-[114px] pb-[140px] bg-[#D1E7FC] relative overflow-hidden h-[69vh] min-h-[495px] md:min-h-[545px] lg:min-h-[665px]">
                   {/* <div className="bg-img absolute w-full h-full inset-0 z-[-1]">
                     <img
                       className="w-full h-full object-cover"
@@ -101,18 +101,18 @@ export function HeroSlider({slides, ballon}) {
                   </div> */}
                   <div className="container h-full">
                     <div className="slide-item-inner items-center rounded-[30px] h-full z-[1] relative">
-                      <div className="content-left w-full relative z-[1] max-w-[600px] h-full">
-                        <div className="col-inner flex flex-col h-full text-left">
-                          <h2 className="title text-[75px] font-bold text-[#1F6B8F] leading-none">
+                      <div className="content-left w-full relative z-[2] max-w-[600px] h-full">
+                        <div className="col-inner flex flex-col h-full text-left lg:justify-center">
+                          <h2 className="title text-[36px] md:text-[50px] xl:text-[75px] font-bold text-[#1F6B8F] leading-none">
                             {slide?.heading?.value}
                           </h2>
-                          <div className="subtitle text-[32px] font-normal text-[#05557B]">
+                          <div className="subtitle text-[20px] md:text-[24px] xl:text-[32px] font-normal text-[#05557B]">
                             {slide?.sub_heading?.value}
                           </div>
-                          <div className="btn-wrap flex mt-[37px] justify-center min-[992px]:justify-start">
+                          <div className="btn-wrap flex mt-[15px] xl:mt-[37px] justify-start">
                             <Link
                               to={slide?.cta_redirect?.value}
-                              className="bg-[#05557B] text-white py-[17px] px-[73px] text-[26px] leading-none font-semibold rounded-[37px] hover:opacity-70 transition-all duration-500"
+                              className="bg-[#05557B] text-white py-[17px] px-[73px] text-[20px] xl:text-[26px] leading-none font-semibold rounded-[37px] hover:opacity-70 transition-all duration-500"
                             >
                               <span className="name">
                                 {slide?.cta_label?.value}
@@ -128,24 +128,24 @@ export function HeroSlider({slides, ballon}) {
                           alt=""
                         /> */}
                          <img
-                          className="pro-img-1 absolute max-w-[760px] h-auto top-[-40px] left-1/2 -translate-x-1/2"
+                          className="pro-img-1 absolute max-w-[760px] h-auto lg:bottom-[-100px] md:bottom-[-140px] bottom-[-120px] left-[55%] -translate-x-1/2 z-[1] w-full"
                           src="https://cdn.shopify.com/s/files/1/0787/1352/0419/files/Pingo_Pinguin_Eisplatte-1_1.png?v=1690352725"
                           alt=""
                         />
                         <img
-                          className="pro-logo absolute right-0 bottom-0 max-w-[191px] h-auto"
+                          className="pro-logo absolute right-0 bottom-[-50px] max-w-[191px] h-auto hidden md:block"
                           src="https://cdn.shopify.com/s/files/1/0787/1352/0419/files/myClimate_Logo_Head-Office_klimaneutral_en-removebg-preview_1.png?v=1690352723"
                           alt=""
                         />
                         <img
-                          className="pro-img-2 absolute right-[100px] top-[-164px] max-w-[520px]"
+                          className="pro-img-2 absolute right-0 lg:right-[200px] top-[-124px] lg:top-[-144px] xl:top-[-164px] max-w-[120px] md:max-w-[200px] lg:max-w-[340px] xl:max-w-[520px]"
                           src="https://cdn.shopify.com/s/files/1/0787/1352/0419/files/pingo_logo_1.png?v=1690352724"
                           alt=""
                         />
                       </div>
                     </div>
                   </div>
-                  <div className='bottom-round-box w-[100%] h-[2160px] rounded-full bg-[#ECF0F4] absolute top-[70%]'></div>
+                  <div className='bottom-round-box w-[2828px] h-[2828px] rounded-full bg-[#ECF0F4] absolute left-[55%] -translate-x-1/2 top-[88%] lg:top-[79%]'></div>
                 </div>
               </SwiperSlide>
             ))}
