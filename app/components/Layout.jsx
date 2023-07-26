@@ -673,7 +673,7 @@ function Badge({openCart, dark, count, locale}) {
   ) : (
     // <Link
     //   to="/cart"
-    //   className="w-full bg-[#c0d4e6] font-['Open_Sans'] p-[7px_6px_7px_8px] min-[992px]:p-[13px_12px_13px_15px] rounded-[4px] min-[992px]:rounded-[8px] text-[#2380b1] hover:bg-[#2380b1] hover:text-white transition-all duration-500 block"
+    //   className="w-full bg-[#c0d4e6] p-[7px_6px_7px_8px] min-[992px]:p-[13px_12px_13px_15px] rounded-[4px] min-[992px]:rounded-[8px] text-[#2380b1] hover:bg-[#2380b1] hover:text-white transition-all duration-500 block"
     // >
     //   {BadgeCounter}
     // </Link>
@@ -788,41 +788,41 @@ function Footer({menu, locale}) {
           </div>
         </div>
       )}
-      <div className="footer-cloud"></div>
+     
       <Section
         divider={isHome ? 'none' : 'top'}
         as="footer"
         role="contentinfo"
-        className={`w-full p-0 lg:p-0 md:p-0 bg-[#fff] text[#3391c2] relative main-footer`}
+        className={`w-full p-0 lg:p-0 md:p-0 bg-[#ECF0F4] mt-[75px] text[#3391c2] relative main-footer rounded-t-[30px] rounded-l-[30px] rounded-b-none`}
       >
-        <div className="container max-w-[1100px] m-auto pl-[15px] pr-[15px] pt-[40px]">
+        <div className="container max-w-[1100px] m-auto pl-[15px] pr-[15px] pt-[60px]">
           <div className="footer-row-wrap relative">
-            <div className="bz-footer-row hidden sm:hidden lg:block xl:block"></div>
+           
             <div className="flex flex-row flex-wrap xl:flex-nowrap mx-[-15px] gap-y-5">
               <div className="px-[15px] w-[100%] md:w-[50%] lg:w-[25%] xl:w-[25%]">
-                <div className="col-inner">
-                  <h4 className="title text-[20px] text-[#3391c2] font-semibold font-['Open_Sans'] pb-[15px] lg:pb-[0px] mb-[5px] lg:mb-[40px] mt-[0px] lg:mt-[-35px] border-b lg:border-b-0 border-[#3890bf]">
+                <div className="col-inner pr-[0px] lg:pr-[65px]">
+                  <h4 className="title text-[24px] text-[#1279A9] font-semibold pb-[15px] lg:pb-[0px] mb-[15px] lg:mb-[15px] mt-[0px] border-b lg:border-b-0 border-[#1279A9]">
                     Swissbabyservice
                   </h4>
-                  <p className="text-[13px] text-[#3391c2] font-normal font-['Open_Sans'] leading-[18px]">
+                  <p className="text-[16px] text-[#1F6B8F]  font-normal leading-[25px]">
                     {translate('footer_desc', locale)}
                   </p>
                 </div>
               </div>
               <div className="px-[15px] w-[100%] md:w-[50%] lg:w-[25%] xl:w-[25%]">
                 <div className="col-inner">
-                  <h4 className="title text-[20px] text-[#3391c2] font-semibold font-['Open_Sans'] pb-[15px] lg:pb-[0px] mb-[5px] lg:mb-[40px] mt-[0px] lg:mt-[-35px] border-b lg:border-b-0 border-[#3890bf]">
+                  <h4 className="title text-[24px] text-[#1279A9] font-semibold pb-[15px] lg:pb-[0px] mb-[15px] lg:mb-[15px] mt-[0px] border-b lg:border-b-0 border-[#1279A9]">
                     {translate('information', locale)}
                   </h4>
-                  <ul className="nav-list flex flex-col gap-[10px] mb-[10px]">
+                  <ul className="nav-list flex flex-col gap-[25px] mb-[10px]">
                     {menu?.items?.map((item, index) => {
                       return (
                         <li
                           key={index}
-                          className="text-[13px] text-[#2380b1] font-normal font-['Open_Sans']"
+                          className="text-[16px] text-[#1F6B8F] font-normal"
                         >
                           <Link
-                            className="hover:text-[#2A6496] transition-all duration-500 underline"
+                            className="hover:text-[#1279A9] transition-all duration-500 underline"
                             href="/"
                             to={item.to}
                           >
@@ -835,26 +835,22 @@ function Footer({menu, locale}) {
                 </div>
               </div>
               <div className="px-[15px] w-[100%] md:w-[50%] lg:w-[25%] xl:w-[25%]">
-                <div className="col-inner">
-                  <h4 className="title text-[20px] text-[#3391c2] font-semibold font-['Open_Sans'] pb-[15px] lg:pb-[0px] mb-[5px] lg:mb-[40px] mt-[0px] lg:mt-[-35px] border-b lg:border-b-0 border-[#3890bf]">
+                <div className="col-inner pr-[0px] lg:pr-[55px]">
+                  <h4 className="title text-[24px] text-[#1279A9] font-semibold pb-[15px] lg:pb-[0px] mb-[15px] lg:mb-[15px] mt-[0px] border-b lg:border-b-0 border-[#1279A9]">
                     {translate('shipment', locale)}
                   </h4>
-                  <p className="text-[13px] text-[#3391c2] font-normal font-['Open_Sans'] leading-[18px] mb-[10px]">
+                  <p className="text-[16px] text-[#1F6B8F] font-normal  leading-[20px] mb-[20px]">
                     {translate('delivery_cost', locale)}{' '}
                     <strong>CHF 6.90</strong>
                   </p>
-                  <p className="text-[13px] text-[#3391c2] font-normal font-['Open_Sans'] leading-[18px] mb-[10px]">
+                  <p className="text-[16px] text-[#1F6B8F] font-normal  leading-[20px] mb-[25px]">
                     {translate('free_delivery_of_order', locale)}{' '}
                     <strong>CHF 65.00</strong>
                   </p>
                   <div className="flex items-start gap-[5px]">
-                    <img
-                      src="https://cdn.shopify.com/s/files/1/0787/1352/0419/files/rechnung.png?v=1688561840"
-                      height="auto"
-                      alt=""
-                    />
+                 
                     <div className="flex">
-                      <p className="text-[13px] text-[#3391c2] font-normal font-['Open_Sans'] leading-[18px] mb-[10px]">
+                      <p className="text-[16px] text-[#1F6B8F] font-normal  leading-[20px] mb-[10px]">
                         <strong className="font-semibold">
                           {translate('invoice', locale)}
                         </strong>
@@ -866,33 +862,34 @@ function Footer({menu, locale}) {
                 </div>
               </div>
               <div className="px-[15px] w-[100%] md:w-[50%] lg:w-[25%] xl:w-[25%]">
-                <div className="col-inner">
-                  <h4 className="title text-[20px] text-[#3391c2] font-semibold font-['Open_Sans'] pb-[15px] lg:pb-[0px] mb-[5px] lg:mb-[40px] mt-[0px] lg:mt-[-35px] border-b lg:border-b-0 border-[#3890bf]">
+                <div className="col-inner ">
+                  <h4 className="title text-[24px] text-[#1279A9] font-semibold pb-[15px] lg:pb-[0px] mb-[15px] lg:mb-[15px] mt-[0px] border-b lg:border-b-0 border-[#1279A9]">
                     {translate('contact', locale)}
                   </h4>
                   <div className="contact-info">
-                    <p className="text-[13px] text-[#3391c2] font-normal font-['Open_Sans'] leading-[18px] mb-[10px] ">
-                      <b className="font-semibold">SWISSBABYSERVICE</b>
-                      <br />
+                  <p className="text-[16px] text-[#1F6B8F] font-normal leading-[20px] mb-[20px] ">
+                    <b className="font-semibold">SWISSBABYSERVICE</b>
+                  </p>
+                    <p className="text-[16px] text-[#1F6B8F] font-normal leading-[20px] mb-[15px] ">
                       Schulstrasse 13a
                       <br />
                       9553 Bettwiesen
                       <br />
                     </p>
-                    <p className="text-[13px] text-[#3391c2] font-normal font-['Open_Sans'] leading-[18px] mb-[10px]">
+                    <p className="text-[16px] text-[#1F6B8F] font-normal leading-[20px] mb-[15px]">
                       <strong className="font-semibold">
                         FR 079 434 62 99
                       </strong>
                     </p>
-                    <p className="text-[13px] text-[#3391c2] font-normal font-['Open_Sans'] leading-[18px] mb-[10px]">
+                    <p className="text-[16px] text-[#1F6B8F] font-normal leading-[20px] mb-[15px]">
                       <strong className="font-semibold">
                         DE 052 720 58 58
                       </strong>
                     </p>
-                    <p className="text-[13px] text-[#3391c2] font-normal font-['Open_Sans'] leading-[18px] mb-[10px]">
+                    <p className="text-[16px] text-[#1F6B8F] font-normal leading-[20px] mb-[10px]">
                       <a
                         href="mailto:info@swissbabyservice.ch"
-                        className="hover:text-[#2A6496] transition-all duration-500 underline"
+                        className="hover:text-[#1279A9] transition-all duration-500 underline"
                       >
                         info@swissbabyservice.ch
                       </a>
@@ -901,6 +898,8 @@ function Footer({menu, locale}) {
                 </div>
               </div>
             </div>
+
+            <div className="bz-footer-row hidden sm:hidden lg:block xl:block pt-[56px]"></div>
           </div>
         </div>
       </Section>

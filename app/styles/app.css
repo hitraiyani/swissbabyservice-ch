@@ -223,7 +223,7 @@ body {
   line-height: 1.2;
   font-weight: 400;
   overflow-x: hidden;
-  background-color: #e4f0fa;
+  background-color: #fff;
 }
 h1,
 .h1 {
@@ -665,7 +665,7 @@ strong {
   width: 100%;
   background-color: transparent;
   padding-bottom: 15px;
-  border-bottom: 1px solid #3890bf;
+  border-bottom: 1px solid #1279A9;
 }
 .bz-footer-row:after {
   content: '';
@@ -673,13 +673,13 @@ strong {
   width: 20px;
   height: 20px;
   margin-top: 0;
-  margin-right: 15px;
+  right: 60px;
   background: transparent
-    url('https://cdn.shopify.com/s/files/1/0787/1352/0419/files/heart.png?v=1688561823')
+    url('https://cdn.shopify.com/s/files/1/0787/1352/0419/files/pseudo.svg?v=1690359246')
     no-repeat 0px 0px;
   float: right;
   position: relative;
-  top: 10px;
+  top: 8px;
 }
 .footer-cloud {
   background: transparent
@@ -698,7 +698,7 @@ strong {
   padding-top: 0px !important;
   padding-left: 0px !important;
   padding-right: 0px !important;
-  padding-bottom: 30px !important;
+  padding-bottom: 55px !important;
   border: none;
 }
 .main-footer p {
