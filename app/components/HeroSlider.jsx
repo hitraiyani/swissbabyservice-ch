@@ -12,12 +12,11 @@ import {useEffect} from 'react';
 /**
  * Hero component that renders metafields attached to collection resources
  **/
-export function HeroSlider({slides ,ballon}) {
+export function HeroSlider({slides, ballon}) {
   const slideOne = slides[0] ? slides[0] : {};
   const slideTwo = slides[1] ? slides[1] : {};
-  const ballons = ballon["nodes"] ?ballon["nodes"][0] : {};
-   
-   
+  const ballons = ballon['nodes'] ? ballon['nodes'][0] : {};
+
   useEffect(() => {
     window.addEventListener('scroll', function (e) {
       parallaxScroll();
@@ -70,10 +69,10 @@ export function HeroSlider({slides ,ballon}) {
             spaceBetween={10}
             slidesPerView={1}
             effect={'fade'}
-            navigation={{
-              nextEl: '#swiper-button-next-heroslider',
-              prevEl: '#swiper-button-prev-heroslider',
-            }}
+            // navigation={{
+            //   nextEl: '#swiper-button-next-heroslider',
+            //   prevEl: '#swiper-button-prev-heroslider',
+            // }}
             loop={true}
             autoHeight={false}
             // autoplay={{
@@ -92,59 +91,67 @@ export function HeroSlider({slides ,ballon}) {
           >
             {slides.map((slide, index) => (
               <SwiperSlide key={index}>
-                
-                <div className="slide-item h-full pt-[30px] pb-[30px]">
-                  <div className="bg-img absolute w-full h-full inset-0 z-[-1]">
+                <div className="slide-item h-full pt-[114px] pb-[140px] bg-[#D1E7FC] relative overflow-hidden min-h-[670px]">
+                  {/* <div className="bg-img absolute w-full h-full inset-0 z-[-1]">
                     <img
                       className="w-full h-full object-cover"
                       src={slide?.background?.reference?.image?.url}
                       alt=""
                     />
-                  </div>
-                  <div className="container max-[1279px]:max-w-[760px]">
-                    <div className="slide-item-inner flex gap-y-[30px] flex-col min-[992px]:flex-row items-center overflow-hidden rounded-[30px] h-full z-[1] relative">
-                      <div className="content-left w-full min-[992px]:w-[40%] lg:w-[50%]">
-                        <div className="col-inner flex flex-col h-full text-center min-[992px]:text-left">
-                          <h2 className="title text-[#00989e] text-[20px] leading-[1.2] font-['Open_Sans'] font-bold tracking-[2px]">
+                  </div> */}
+                  <div className="container h-full">
+                    <div className="slide-item-inner items-center rounded-[30px] h-full z-[1] relative">
+                      <div className="content-left w-full relative z-[1] max-w-[600px] h-full">
+                        <div className="col-inner flex flex-col h-full text-left">
+                          <h2 className="title text-[75px] font-bold text-[#1F6B8F] leading-none">
                             {slide?.heading?.value}
                           </h2>
-                          <div className="subtitle text-[#00989e] text-[20px] leading-[1.2] tracking-[2px] font-['Open_Sans']">
+                          <div className="subtitle text-[32px] font-normal text-[#05557B]">
                             {slide?.sub_heading?.value}
                           </div>
-                          <div className="btn-wrap flex mt-[30px] justify-center min-[992px]:justify-start">
+                          <div className="btn-wrap flex mt-[37px] justify-center min-[992px]:justify-start">
                             <Link
                               to={slide?.cta_redirect?.value}
-                              className='leading-none w-fit flex items-center justify-center text-center gap-[10px]  font-["OpenSans"] uppercase text-[20px] h-[50px] min-w-[200px] border-[2px] border-[#2380b1] rounded-[8px] text-[#2380b1] hover:bg-[#2380b1] hover:text-white transition-all duration-700'
+                              className="bg-[#05557B] text-white py-[17px] px-[73px] text-[26px] leading-none font-semibold rounded-[37px] hover:opacity-70 transition-all duration-500"
                             >
                               <span className="name">
                                 {slide?.cta_label?.value}
                               </span>
-                              {/* <span className="icon">
-                             <IconArrowRight className={'w-[22px] h-[12px]'} />
-                           </span> */}
                             </Link>
                           </div>
                         </div>
                       </div>
-                      <div className="img-col w-full min-[992px]:w-[60%] lg:w-[50%]">
-                        <div className="col-inner h-full">
-                          <div className="img-wrap relative overflow-hidden pb-[42%] min-[992px]:pb-[57%]">
-                            <img
-                              className="absolute w-full inset-0 h-full object-contain object-center"
-                              src={slide?.main_image?.reference?.image?.url}
-                              alt=""
-                            />
-                          </div>
-                        </div>
+                      <div className="img-col w-full">
+                        {/* <img
+                          className="pro-img absolute"
+                          src={slide?.main_image?.reference?.image?.url}
+                          alt=""
+                        /> */}
+                         <img
+                          className="pro-img-1 absolute max-w-[760px] h-auto top-[-40px] left-1/2 -translate-x-1/2"
+                          src="https://cdn.shopify.com/s/files/1/0787/1352/0419/files/Pingo_Pinguin_Eisplatte-1_1.png?v=1690352725"
+                          alt=""
+                        />
+                        <img
+                          className="pro-logo absolute right-0 bottom-0 max-w-[191px] h-auto"
+                          src="https://cdn.shopify.com/s/files/1/0787/1352/0419/files/myClimate_Logo_Head-Office_klimaneutral_en-removebg-preview_1.png?v=1690352723"
+                          alt=""
+                        />
+                        <img
+                          className="pro-img-2 absolute right-[100px] top-[-164px] max-w-[520px]"
+                          src="https://cdn.shopify.com/s/files/1/0787/1352/0419/files/pingo_logo_1.png?v=1690352724"
+                          alt=""
+                        />
                       </div>
                     </div>
                   </div>
+                  <div className='bottom-round-box w-[100%] h-[2160px] rounded-full bg-[#ECF0F4] absolute top-[70%]'></div>
                 </div>
               </SwiperSlide>
             ))}
           </Swiper>
         </div>
-        <div
+        {/* <div
           id="swiper-button-prev-heroslider"
           className="absolute left-[20px] top-1/2 -translate-y-1/2 w-[40px] h-[45px] z-[1] transition-all duration-500 flex items-center justify-center"
         >
@@ -163,60 +170,41 @@ export function HeroSlider({slides ,ballon}) {
             src="https://cdn.shopify.com/s/files/1/0787/1352/0419/files/right-a.png?v=1688967073"
             alt=""
           />
-        </div>
+        </div> */}
       </div>
-      <div className="bz-baloons-container hidden min-[992px]:block">
-        
-      {ballons && (
+      <div className="bz-baloons-container hidden min-[992px]:block !hidden">
+        {ballons && (
           <div className="baloon-1">
-          <img
-            src={ballons?.balloon_1?.reference?.image?.url} 
-            alt=""
-          />
-        </div>
+            <img src={ballons?.balloon_1?.reference?.image?.url} alt="" />
+          </div>
         )}
         {ballons && (
           <div className="baloon-2">
-          <img
-            src={ballons?.balloon_2?.reference?.image?.url} 
-            alt=""
-          />
-        </div>
+            <img src={ballons?.balloon_2?.reference?.image?.url} alt="" />
+          </div>
         )}
-         {ballons && (
+        {ballons && (
           <div className="baloon-3">
-          <img
-            src={ballons?.balloon_3?.reference?.image?.url} 
-            alt=""
-          />
-        </div>
+            <img src={ballons?.balloon_3?.reference?.image?.url} alt="" />
+          </div>
         )}
-         {ballons && (
+        {ballons && (
           <div className="baloon-4">
-          <img
-            src={ballons?.balloon_4?.reference?.image?.url} 
-            alt=""
-          />
-        </div>
+            <img src={ballons?.balloon_4?.reference?.image?.url} alt="" />
+          </div>
         )}
-         {ballons && (
+        {ballons && (
           <div className="baloon-5">
-          <img
-            src={ballons?.balloon_5?.reference?.image?.url} 
-            alt=""
-          />
-        </div>
+            <img src={ballons?.balloon_5?.reference?.image?.url} alt="" />
+          </div>
         )}
-         {ballons && (
+        {ballons && (
           <div className="baloon-6">
-          <img
-            src={ballons?.balloon_6?.reference?.image?.url} 
-            alt=""
-          />
-        </div>
+            <img src={ballons?.balloon_6?.reference?.image?.url} alt="" />
+          </div>
         )}
-        
-         {/* <div className="baloon-1">
+
+        {/* <div className="baloon-1">
           <img
             src="https://cdn.shopify.com/s/files/1/0787/1352/0419/files/baloon-1-de.png?v=1688968486"
             alt=""

@@ -8,7 +8,7 @@ import {
 
 import {useWindowScroll} from 'react-use';
 import {Disclosure} from '@headlessui/react';
-import {Suspense, useEffect, useMemo} from 'react';
+import {Suspense, useEffect, useMemo, useState} from 'react';
 import Cookies from 'js-cookie';
 
 import {
@@ -245,17 +245,20 @@ function MobileHeader({title, isHome, openCart, openMenu, aicoMenu, locale}) {
   // useHeaderStyleFix(containerStyle, setContainerStyle, isHome);
 
   const params = useParams();
-
+  const [isActiveSearchMobile, setActiveSearchMobile] = useState(false);
+  const toggleSearchClassMobile = () => {
+    setActiveSearchMobile(!isActiveSearchMobile);
+  };
   return (
     <header
       role="banner"
       className={`${
         isHome ? '' : ''
-      } mobile-header min-[992px]:hidden bg-white py-[15px] border-b-[1px] border-[#3890bf] relative`}
+      } mobile-header min-[992px]:hidden bg-white py-[15px] relative`}
     >
       <div className="container">
         <div className="row flex items-center justify-between gap-[15px]">
-          <div className="logo-col w-[60%] max-w-[240px]">
+          <div className="logo-col w-[55%] max-w-[240px]">
             <a href="/" className="block w-full">
               <img
                 className="w-full h-auto"
@@ -264,7 +267,7 @@ function MobileHeader({title, isHome, openCart, openMenu, aicoMenu, locale}) {
               />
             </a>
           </div>
-          <div className="right-col w-[40%] flex flex-col gap-[10px]">
+          <div className="right-col w-[45%] flex flex-col gap-[10px]">
             <div className="justify-end flex items-center gap-[10px]">
               <button onClick={openMenu} className="">
                 <IconMenu
@@ -274,10 +277,20 @@ function MobileHeader({title, isHome, openCart, openMenu, aicoMenu, locale}) {
               <div className="my-account-mobile">
                 <a
                   href="/account"
-                  className='header-login flex text-[11px] text-[#2380b1] font-["Open_Sans"] font-medium items-baseline gap-[2px]'
+                  className="header-login flex text-[11px] text-[#2380b1] font-medium items-baseline gap-[2px]"
                 >
                   <IconUser2 className={'w-[20px] h-[20px] text-[#2380b1] '} />
                 </a>
+              </div>
+              <div className="search-mobile">
+                <button
+                  onClick={toggleSearchClassMobile}
+                  className="header-search flex text-[11px] text-[#2380b1] font-medium items-baseline gap-[2px]"
+                >
+                  <IconSearch2
+                    className={'w-[20px] h-[20px] text-[#2380b1] '}
+                  />
+                </button>
               </div>
               <div className="header-cart mobile">
                 <CartCount
@@ -308,6 +321,53 @@ function MobileHeader({title, isHome, openCart, openMenu, aicoMenu, locale}) {
               placeholder="Produkt suchen"
               name="q"
             />
+          </Form>
+        </div>
+      </div>
+      <div
+        className={`${
+          isActiveSearchMobile ? 'block' : 'hidden'
+        } search-box absolute top-full left-0 right-0 w-full bg-white py-[30px] mx-h z-[99] border-t border-gray-200`}
+      >
+        <div className="container mx-auto relative">
+          <Form
+            method="get"
+            action={params.locale ? `/${params.locale}/search` : '/search'}
+            className="flex items-center gap-2"
+          >
+            <label className="relative block w-full pr-[50px]">
+              <span className="sr-only">Search</span>
+              <button
+                type="submit"
+                className="search-icon absolute inset-y-0 left-0 flex items-center pl-3"
+                onClick={toggleSearchClassMobile}
+              >
+                <IconSearch className="h-4 w-4 fill-black" />
+              </button>
+              <Input
+                className="bg-white border border-gray-300 text-black text-sm rounded-lg placeholder:text-gray-500 block w-full p-[10px] pl-[40px] focus:ring-0 focus:shadow-none ring-0 focus:ring-transparent focus:border-black"
+                type="search"
+                variant="minisearch"
+                placeholder="Produkt suchen"
+                name="q"
+              />
+            </label>
+            <span
+              className="icon search-overlay__close cursor-pointer absolute top-1/2 -translate-y-1/2 right-[13px] block"
+              onClick={toggleSearchClassMobile}
+              data-icon="x"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 100 100"
+                width={18}
+                height={18}
+              >
+                <g id="x">
+                  <polygon points="97.83 7.83 92.17 2.17 50 44.34 7.83 2.17 2.17 7.83 44.34 50 2.17 92.17 7.83 97.83 50 55.66 92.17 97.83 97.83 92.17 55.66 50 97.83 7.83" />
+                </g>
+              </svg>
+            </span>
           </Form>
         </div>
       </div>
@@ -380,12 +440,14 @@ function DesktopHeader({isHome, aicoMenu, menu, openCart, title, locale}) {
   const params = useParams();
   const {y} = useWindowScroll();
   const {pathname} = useLocation();
+  const [isActiveSearch, setActiveSearch] = useState(false);
+  const toggleSearchClass = () => {
+    setActiveSearch(!isActiveSearch);
+  };
   return (
     <header
       role="banner"
-      className={`${isHome ? '' : ''} ${
-        !isHome && y > 50 && ''
-      } site-header bg-white max-[991px]:hidden`}
+      className={`site-header bg-white max-[991px]:hidden relative`}
     >
       <div className="top-header py-[20px]">
         <div className="container">
@@ -424,30 +486,12 @@ function DesktopHeader({isHome, aicoMenu, menu, openCart, title, locale}) {
             </div>
             <div className="right-col flex-1 flex justify-end gap-[30px] items-center">
               <div className="search-col">
-                <button className="search-btn w-[24px] h-[24px] relative top-[3px]">
+                <button
+                  onClick={toggleSearchClass}
+                  className="search-btn w-[24px] h-[24px] relative top-[3px]"
+                >
                   <IconSearch2 className={'w-full h-full'} />
                 </button>
-                <Form
-                  method="get"
-                  action={
-                    params.locale ? `/${params.locale}/search` : '/search'
-                  }
-                  className="flex items-center gap-2 !hidden"
-                >
-                  <Input
-                    className={isHome ? '' : ''}
-                    type="search"
-                    variant="minisearch"
-                    placeholder="Produkt suchen"
-                    name="q"
-                  />
-                  <button
-                    type="submit"
-                    className="relative flex items-center justify-center w-8 h-8 focus:ring-primary/5"
-                  >
-                    <IconSearch />
-                  </button>
-                </Form>
               </div>
               <a
                 href="/account"
@@ -492,19 +536,66 @@ function DesktopHeader({isHome, aicoMenu, menu, openCart, title, locale}) {
                       className="navbar-item flex-auto text-center"
                     >
                       <Link
-                        to={itemHandle} 
+                        to={itemHandle}
                         className={`${
                           itemHandle == pathname ? 'text-[#00a0e0]' : ''
                         } xl:text-[16px] text-[12px] font-bold text-[#00334B] hover:text-[#00a0e0]`}
                       >
                         {translate(item.category.name, locale)}
                       </Link>
-                    </li> 
+                    </li>
                   );
                 })}
               </ul>
             </div>
           </div>
+        </div>
+      </div>
+      <div
+        className={`${
+          isActiveSearch ? 'block' : 'hidden'
+        } search-box absolute top-full left-0 right-0 w-full bg-white py-14 mx-h z-[99] border-t border-gray-200`}
+      >
+        <div className="container mx-auto relative">
+          <Form
+            method="get"
+            action={params.locale ? `/${params.locale}/search` : '/search'}
+            className="flex items-center gap-2"
+          >
+            <label className="relative block w-full pr-[50px]">
+              <span className="sr-only">Search</span>
+              <button
+                type="submit"
+                className="search-icon absolute inset-y-0 left-0 flex items-center pl-3"
+                onClick={toggleSearchClass}
+              >
+                <IconSearch className="h-4 w-4 fill-black" />
+              </button>
+              <Input
+                className="bg-white border border-gray-300 text-black text-sm rounded-lg placeholder:text-gray-500 block w-full p-[10px] pl-[40px] focus:ring-0 focus:shadow-none ring-0 focus:ring-transparent focus:border-black"
+                type="search"
+                variant="minisearch"
+                placeholder="Produkt suchen"
+                name="q"
+              />
+            </label>
+            <span
+              className="icon search-overlay__close cursor-pointer absolute top-1/2 -translate-y-1/2 right-[13px] block"
+              onClick={toggleSearchClass}
+              data-icon="x"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 100 100"
+                width={18}
+                height={18}
+              >
+                <g id="x">
+                  <polygon points="97.83 7.83 92.17 2.17 50 44.34 7.83 2.17 2.17 7.83 44.34 50 2.17 92.17 7.83 97.83 50 55.66 92.17 97.83 97.83 92.17 55.66 50 97.83 7.83" />
+                </g>
+              </svg>
+            </span>
+          </Form>
         </div>
       </div>
     </header>

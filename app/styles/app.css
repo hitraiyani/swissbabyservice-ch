@@ -349,7 +349,7 @@ p {
   -moz-transform: translateY(-10px);
   transform: translateY(-10px);
 }
-.navbar-wrap:after,
+.site-header:after,
 .mobile-header::after {
   content: '';
   display: inline-block;
