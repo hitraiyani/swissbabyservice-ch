@@ -84,13 +84,13 @@ export function ShoppingByBrands({className, locale}) {
                   }
                 }
                 return (
-                  <div key={index} className="relative h-[62px] w-[124px] md:w-[167px] overflow-hidden">
+                  <div key={index} className="relative h-[62px] md:h-[145px] w-[124px] md:w-[207px] overflow-hidden">
                     <Link
                       to={'/'}
                       className="w-full h-full absolute inset-0"
                     >
                       <img
-                        className="w-full h-full object-contain transition-all duration-500 absolute inset-0"
+                        className="w-full h-full object-contain transition-all duration-500 absolute inset-0 p-[5px]"
                         src={brandImage}
                         alt=""
                       />
