@@ -126,7 +126,7 @@ export function HeroSlider({slides, ballon}) {
                           className="pro-img absolute"
                           src={slide?.main_image?.reference?.image?.url}
                           alt=""
-                        /> */}
+                        /> */} 
                          <img
                           className="pro-img-1 absolute max-w-[760px] h-auto lg:bottom-[-100px] md:bottom-[-140px] bottom-[-120px] left-[55%] -translate-x-1/2 z-[1] w-full"
                           src="https://cdn.shopify.com/s/files/1/0787/1352/0419/files/Pingo_Pinguin_Eisplatte-1_1.png?v=1690352725"

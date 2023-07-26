@@ -449,7 +449,7 @@ function DesktopHeader({isHome, aicoMenu, menu, openCart, title, locale}) {
       role="banner"
       className={`site-header bg-white max-[991px]:hidden relative rounded-[0px_0px_20px_20px] z-[99] mb-[-20px]`}
     >
-      <div className="top-header py-[20px]">
+      <div className="top-header py-[20px]"> 
         <div className="container">
           <div className="row flex justify-between items-center">
             <div className="empty-col flex-1"></div>
