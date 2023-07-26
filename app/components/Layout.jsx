@@ -801,7 +801,7 @@ function Footer({menu, locale}) {
             <div className="flex flex-row flex-wrap xl:flex-nowrap mx-[-15px] gap-y-5">
               <div className="px-[15px] w-[100%] md:w-[50%] lg:w-[25%] xl:w-[25%]">
                 <div className="col-inner pr-[0px] lg:pr-[65px]">
-                  <h4 className="title text-[24px] text-[#1279A9] font-semibold pb-[15px] lg:pb-[0px] mb-[15px] lg:mb-[15px] mt-[0px] border-b lg:border-b-0 border-[#1279A9]">
+                  <h4 className="title text-[24px] text-[#1279A9] font-bold pb-[15px] lg:pb-[0px] mb-[15px] lg:mb-[15px] mt-[0px] border-b lg:border-b-0 border-[#1279A9]">
                     Swissbabyservice
                   </h4>
                   <p className="text-[16px] text-[#1F6B8F]  font-normal leading-[25px]">
@@ -811,7 +811,7 @@ function Footer({menu, locale}) {
               </div>
               <div className="px-[15px] w-[100%] md:w-[50%] lg:w-[25%] xl:w-[25%]">
                 <div className="col-inner">
-                  <h4 className="title text-[24px] text-[#1279A9] font-semibold pb-[15px] lg:pb-[0px] mb-[15px] lg:mb-[15px] mt-[0px] border-b lg:border-b-0 border-[#1279A9]">
+                  <h4 className="title text-[24px] text-[#1279A9] font-bold pb-[15px] lg:pb-[0px] mb-[15px] lg:mb-[15px] mt-[0px] border-b lg:border-b-0 border-[#1279A9]">
                     {translate('information', locale)}
                   </h4>
                   <ul className="nav-list flex flex-col gap-[25px] mb-[10px]">
@@ -836,7 +836,7 @@ function Footer({menu, locale}) {
               </div>
               <div className="px-[15px] w-[100%] md:w-[50%] lg:w-[25%] xl:w-[25%]">
                 <div className="col-inner pr-[0px] lg:pr-[55px]">
-                  <h4 className="title text-[24px] text-[#1279A9] font-semibold pb-[15px] lg:pb-[0px] mb-[15px] lg:mb-[15px] mt-[0px] border-b lg:border-b-0 border-[#1279A9]">
+                  <h4 className="title text-[24px] text-[#1279A9] font-bold pb-[15px] lg:pb-[0px] mb-[15px] lg:mb-[15px] mt-[0px] border-b lg:border-b-0 border-[#1279A9]">
                     {translate('shipment', locale)}
                   </h4>
                   <p className="text-[16px] text-[#1F6B8F] font-normal  leading-[20px] mb-[20px]">
@@ -863,7 +863,7 @@ function Footer({menu, locale}) {
               </div>
               <div className="px-[15px] w-[100%] md:w-[50%] lg:w-[25%] xl:w-[25%]">
                 <div className="col-inner ">
-                  <h4 className="title text-[24px] text-[#1279A9] font-semibold pb-[15px] lg:pb-[0px] mb-[15px] lg:mb-[15px] mt-[0px] border-b lg:border-b-0 border-[#1279A9]">
+                  <h4 className="title text-[24px] text-[#1279A9] font-bold pb-[15px] lg:pb-[0px] mb-[15px] lg:mb-[15px] mt-[0px] border-b lg:border-b-0 border-[#1279A9]">
                     {translate('contact', locale)}
                   </h4>
                   <div className="contact-info">
