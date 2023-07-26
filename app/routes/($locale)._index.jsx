@@ -171,17 +171,6 @@ export default function Homepage() {
           </Await>
         </Suspense>
       )}
-
-      {childBanner && (
-        <Suspense>
-          <Await resolve={childBanner}>
-            {({data}) => {
-              return <CtaBanner banner={data.banner} />;
-            }}
-          </Await>
-        </Suspense>
-      )}
-
       {latestProducts && (
         <Suspense>
           <Await resolve={latestProducts}>
@@ -198,8 +187,17 @@ export default function Homepage() {
           </Await>
         </Suspense>
       )}
+      {childBanner && (
+        <Suspense>
+          <Await resolve={childBanner}>
+            {({data}) => {
+              return <CtaBanner banner={data.banner} />;
+            }}
+          </Await>
+        </Suspense>
+      )}
 
-      {tertiaryHero && (
+      {/* {tertiaryHero && (
         <Suspense fallback={<Hero {...skeletons[2]} />}>
           <Await resolve={tertiaryHero}>
             {({hero}) => {
@@ -208,7 +206,7 @@ export default function Homepage() {
             }}
           </Await>
         </Suspense>
-      )}
+      )} */}
     </>
   );
 }
