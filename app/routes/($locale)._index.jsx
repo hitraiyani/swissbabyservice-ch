@@ -29,24 +29,22 @@ export async function loader({params, context}) {
     throw new Response(null, {status: 404});
   }
 
-  const {shop, hero, home_hero_slider,slider_ballons} = await context.storefront.query(
-    HOMEPAGE_SEO_QUERY,
-    {
+  const {shop, hero, home_hero_slider, slider_ballons} =
+    await context.storefront.query(HOMEPAGE_SEO_QUERY, {
       variables: {handle: 'freestyle'},
-    },
-  );
+    });
 
   const seo = seoPayload.home();
   var ImageId = 'gid://shopify/Metaobject/1449656611';
 
-  if(language == "FR"){
-    var ImageId = "gid://shopify/Metaobject/4294377763";
+  if (language == 'FR') {
+    var ImageId = 'gid://shopify/Metaobject/4294377763';
   }
-  
+
   return defer({
     shop,
     homeHeroSlider: home_hero_slider,
-    slider_ballons:slider_ballons,
+    slider_ballons: slider_ballons,
     language,
     primaryHero: hero,
     // These different queries are separated to illustrate how 3rd party content
@@ -162,18 +160,13 @@ export default function Homepage() {
           </Await>
         </Suspense>
       )} */}
-
+      <ShoppingByBrands className={''} locale={language} />
       {featuredCollections && (
         <Suspense>
           <Await resolve={featuredCollections}>
             {({collections}) => {
               if (!collections?.nodes) return <></>;
-              return (
-                <FeaturedCollections
-                  collections={collections}
-                  title=""
-                />
-              );
+              return <FeaturedCollections collections={collections} title="" />;
             }}
           </Await>
         </Suspense>
@@ -188,8 +181,6 @@ export default function Homepage() {
           </Await>
         </Suspense>
       )}
-
-      <ShoppingByBrands className={''} locale={language} />
 
       {latestProducts && (
         <Suspense>
