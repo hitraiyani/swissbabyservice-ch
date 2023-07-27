@@ -12,6 +12,7 @@ import {translate} from '~/lib/utils';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import {ShoppingByBrands} from '~/components/ShoppingByBrands';
 import {NewInTheShop} from '~/components/NewInTheShop';
+import {Bestseller} from '~/components/Bestseller';
 import {CtaBanner} from '~/components/CtaBanner';
 import {HeroSlider} from '~/components/HeroSlider';
 
@@ -178,6 +179,22 @@ export default function Homepage() {
               if (!products?.nodes) return <></>;
               return (
                 <NewInTheShop
+                  products={products.nodes}
+                  title={translate('new_in_shop', language)}
+                  locale={language}
+                />
+              );
+            }}
+          </Await>
+        </Suspense>
+      )}
+      {latestProducts && (
+        <Suspense>
+          <Await resolve={latestProducts}>
+            {({products}) => {
+              if (!products?.nodes) return <></>;
+              return (
+                <Bestseller
                   products={products.nodes}
                   title={translate('new_in_shop', language)}
                   locale={language}
