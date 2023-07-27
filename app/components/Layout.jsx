@@ -878,12 +878,22 @@ function Footer({menu, locale}) {
                     </p>
                     <p className="text-[16px] text-[#1F6B8F] font-normal leading-[20px] mb-[15px]">
                       <strong className="font-semibold">
-                        FR 079 434 62 99
+                        FR  <a
+                        href="tel:+0527205858"
+                        className="hover:text-[#1279A9] transition-all duration-500"
+                      >
+                        052 720 58 58
+                      </a>
                       </strong>
                     </p>
                     <p className="text-[16px] text-[#1F6B8F] font-normal leading-[20px] mb-[15px]">
                       <strong className="font-semibold">
-                        DE 052 720 58 58
+                        DE  <a
+                        href="tel:+0527205858"
+                        className="hover:text-[#1279A9] transition-all duration-500"
+                      >
+                        052 720 58 58
+                      </a>
                       </strong>
                     </p>
                     <p className="text-[16px] text-[#1F6B8F] font-normal leading-[20px] mb-[10px]">

@@ -15,13 +15,13 @@ export function CtaBanner({banner}) {
                   Weil Schenken Freude macht!
                   </p>
 
-                  <Link
+                  <a
                     className="btn text-white text-[20px]  font-bold w-auto max-w-max leading-none py-[15px] px-[20px] bg-[#05557B] rounded-[40px] hover:opacity-70 transition-all duration-500"
-                    href="/"
+                    href="/collections/windelnundreinigungswaren"
                     to="Mehr erfahren"
                   >
                    Mehr erfahren
-                  </Link>
+                  </a>
           </div>
           <div className="img-wrap w-[100%] md:w-[40%] lg:w-[40%] xl:w-[40%] items-end flex">
             
