@@ -45,7 +45,7 @@ export function FeaturedCollections({
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-[30px]">
           <div className="collection-col rounded-[30px] overflow-hidden bg-[#9CD6BD]">
             <div className="col-inner py-[22px] px-[33px]">
-              <a href="#" className='relative'>
+              <a href="/collections/windelnundreinigungswaren" className='relative'>
                 <div className="title-wrap absolute top-0 left-0 w-full">
                   <h2 className='text-[24px] lg:text-[32px] text-[#05557B] font-bold'>BIO</h2>
                 </div>
@@ -60,7 +60,7 @@ export function FeaturedCollections({
           </div>
           <div className="collection-col rounded-[30px] overflow-hidden bg-[#F8AFA8]">
             <div className="col-inner py-[22px] px-[33px]">
-              <a href="#" className='relative'>
+              <a href="/collections/wickelzubehor" className='relative'>
                 <div className="title-wrap absolute top-0 left-0 w-full">
                   <h2 className='text-[24px] lg:text-[32px] text-[#05557B] font-bold'>Hygiene</h2>
                 </div>
@@ -75,7 +75,7 @@ export function FeaturedCollections({
           </div>
           <div className="collection-col rounded-[30px] overflow-hidden bg-[#F9BE3C]">
             <div className="col-inner py-[22px] px-[33px]">
-              <a href="#" className='relative'>
+              <a href="/collections/pflegeundhygiene" className='relative'>
                 <div className="title-wrap absolute top-0 left-0 w-full">
                   <h2 className='text-[24px] lg:text-[32px] text-[#05557B] font-bold'>Pflegeprodukte</h2>
                 </div>

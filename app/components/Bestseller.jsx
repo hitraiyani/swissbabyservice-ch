@@ -239,7 +239,7 @@ export function Bestseller({products, title, locale}) {
           </Slider>
         </div>
         <div className='btn-wrap flex justify-center mt-[20px] xl:mt-[40px] 2xl:mt-[60px]'>
-          <a href="#" className='btn text-white text-[20px]  font-bold w-auto max-w-max leading-none py-[15px] px-[20px] bg-[#05557B] rounded-[40px] hover:opacity-70 transition-all duration-500'>All ansehen</a>
+          <a href="/collections/windelnundreinigungswaren" className='btn text-white text-[20px]  font-bold w-auto max-w-max leading-none py-[15px] px-[20px] bg-[#05557B] rounded-[40px] hover:opacity-70 transition-all duration-500'>All ansehen</a>
         </div>
       </div>
     </section>
